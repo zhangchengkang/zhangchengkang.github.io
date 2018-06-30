@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-keywords:
-author: John Doe
-language:
-timezone:
+title: 千山暮雪
+subtitle: 只影向谁去
+description: 当时共我赏花人,点检如今无一半
+keywords: 
+author: kangshifu
+language: zh-Hans
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -73,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,3 +81,32 @@ deploy:
   type: git
   repo: git@github.com:zhangchengkang/zhangchengkang.github.io.git
   branch: master
+# 宠物
+  live2d:
+  bottom: -30
+  mobileShow: false
+# model: Gantzert_Felixander
+# model: Epsilon2.1
+# model: haru
+# model: miku
+# model: ni-j
+# model: nico
+# model: nito
+# model: nipsilon
+# model: nietzsche
+# model: shizuku
+# model: tsumiki
+# model: wanko
+# model: z16
+# model: hibiki
+model: koharu
+# model: haruto
+# model: Unitychan
+# model: tororo
+# model: hijiki
+
+search:
+path: search.xml
+field: post
+format: html
+limit: 10000
