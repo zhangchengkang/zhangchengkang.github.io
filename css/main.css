@@ -1928,7 +1928,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6a2dff;
+  background: #58e347;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3041,7 +3041,7 @@ body {
   font-size: 20px;
 }
 .site-author-name {
-  font-size: 20px !important;
+  font-size: 22px !important;
 }
 .site-description {
   font-size: 12px !important;
