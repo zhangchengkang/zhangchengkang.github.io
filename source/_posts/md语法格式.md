@@ -2,7 +2,8 @@
 toc: true
 title: md语法格式
 date: 2018-05-16 18:53:40
-tags: 前端
+tags: [Markdown]
+categories: JavaScript
 ---
 *Add this line to Using the more label,but it's too short to look bad,addition point length*
 <!--more-->

@@ -2,8 +2,8 @@
 toc: true
 title:  java垃圾回收机制
 date: 2018-05-28 20:57:50
-tags: [JVM,JAVA]
-categories: JVM
+tags: [JVM]
+categories: JAVA
 ---
 *Add this line to Using the more label,but it's too short to look bad,addition point length*
 <!--more-->  

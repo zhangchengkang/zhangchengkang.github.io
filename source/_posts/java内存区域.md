@@ -2,8 +2,8 @@
 toc: true
 title: java内存区域
 date: 2018-05-23 21:36:06
-tags:
-- JVM
+tags: [JVM]
+categories: JAVA
 ---
 *Add this line to Using the more label,but it's too short to look bad,addition point length*
 <!--more-->  

@@ -81,32 +81,29 @@ deploy:
   type: git
   repo: git@github.com:zhangchengkang/zhangchengkang.github.io.git
   branch: master
-# 宠物
-  live2d:
-  bottom: -30
-  mobileShow: false
-# model: Gantzert_Felixander
-# model: Epsilon2.1
-# model: haru
-# model: miku
-# model: ni-j
-# model: nico
-# model: nito
-# model: nipsilon
-# model: nietzsche
-# model: shizuku
-# model: tsumiki
-# model: wanko
-# model: z16
-# model: hibiki
-model: koharu
-# model: haruto
-# model: Unitychan
-# model: tororo
-# model: hijiki
 
 search:
 path: search.xml
 field: post
 format: html
 limit: 10000
+
+
+live2d:
+  model:
+    scale: 2
+    hHeadPos: 0.5
+    vHeadPos: 0.618
+  display:
+    superSample: 3
+    width: 150
+    height: 300
+    position: right
+    hOffset: 0
+    vOffset: -20
+  mobile:
+    show: true
+    scale: 0.5
+  react:
+    opacityDefault: 0.7
+    opacityOnHover: 0.2
