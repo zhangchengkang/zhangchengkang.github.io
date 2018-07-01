@@ -1928,7 +1928,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a4dbf2;
+  background: #6a2dff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3026,7 +3026,7 @@ body {
   width: 900px;
 }
 #sidebar {
-  background: url("/images/background.jpg");
+  background: url("/images/leftlan.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -3034,11 +3034,25 @@ body {
 #sidebar p,
 #sidebar span,
 #sidebar a {
-  color: #f5f5f5;
-  font-size: 18px;
+  color: #f7b892;
+  font-size: 16px;
 }
 #sidebar li {
   font-size: 20px;
+}
+.site-author-name {
+  font-size: 20px !important;
+}
+.site-description {
+  font-size: 12px !important;
+}
+.sidebar-inner {
+  border-radius: 10px;
+  margin-top: 25px;
+  background: rgba(4,4,4,0.6) none repeat scroll !important;
+}
+.site-overview {
+  margin-top: 20px;
 }
 .post-body p a {
   color: #0593d3;
@@ -3097,6 +3111,7 @@ pre {
 }
 #player1 {
 /*边框样式*/
+  margin-top: 50px;
   border-radius: 6px;
 }
 #player1 div,
