@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建造者模式">
+<meta property="og:url" content="http://yoursite.com/2018/06/21/建造者模式/index.html">
+<meta property="og:site_name" content="千山暮雪">
+<meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-21T14:34:55.082Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="建造者模式">
+<meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/21/建造者模式/"/>
+
+
+
+
+
+  <title>建造者模式 | 千山暮雪</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+    <a href="https://github.com/zhangchengkang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千山暮雪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">只影向谁去</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/建造者模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kangshifu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千山暮雪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">建造者模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T17:12:01+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>Add this line to Using the more label,but it’s too short to look bad,addition point length</em><br><a id="more"></a>  </p>
+<h2 id="1-重叠构造器模式"><a href="#1-重叠构造器模式" class="headerlink" title="1. 重叠构造器模式"></a>1. 重叠构造器模式</h2><p>在这种模式下,我们提供的第一个构造器只有必要的参数,第二个构造器有一个可选参数,第三个构造器有两个可选参数,以此类推,最后一个构造器含有所有参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">    private String name;    // required</span><br><span class="line">    private String sex;     // required</span><br><span class="line">    private Date date;      // required</span><br><span class="line">    private String email;       // required</span><br><span class="line"></span><br><span class="line">    private int height;     // optional</span><br><span class="line">    private String edu;     // optional</span><br><span class="line">    private String nickName;     // optional</span><br><span class="line">    private int weight;     // optional</span><br><span class="line">    private String addr;     // optional</span><br><span class="line"></span><br><span class="line">    public Person(String name, String sex, Date date, String email) &#123;</span><br><span class="line">        this(name, sex, date, email, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Person(String name, String sex, Date date, String email, int height) &#123;</span><br><span class="line">        this(name, sex, date, email, height, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Person(String name, String sex, Date date, String email, int height, String edu) &#123;</span><br><span class="line">        this(name, sex, date, email, height, edu, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Person(String name, String sex, Date date, String email, int height, String edu, String nickName) &#123;</span><br><span class="line">        this(name, sex, date, email, height, edu, nickName, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Person(String name, String sex, Date date, String email, int height, String edu, String nickName, int</span><br><span class="line">            weight) &#123;</span><br><span class="line">        this(name, sex, date, email, height, edu, nickName, weight, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Person(String name, String sex, Date date, String email, int height, String edu, String nickName, int</span><br><span class="line">            weight, String addr) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.sex = sex;</span><br><span class="line">        this.date = date;</span><br><span class="line">        this.email = email;</span><br><span class="line">        this.height = height;</span><br><span class="line">        this.edu = edu;</span><br><span class="line">        this.nickName = nickName;</span><br><span class="line">        this.weight = weight;</span><br><span class="line">        this.addr = addr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用这种模式创建对象时,存在以下几点不足</p>
+<ul>
+<li><p><strong>灵活性很差</strong> : 如果客户端只想创建一个给定姓名,性别,生日,邮箱和体重,那么他将被迫调用如下构造函数,这样无意中就”被迫”设置了他本不想设置的一些参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public Person(String name, String sex, Date date, String email, int height, String edu, String nickName, int</span><br><span class="line">            weight) &#123;</span><br><span class="line">        this(name, sex, date, email, height, edu, nickName, weight, null);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>代码难以编写与阅读</strong> : 当属性有很多的时候,代码不但看起来很丑陋,而且极易出错。试想,若客户端不小心颠倒了两个参数的顺序,编译器也不会出错,但是在运行时就会出现错误的行为,并且这种错误难以发现</p>
+<h2 id="2-JavaBeans模式"><a href="#2-JavaBeans模式" class="headerlink" title="2. JavaBeans模式"></a>2. JavaBeans模式</h2><p>这时,我们可能转而求助于JavaBeans模式来避免这些问题,但是同时会带来一些新的问题。</p>
+</li>
+<li><strong>Setter的存在妨碍的其成为不可变类的可能</strong>: 这样,在并发环境下,我们就不得不考虑其线程安全性;</li>
+<li><strong>代码丑陋且对象易处于不一致状态</strong>: 上面创建对象的方式毕竟丑陋,同时由于对象的构造过程分为若干个函数调用,所以容易导致对象处于不一致状态。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Person p2 = new Person();</span><br><span class="line">   p2.setName(&quot;zck&quot;);</span><br><span class="line">   p2.setSex(&quot;boy&quot;);</span><br><span class="line">   p2.setDate(new Date());</span><br><span class="line">   p2.setEmail(&quot;*******@qq.com&quot;);</span><br><span class="line">   p2.setHeight(179);</span><br><span class="line">   p2.setEdu(&quot;NCU&quot;);</span><br><span class="line">   p2.setNickName(&quot;kang&quot;);</span><br><span class="line">   p2.setWeight(140);</span><br><span class="line">   p2.setAddr(&quot;武汉市&quot;);</span><br><span class="line">   System.out.println(p2);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-Builder模式"><a href="#3-Builder模式" class="headerlink" title="3. Builder模式"></a>3. Builder模式</h2><p>使用Builder模式创建复杂对象,既能保证像重叠构造器模式那样的安全性,也能保证像JavaBeans模式那么好的可读性。该模式的内涵是:不直接生成想要的对象,而是让客户端利用所有必要的参数构造一个Bulider对象,然后在此基础上,调用类似于Setter的方法来设置每个可选参数,最后通过调用无参的build()方法来生成不可变对象。一般的,所属Builder是它所构建类的静态成员类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">    private final String name;// required</span><br><span class="line">    private final Boolean sex;</span><br><span class="line">    private final Integer age;</span><br><span class="line"></span><br><span class="line">    private final Integer height;// optional</span><br><span class="line">    private final Double weight;</span><br><span class="line">    private final Date birthday;</span><br><span class="line">    private final String addr;</span><br><span class="line"></span><br><span class="line">    private Person(Builder builder) &#123;</span><br><span class="line">        this.name = builder.name;</span><br><span class="line">        this.sex = builder.sex;</span><br><span class="line">        this.age = builder.age;</span><br><span class="line">        this.height =builder.height;</span><br><span class="line">        this.weight = builder.weight;</span><br><span class="line">        this.birthday = builder.birthday;</span><br><span class="line">        this.addr = builder.addr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class Builder &#123;</span><br><span class="line">        private final String name;</span><br><span class="line">        private final Boolean sex;</span><br><span class="line">        private final Integer age;</span><br><span class="line"></span><br><span class="line">        private Integer height;</span><br><span class="line">        private Double weight;</span><br><span class="line">        private Date birthday;</span><br><span class="line">        private String addr;</span><br><span class="line"></span><br><span class="line">        public Builder(String name, Boolean sex, Integer age) &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">            this.age = age;</span><br><span class="line">            this.sex = sex;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 返回Builder对象本身，链式调用</span><br><span class="line">        public Builder height(Integer height) &#123;</span><br><span class="line">            this.height = height;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public Builder weight(Double weight) &#123;</span><br><span class="line">            this.weight = weight;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public Builder birthday(Date birthday) &#123;</span><br><span class="line">            this.birthday = birthday;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public Builder addr(String addr) &#123;</span><br><span class="line">            this.addr = addr;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 通过Builder构建所需Person对象，并且每次都产生新的Person对象</span><br><span class="line">        public Person build() &#123;</span><br><span class="line">            return new Person(this);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们可以通过下面的方式来创建一个Person对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person.Builder builder = new Person.Builder(&quot;老张&quot;,true,23);</span><br><span class="line">        Person person = builder.addr(&quot;武汉市江夏区&quot;).birthday(new Date(2008,8,8)).height(179).weight(140D).build();</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>Person类的构造方法是私有的</strong>: 也就是说,客户端不能直接创建Person对象;</li>
+<li><strong>Person类是不可变的</strong>: 所有的属性都被final修饰,在构造方法中设置参数值,并且不对外提供Setter方法</li>
+<li><strong>Bulider模式的高可读性</strong>: Builder模式使用了链式调用,可读性更佳。</li>
+<li><strong>Builder对象与目标对象的异同</strong>: Person与Buildr拥有共同的属性,并且Builder内部类的构造方法中只接收必传的参数,同时只有这些必传的参数使用final修饰符</li>
+</ul>
+<h2 id="4-Builder模式中的参数约束与线程安全行"><a href="#4-Builder模式中的参数约束与线程安全行" class="headerlink" title="4. Builder模式中的参数约束与线程安全行"></a>4. Builder模式中的参数约束与线程安全行</h2><p>Person对象是不可变的,因此是线程安全;但是,Builder对象并不具有线程安全性。因此,当我们需要对Person对象的参数强加约束条件时,我们应该可以对builder()方法中所创建出来的Person对象进行校验,即我们可以将builder()方法进行如下重写:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public Person build()&#123;</span><br><span class="line">        Person person = new Person(this);</span><br><span class="line">        if (!&quot;boy&quot;.equals(person.sex))&#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;所注册用户必须为男性！&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return person;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要特别主要的是,我们是对Person对象进行参数检查,而不是对Builder对象进行参数检查,因为Builder对象不是线程安全的,即下面的代码存在线程安全问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public Person build()&#123;</span><br><span class="line">        if (!&quot;boy&quot;.equals(this.sex))&#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;所注册用户必须为男性！&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return new Person(this);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"><i class="fa fa-tag"></i> 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/01/对象克隆/" rel="next" title="对象克隆">
+                <i class="fa fa-chevron-left"></i> 对象克隆
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="kangshifu" />
+            
+              <p class="site-author-name" itemprop="name">kangshifu</p>
+              <p class="site-description motion-element" itemprop="description">当时共我赏花人,点检如今无一半</p>
+          </div>
+<!--my custom code begin-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+        <script type="text/javascript">
+        $("#sidebar").hover(function(){
+          $("#mydivshow").velocity('stop').velocity({opacity: 1});
+        },function(){
+         $("#mydivshow").velocity('stop').velocity({opacity: 0});
+       });
+      </script>
+
+      <div id="mydivshow" class="mydivshow">
+ <!--my custom code end-->
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+<div id="player1" class="aplayer"></div>
+<script src="/js/src/APlayer.min.js"></script>
+<script type="text/javascript">
+var ap = new APlayer({
+    element: document.getElementById('player1'),                       // Optional, player element
+    narrow: false,                                                     // Optional, narrow style
+    autoplay: true,                                                    // Optional, autoplay song(s), not supported by mobile browsers
+    showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+    mutex: true,                                                       // Optional, pause other players when this player playing
+    theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
+    mode: 'random',                                                    // Optional, play mode, can be `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
+    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
+    listmaxheight: '513px',                                             // Optional, max height of play list
+    music: {                                                           // Required, music info, see: ###With playlist
+        title: 'Preparation',                                          // Required, music title
+        author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
+        url: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.mp3',  //requier,music url
+	    pic: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.jpg'  // Optional, music picture
+       // lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'                   // Optional, lrc, see: ###With lrc
+    }
+});
+</script>
+        </div>
+<!--my custom code begin-->
+      </div>
+<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-重叠构造器模式"><span class="nav-number">1.</span> <span class="nav-text">1. 重叠构造器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-JavaBeans模式"><span class="nav-number">2.</span> <span class="nav-text">2. JavaBeans模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Builder模式"><span class="nav-number">3.</span> <span class="nav-text">3. Builder模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Builder模式中的参数约束与线程安全行"><span class="nav-number">4.</span> <span class="nav-text">4. Builder模式中的参数约束与线程安全行</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kangshifu</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=65907178";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+
+var ap = new APlayer({
+	    element: document.getElementById('player1'),                       // Optional, player element
+	    narrow: false,                                                     // Optional, narrow style
+	    autoplay: false,                                                    // Optional, autoplay song(s), not supported by mobile browsers
+	    showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+	    mutex: true,                                                       // Optional, pause other players when this player playing
+	    theme: '#8B008B',                                                  // Optional, theme color, default: #b7daff
+	    mode: 'random',                                                    // Optional, play mode, can be `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
+	    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
+	    listmaxheight: '250px',                                             // Optional, max height of play list
+	    music: [
+	    {
+	    	title: 'No title',                                          // Required, music title
+	        author: 'れをる,ギガP',                          // Required, music author
+	        url: 'http://ou68gv0zg.bkt.clouddn.com/%E3%82%8C%E3%82%92%E3%82%8B,%E3%82%AE%E3%82%ACP%20-%20No%20title.mp3',  // Required, music url
+	        pic: 'http://ou68gv0zg.bkt.clouddn.com/%E3%82%8C%E3%82%92%E3%82%8B,%E3%82%AE%E3%82%ACP%20-%20No%20title.jpg'
+	    },
+	    {
+	    	title: '空想フォレスト',
+	    	author: '伊東歌詞太郎',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/%E4%BC%8A%E6%9D%B1%E6%AD%8C%E8%A9%9E%E5%A4%AA%E9%83%8E%20-%20%E7%A9%BA%E6%83%B3%E3%83%95%E3%82%A9%E3%83%AC%E3%82%B9%E3%83%88.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/%E4%BC%8A%E6%9D%B1%E6%AD%8C%E8%A9%9E%E5%A4%AA%E9%83%8E%20-%20%E7%A9%BA%E6%83%B3%E3%83%95%E3%82%A9%E3%83%AC%E3%82%B9%E3%83%88.gif'
+	    },
+	    {
+	    	title: 'だんご大家族',
+	    	author: '茶太',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/Key%20Sounds%20Label%20-%20%E3%81%A0%E3%82%93%E3%81%94%E5%A4%A7%E5%AE%B6%E6%97%8F.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/Key%20Sounds%20Label%20-%20%E3%81%A0%E3%82%93%E3%81%94%E5%A4%A7%E5%AE%B6%E6%97%8F.jpg'
+	    },
+	    {
+	    	title: 'Clover Heart\'s-New days recording',
+	    	author: 'MANYO,三輪学',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.jpg'
+	    },
+	    {
+	    	title: 'Secret',
+	    	author: '茶太',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/%E8%8C%B6%E5%A4%AA%20-%20Secret.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/%E8%8C%B6%E5%A4%AA%20-%20Secret.jpg'
+	    }]
+});
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:true,
+		position:{top:'150px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+  undefined
+  
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</html>

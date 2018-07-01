@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JVM,JavaSE," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta name="keywords" content="JVM,JavaSE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类的实例化">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/类的实例化/index.html">
+<meta property="og:site_name" content="千山暮雪">
+<meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/jvm/jvm012.png">
+<meta property="og:updated_time" content="2018-06-21T09:33:06.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类的实例化">
+<meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta name="twitter:image" content="http://yoursite.com/img/jvm/jvm012.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/类的实例化/"/>
+
+
+
+
+
+  <title>类的实例化 | 千山暮雪</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+    <a href="https://github.com/zhangchengkang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千山暮雪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">只影向谁去</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/类的实例化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kangshifu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千山暮雪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">类的实例化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T19:41:48+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>Add this line to Using the more label,but it’s too short to look bad,addition point length</em><br><a id="more"></a>  </p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>　在Java中，一个对象在可以被使用之前必须要被正确地初始化，这一点是Java规范规定的。在实例化一个对象时，JVM首先会检查相关类型是否已经加载并初始化，如果没有，则JVM立即进行加载并调用类构造器完成类的初始化。在类初始化过程中或初始化完毕后，根据具体情况才会去对类进行实例化。一个Java对象的创建过程往往包括<strong>类初始化</strong>和<strong>类实例化</strong>两个阶段。</p>
+<h2 id="1-Java对象创建时机"><a href="#1-Java对象创建时机" class="headerlink" title="1 Java对象创建时机"></a>1 Java对象创建时机</h2><p>　　我们知道，一个对象在可以被使用之前必须要被正确地实例化。在Java代码中，有很多行为可以引起对象的创建，最为直观的一种就是使用new关键字来调用一个类的构造函数显式地创建对象，这种方式在Java规范中被称为 : <strong>由执行类实例创建表达式而引起的对象创建</strong>。除此之外，我们还可以使用反射机制(Class类的newInstance方法、使用Constructor类的newInstance方法)、使用Clone方法、使用反序列化等方式创建对象。</p>
+<h3 id="1-1-使用new关键字创建对象"><a href="#1-1-使用new关键字创建对象" class="headerlink" title="1.1 使用new关键字创建对象"></a>1.1 使用new关键字创建对象</h3><p>　　这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们可以调用任意的构造函数（无参的和有参的）去创建对象。：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object object = new Object();</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-2-使用Class类的newInstance方法-反射机制"><a href="#1-2-使用Class类的newInstance方法-反射机制" class="headerlink" title="1.2 使用Class类的newInstance方法(反射机制)"></a>1.2 使用Class类的newInstance方法(反射机制)</h3><p>　　我们也可以通过Java的反射机制使用Class类的newInstance方法来创建对象，事实上，这个newInstance方法是调用无参的构造器创建对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　Student student = (Student)Class.forName(&quot;Student类全限定名&quot;).newInstance();　</span><br><span class="line">//或者</span><br><span class="line">　　Student stu = Student.class.newInstance();</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-3-使用Constructor类的newInstance方法-反射机制"><a href="#1-3-使用Constructor类的newInstance方法-反射机制" class="headerlink" title="1.3 使用Constructor类的newInstance方法(反射机制)"></a>1.3 使用Constructor类的newInstance方法(反射机制)</h3><p>　　java.lang.relect.Constructor类里也有一个newInstance方法可以创建对象，该方法和Class类中的newInstance方法很像，但是相比之下，Constructor类的newInstance方法更加强大些，我们可以通过这个newInstance方法调用有参数的和私有的构造函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Student &#123;</span><br><span class="line"></span><br><span class="line">    private int id;</span><br><span class="line"></span><br><span class="line">    public Student(Integer id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        Constructor&lt;Student&gt; constructor = Student.class</span><br><span class="line">                .getConstructor(Integer.class);</span><br><span class="line">        Student stu3 = constructor.newInstance(123);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>使用newInstance方法的这两种方式创建对象使用的就是Java的反射机制，事实上Class的newInstance方法内部调用的也是Constructor的newInstance方法</li>
+</ul>
+<h3 id="1-4-使用clone方法创建对象"><a href="#1-4-使用clone方法创建对象" class="headerlink" title="1.4 使用clone方法创建对象"></a>1.4 使用clone方法创建对象</h3><p>　　无论何时我们调用一个对象的clone方法，JVM都会帮我们创建一个新的、一样的对象，特别需要说明的是，用clone方法创建对象的过程中并不会调用任何构造函数。要想使用clone方法，我们就必须先实现Cloneable接口并实现其定义的clone方法，这也是原型模式的应用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class Child implements Cloneable &#123;</span><br><span class="line"></span><br><span class="line">    public Child() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">    public Object clone()&#123;</span><br><span class="line">        Child child = null</span><br><span class="line">        try &#123;</span><br><span class="line">            child  = (Child) super.clone();</span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return child;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        Constructor&lt;Child&gt; childConstructor = Child.class.getConstructor();</span><br><span class="line">        Child child = childConstructor.newInstance();</span><br><span class="line">        Child cloneChild = (Child) child.clone();</span><br><span class="line">        System.out.println(cloneChild==child);//false </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-5-使用-反-序列化机制创建对象"><a href="#1-5-使用-反-序列化机制创建对象" class="headerlink" title="1.5 使用(反)序列化机制创建对象"></a>1.5 使用(反)序列化机制创建对象</h3><p>　　当我们反序列化一个对象时，JVM会给我们创建一个单独的对象，在此过程中，JVM并不会调用任何构造函数。为了反序列化一个对象，我们需要让我们的类实现Serializable接口，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Child implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        Child child = new Child();</span><br><span class="line">        //写对象</span><br><span class="line">        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(&quot;aaa&quot;));</span><br><span class="line">        output.writeObject(child);</span><br><span class="line">        output.close();</span><br><span class="line">        //读对象</span><br><span class="line">        ObjectInputStream input = new ObjectInputStream(new FileInputStream(&quot;aaa&quot;));</span><br><span class="line">        Child c = (Child) input.readObject();</span><br><span class="line">        System.out.println(child);//cn.zck.jvm.Child@6d6f6e28</span><br><span class="line">        System.out.println(c);//cn.zck.jvm.Child@7ba4f24f</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-Java对象创建过程"><a href="#2-Java对象创建过程" class="headerlink" title="2 Java对象创建过程"></a>2 Java对象创建过程</h2><p>　　当一个对象被创建时，虚拟机就会为其分配内存来存放对象自己的实例变量及其从父类继承过来的实例变量(即使这些从超类继承过来的实例变量有可能被隐藏也会被分配空间)。在为这些实例变量分配内存的同时，这些实例变量也会被赋予默认值(零值)。在内存分配完成之后，Java虚拟机就会开始对新创建的对象按照程序猿的意志进行初始化。在Java对象初始化过程中，主要涉及三种执行对象初始化的结构，分别是 <strong>实例变量初始化</strong>、<strong>实例代码块初始化</strong> 以及 <strong>构造函数初始化</strong>。<br>　　在编译生成的字节码中，构造函数会被命名成<init>()方法，参数列表与Java语言书写的构造函数的参数列表相同。<br>　　我们知道，Java要求在实例化类之前，必须先实例化其超类，以保证所创建实例的完整性。事实上，这一点是在构造函数中保证的：Java强制要求Object对象(Object是Java的顶层对象，没有超类)之外的所有对象<strong>构造函数的第一条语句必须是超类构造函数的调用语句或者是类中定义的其他的构造函数</strong>，如果我们既没有调用其他的构造函数，也没有显式调用超类的构造函数，那么编译器会为我们自动生成一个对超类构造函数的调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class Parent &#123;</span><br><span class="line">    private Integer a;</span><br><span class="line">    private String b;</span><br><span class="line">    private Date c;</span><br><span class="line">    private Double d;</span><br><span class="line"></span><br><span class="line">    public Parent() &#123;</span><br><span class="line">        this(2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Parent(int a) &#123;</span><br><span class="line">        this.a = a;</span><br><span class="line">        this();//Call to &apos;this()&apos; must be first statement in constructor body</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Parent(String b) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this();//Call to &apos;this()&apos; must be first statement in constructor body</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Parent(Date c) &#123;</span><br><span class="line">        this();</span><br><span class="line">        super();//Call to &apos;super()&apos; must be first statement in constructor body</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Parent(Double d) &#123;</span><br><span class="line">        //会自动生成super()</span><br><span class="line">        this.d = d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></init></p>
+<ul>
+<li>总而言之，实例化一个类的对象的过程是一个典型的递归过程,进一步地说，在实例化一个类的对象时，具体过程是这样的：<blockquote>
+<p>在准备实例化一个类的对象前，首先准备实例化该类的父类，如果该类的父类还有父类，那么准备实例化该类的父类的父类，依次递归直到递归到Object类。此时，首先实例化Object类，再依次对以下各l进行实例化，直到完成对目标类的实例化。<br>具体而言，在实例化每个类时，都遵循如下顺序：先依次执行实例变量初始化和实例代码块初始化，再执行构造函数初始化。也就是说，编译器会将实例变量初始化和实例代码块初始化相关代码放到类的构造函数中去，并且这些代码会被放在对超类构造函数的调用语句之后，构造函数本身的代码之前。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">对象实例化过程</span><br><span class="line">public Child(int a, String b)&#123;</span><br><span class="line">        super();</span><br><span class="line">       // 实例变量或实例代码块</span><br><span class="line">       // 构造函数本身代码</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<p><img src="/img/jvm/jvm012.png" alt="实例化一个类的递归过程"></p>
+<p>　　总的来说，类实例化的一般过程是：父类的类构造器&lt;clinit>() -&gt; 子类的类构造器&lt;clinit>() -&gt; 父类的成员变量和实例代码块 -&gt; 父类的构造函数&lt;init>() -&gt; 子类的成员变量和实例代码块 -&gt; 子类的构造函数&lt;init>()。</p>
+
+      
+    </div>
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
+          
+            <a href="/tags/JavaSE/" rel="tag"><i class="fa fa-tag"></i> JavaSE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/28/java垃圾回收机制/" rel="next" title="java垃圾回收机制">
+                <i class="fa fa-chevron-left"></i> java垃圾回收机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/31/工厂模式/" rel="prev" title="工厂模式">
+                工厂模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="kangshifu" />
+            
+              <p class="site-author-name" itemprop="name">kangshifu</p>
+              <p class="site-description motion-element" itemprop="description">当时共我赏花人,点检如今无一半</p>
+          </div>
+<!--my custom code begin-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+        <script type="text/javascript">
+        $("#sidebar").hover(function(){
+          $("#mydivshow").velocity('stop').velocity({opacity: 1});
+        },function(){
+         $("#mydivshow").velocity('stop').velocity({opacity: 0});
+       });
+      </script>
+
+      <div id="mydivshow" class="mydivshow">
+ <!--my custom code end-->
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+<div id="player1" class="aplayer"></div>
+<script src="/js/src/APlayer.min.js"></script>
+<script type="text/javascript">
+var ap = new APlayer({
+    element: document.getElementById('player1'),                       // Optional, player element
+    narrow: false,                                                     // Optional, narrow style
+    autoplay: true,                                                    // Optional, autoplay song(s), not supported by mobile browsers
+    showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+    mutex: true,                                                       // Optional, pause other players when this player playing
+    theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
+    mode: 'random',                                                    // Optional, play mode, can be `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
+    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
+    listmaxheight: '513px',                                             // Optional, max height of play list
+    music: {                                                           // Required, music info, see: ###With playlist
+        title: 'Preparation',                                          // Required, music title
+        author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
+        url: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.mp3',  //requier,music url
+	    pic: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.jpg'  // Optional, music picture
+       // lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'                   // Optional, lrc, see: ###With lrc
+    }
+});
+</script>
+        </div>
+<!--my custom code begin-->
+      </div>
+<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Java对象创建时机"><span class="nav-number">2.</span> <span class="nav-text">1 Java对象创建时机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-使用new关键字创建对象"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 使用new关键字创建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-使用Class类的newInstance方法-反射机制"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 使用Class类的newInstance方法(反射机制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-使用Constructor类的newInstance方法-反射机制"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 使用Constructor类的newInstance方法(反射机制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-使用clone方法创建对象"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 使用clone方法创建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-使用-反-序列化机制创建对象"><span class="nav-number">2.5.</span> <span class="nav-text">1.5 使用(反)序列化机制创建对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Java对象创建过程"><span class="nav-number">3.</span> <span class="nav-text">2 Java对象创建过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kangshifu</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=65907178";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+
+var ap = new APlayer({
+	    element: document.getElementById('player1'),                       // Optional, player element
+	    narrow: false,                                                     // Optional, narrow style
+	    autoplay: false,                                                    // Optional, autoplay song(s), not supported by mobile browsers
+	    showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+	    mutex: true,                                                       // Optional, pause other players when this player playing
+	    theme: '#8B008B',                                                  // Optional, theme color, default: #b7daff
+	    mode: 'random',                                                    // Optional, play mode, can be `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
+	    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
+	    listmaxheight: '250px',                                             // Optional, max height of play list
+	    music: [
+	    {
+	    	title: 'No title',                                          // Required, music title
+	        author: 'れをる,ギガP',                          // Required, music author
+	        url: 'http://ou68gv0zg.bkt.clouddn.com/%E3%82%8C%E3%82%92%E3%82%8B,%E3%82%AE%E3%82%ACP%20-%20No%20title.mp3',  // Required, music url
+	        pic: 'http://ou68gv0zg.bkt.clouddn.com/%E3%82%8C%E3%82%92%E3%82%8B,%E3%82%AE%E3%82%ACP%20-%20No%20title.jpg'
+	    },
+	    {
+	    	title: '空想フォレスト',
+	    	author: '伊東歌詞太郎',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/%E4%BC%8A%E6%9D%B1%E6%AD%8C%E8%A9%9E%E5%A4%AA%E9%83%8E%20-%20%E7%A9%BA%E6%83%B3%E3%83%95%E3%82%A9%E3%83%AC%E3%82%B9%E3%83%88.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/%E4%BC%8A%E6%9D%B1%E6%AD%8C%E8%A9%9E%E5%A4%AA%E9%83%8E%20-%20%E7%A9%BA%E6%83%B3%E3%83%95%E3%82%A9%E3%83%AC%E3%82%B9%E3%83%88.gif'
+	    },
+	    {
+	    	title: 'だんご大家族',
+	    	author: '茶太',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/Key%20Sounds%20Label%20-%20%E3%81%A0%E3%82%93%E3%81%94%E5%A4%A7%E5%AE%B6%E6%97%8F.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/Key%20Sounds%20Label%20-%20%E3%81%A0%E3%82%93%E3%81%94%E5%A4%A7%E5%AE%B6%E6%97%8F.jpg'
+	    },
+	    {
+	    	title: 'Clover Heart\'s-New days recording',
+	    	author: 'MANYO,三輪学',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.jpg'
+	    },
+	    {
+	    	title: 'Secret',
+	    	author: '茶太',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/%E8%8C%B6%E5%A4%AA%20-%20Secret.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/%E8%8C%B6%E5%A4%AA%20-%20Secret.jpg'
+	    }]
+});
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:true,
+		position:{top:'150px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+  undefined
+  
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</html>

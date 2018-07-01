@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaSE," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta name="keywords" content="JavaSE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对象克隆">
+<meta property="og:url" content="http://yoursite.com/2018/06/01/对象克隆/index.html">
+<meta property="og:site_name" content="千山暮雪">
+<meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-21T09:32:58.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对象克隆">
+<meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/01/对象克隆/"/>
+
+
+
+
+
+  <title>对象克隆 | 千山暮雪</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+    <a href="https://github.com/zhangchengkang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千山暮雪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">只影向谁去</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/对象克隆/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kangshifu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千山暮雪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">对象克隆</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T19:53:43+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>Add this line to Using the more label,but it’s too short to look bad,addition point length</em><br><a id="more"></a>  </p>
+<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Teacher teacher = new Teacher();</span><br><span class="line">Teacher cloneTea = teacher;</span><br><span class="line">cloneTea.setSalary(3000);</span><br><span class="line">System.out.println(&quot;teacher: &quot;+teacher);</span><br><span class="line">System.out.println(&quot;cloneTea: &quot;+cloneTea);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">teacher: Teacher&#123;salary=3000&#125;</span><br><span class="line">cloneTea: Teacher&#123;salary=3000&#125;</span><br><span class="line">//Teacher cloneTea = teacher这句话只是将引用赋值</span><br></pre></td></tr></table></figure>
+<h2 id="1-浅克隆。"><a href="#1-浅克隆。" class="headerlink" title="1. 浅克隆。"></a>1. 浅克隆。</h2><ul>
+<li>浅克隆：只复制基本类型的数据，引用类型的数据只复制了引用的地址</li>
+<li>实现 : 被复制的类实现Clonenable接口,覆盖clone()方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class Student implements Cloneable &#123;//实现Cloneable接口</span><br><span class="line">    private Integer number;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *重写clone方法(Object里clone方法是protect修饰的)</span><br><span class="line">     * */</span><br><span class="line">    @Override</span><br><span class="line">    public Object clone() &#123;</span><br><span class="line">        Student student = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            student = (Student) super.clone();</span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return student;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student1 = new Student();</span><br><span class="line">        student1.setNumber(200);</span><br><span class="line">        Student student2 = (Student) student1.clone();</span><br><span class="line">        System.out.println(student1==student2);</span><br><span class="line">        System.out.println(&quot;student1:&quot; + student1);</span><br><span class="line">        System.out.println(&quot;student2:&quot; + student2);</span><br><span class="line">        student2.setNumber(500);</span><br><span class="line">        System.out.println(&quot;student1:&quot; + student1);</span><br><span class="line">        System.out.println(&quot;student2:&quot; + student2);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">false//地址不一样了哦</span><br><span class="line">student1:Student&#123;number=200&#125;</span><br><span class="line">student2:Student&#123;number=200&#125;</span><br><span class="line">student1:Student&#123;number=200&#125;</span><br><span class="line">student2:Student&#123;number=500&#125;</span><br></pre></td></tr></table></figure>
+<p>但是如果Student类的属性是另外一个类的话,就会出现新的问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Teacher teacher = new Teacher(&quot;武昌&quot;);</span><br><span class="line">    Student student1 = new Student();</span><br><span class="line">    student1.setTeacher(teacher);</span><br><span class="line">    Student student2 = (Student) student1.clone();</span><br><span class="line">    System.out.println(student1 == student2);</span><br><span class="line">    System.out.println(&quot;student1:&quot; + student1);</span><br><span class="line">    System.out.println(&quot;student2:&quot; + student2);</span><br><span class="line">    student2.getTeacher().setAddress(&quot;江夏&quot;);</span><br><span class="line">    System.out.println(&quot;student1:&quot; + student1);</span><br><span class="line">    System.out.println(&quot;student2:&quot; + student2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">student1:Student&#123;number=null, teacher=Teacher&#123;salary=null, address=&apos;武昌&apos;&#125;&#125;</span><br><span class="line">student2:Student&#123;number=null, teacher=Teacher&#123;salary=null, address=&apos;武昌&apos;&#125;&#125;</span><br><span class="line">student1:Student&#123;number=null, teacher=Teacher&#123;salary=null, address=&apos;江夏&apos;&#125;&#125;</span><br><span class="line">student2:Student&#123;number=null, teacher=Teacher&#123;salary=null, address=&apos;江夏&apos;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到两个address都变了<br>稍微修改一行代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">student2.setTeacher(new Teacher(&quot;汉口&quot;));</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">student1:Student&#123;number=null, teacher=Teacher&#123;salary=null, address=&apos;武昌&apos;&#125;&#125;</span><br><span class="line">student2:Student&#123;number=null, teacher=Teacher&#123;salary=null, address=&apos;武昌&apos;&#125;&#125;</span><br><span class="line">student1:Student&#123;number=null, teacher=Teacher&#123;salary=null, address=&apos;武昌&apos;&#125;&#125;</span><br><span class="line">student2:Student&#123;number=null, teacher=Teacher&#123;salary=null, address=&apos;汉口&apos;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>可以发现student1的address没变<br>显而易见,浅克隆中属性如果是一个类的话,那么复制的是这个类的地址</p>
+<h2 id="2-深克隆"><a href="#2-深克隆" class="headerlink" title="2. 深克隆"></a>2. 深克隆</h2><ul>
+<li>深克隆: 是在引用类型的类中也实现了clone，是clone的嵌套，复制后的对象与原对象之间完全不会影响。</li>
+<li>实现 : 不仅需要将被复制的类实现Clonenable接口,覆盖clone()方法而且该类中的某个类型为类的属性也需要被复制的话那这个类也需要实现Clonenable接口,覆盖clone()方法;</li>
+<li>如果引用类型里面还包含很多引用类型，或者内层引用类型的类里面又包含引用类型，使用clone方法就会很麻烦。这时我们可以用序列化的方式来实现对象的深克隆。</li>
+</ul>
+<h2 id="3-使用序列化的方式解决多层克隆"><a href="#3-使用序列化的方式解决多层克隆" class="headerlink" title="3. 使用序列化的方式解决多层克隆"></a>3. 使用序列化的方式解决多层克隆</h2><ul>
+<li>使用序列化也能完成深复制的功能：对象序列化后写入流中，此时也就不存在引用什么的概念了，再从流中读取，生成新的对象，新对象和原对象之间也是完全互不影响的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        Teacher teacher = new Teacher();</span><br><span class="line">        teacher.setAddress(&quot;西湖&quot;);</span><br><span class="line">        Teacher teacher1 = (Teacher) cloneObj(teacher);</span><br><span class="line">        System.out.println(teacher==teacher1);</span><br><span class="line">        System.out.println(&quot;teacher:&quot;+teacher);</span><br><span class="line">        System.out.println(&quot;teacher1:&quot;+teacher1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Object cloneObj(Teacher teacher) throws Exception &#123;</span><br><span class="line">        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();</span><br><span class="line">        ObjectOutputStream objOut = new ObjectOutputStream(byteOut);</span><br><span class="line">        objOut.writeObject(teacher);</span><br><span class="line"></span><br><span class="line">        ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());</span><br><span class="line">        ObjectInputStream objIn = new ObjectInputStream(byteIn);</span><br><span class="line">       return objIn.readObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">teacher:Teacher&#123;salary=null, address=&apos;西湖&apos;&#125;</span><br><span class="line">teacher1:Teacher&#123;salary=null, address=&apos;西湖&apos;&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaSE/" rel="tag"><i class="fa fa-tag"></i> JavaSE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/31/工厂模式/" rel="next" title="工厂模式">
+                <i class="fa fa-chevron-left"></i> 工厂模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/21/建造者模式/" rel="prev" title="建造者模式">
+                建造者模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="kangshifu" />
+            
+              <p class="site-author-name" itemprop="name">kangshifu</p>
+              <p class="site-description motion-element" itemprop="description">当时共我赏花人,点检如今无一半</p>
+          </div>
+<!--my custom code begin-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+        <script type="text/javascript">
+        $("#sidebar").hover(function(){
+          $("#mydivshow").velocity('stop').velocity({opacity: 1});
+        },function(){
+         $("#mydivshow").velocity('stop').velocity({opacity: 0});
+       });
+      </script>
+
+      <div id="mydivshow" class="mydivshow">
+ <!--my custom code end-->
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+<div id="player1" class="aplayer"></div>
+<script src="/js/src/APlayer.min.js"></script>
+<script type="text/javascript">
+var ap = new APlayer({
+    element: document.getElementById('player1'),                       // Optional, player element
+    narrow: false,                                                     // Optional, narrow style
+    autoplay: true,                                                    // Optional, autoplay song(s), not supported by mobile browsers
+    showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+    mutex: true,                                                       // Optional, pause other players when this player playing
+    theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
+    mode: 'random',                                                    // Optional, play mode, can be `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
+    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
+    listmaxheight: '513px',                                             // Optional, max height of play list
+    music: {                                                           // Required, music info, see: ###With playlist
+        title: 'Preparation',                                          // Required, music title
+        author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
+        url: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.mp3',  //requier,music url
+	    pic: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.jpg'  // Optional, music picture
+       // lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'                   // Optional, lrc, see: ###With lrc
+    }
+});
+</script>
+        </div>
+<!--my custom code begin-->
+      </div>
+<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序"><span class="nav-number">1.</span> <span class="nav-text">序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-浅克隆。"><span class="nav-number">2.</span> <span class="nav-text">1. 浅克隆。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-深克隆"><span class="nav-number">3.</span> <span class="nav-text">2. 深克隆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用序列化的方式解决多层克隆"><span class="nav-number">4.</span> <span class="nav-text">3. 使用序列化的方式解决多层克隆</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kangshifu</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=65907178";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+
+var ap = new APlayer({
+	    element: document.getElementById('player1'),                       // Optional, player element
+	    narrow: false,                                                     // Optional, narrow style
+	    autoplay: false,                                                    // Optional, autoplay song(s), not supported by mobile browsers
+	    showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+	    mutex: true,                                                       // Optional, pause other players when this player playing
+	    theme: '#8B008B',                                                  // Optional, theme color, default: #b7daff
+	    mode: 'random',                                                    // Optional, play mode, can be `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
+	    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
+	    listmaxheight: '250px',                                             // Optional, max height of play list
+	    music: [
+	    {
+	    	title: 'No title',                                          // Required, music title
+	        author: 'れをる,ギガP',                          // Required, music author
+	        url: 'http://ou68gv0zg.bkt.clouddn.com/%E3%82%8C%E3%82%92%E3%82%8B,%E3%82%AE%E3%82%ACP%20-%20No%20title.mp3',  // Required, music url
+	        pic: 'http://ou68gv0zg.bkt.clouddn.com/%E3%82%8C%E3%82%92%E3%82%8B,%E3%82%AE%E3%82%ACP%20-%20No%20title.jpg'
+	    },
+	    {
+	    	title: '空想フォレスト',
+	    	author: '伊東歌詞太郎',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/%E4%BC%8A%E6%9D%B1%E6%AD%8C%E8%A9%9E%E5%A4%AA%E9%83%8E%20-%20%E7%A9%BA%E6%83%B3%E3%83%95%E3%82%A9%E3%83%AC%E3%82%B9%E3%83%88.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/%E4%BC%8A%E6%9D%B1%E6%AD%8C%E8%A9%9E%E5%A4%AA%E9%83%8E%20-%20%E7%A9%BA%E6%83%B3%E3%83%95%E3%82%A9%E3%83%AC%E3%82%B9%E3%83%88.gif'
+	    },
+	    {
+	    	title: 'だんご大家族',
+	    	author: '茶太',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/Key%20Sounds%20Label%20-%20%E3%81%A0%E3%82%93%E3%81%94%E5%A4%A7%E5%AE%B6%E6%97%8F.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/Key%20Sounds%20Label%20-%20%E3%81%A0%E3%82%93%E3%81%94%E5%A4%A7%E5%AE%B6%E6%97%8F.jpg'
+	    },
+	    {
+	    	title: 'Clover Heart\'s-New days recording',
+	    	author: 'MANYO,三輪学',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/MANYO,%E4%B8%89%E8%BC%AA%E5%AD%A6%20-%20Clover%20Heart%27s%20-New%20days%20recording-.jpg'
+	    },
+	    {
+	    	title: 'Secret',
+	    	author: '茶太',
+	    	url: 'http://ou68gv0zg.bkt.clouddn.com/%E8%8C%B6%E5%A4%AA%20-%20Secret.mp3',
+	    	pic: 'http://ou68gv0zg.bkt.clouddn.com/%E8%8C%B6%E5%A4%AA%20-%20Secret.jpg'
+	    }]
+});
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:true,
+		position:{top:'150px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+  undefined
+  
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</html>
