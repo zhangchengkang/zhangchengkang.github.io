@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java 并发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta name="keywords" content="Java 并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="volatile">
+<meta property="og:url" content="http://yoursite.com/2018/07/15/volatile/index.html">
+<meta property="og:site_name" content="千山暮雪">
+<meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/thread/volatile和synchronized的关系.png">
+<meta property="og:updated_time" content="2018-07-17T15:12:17.061Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="volatile">
+<meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta name="twitter:image" content="http://yoursite.com/img/thread/volatile和synchronized的关系.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/15/volatile/"/>
+
+
+
+
+
+  <title>volatile | 千山暮雪</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+    <a href="https://github.com/zhangchengkang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千山暮雪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">只影向谁去</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/volatile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kangshifu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千山暮雪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">volatile</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-15T20:17:13+08:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>Add this line to Using the more label,but it’s too short to look bad,addition point length</em><br><a id="more"></a><br>　  在 Java 并发编程中，要想使并发程序能够正确地执行，必须要保证三条原则，即：原子性、可见性和有序性。只要有一条原则没有被保证，就有可能会导致程序运行不正确。volatile关键字 被用来保证可见性，即保证共享变量的内存可见性以解决缓存一致性问题。一旦一个共享变量被 volatile关键字 修饰，那么就具备了两层语义：内存可见性和禁止进行指令重排序。在多线程环境下，volatile关键字 主要用于及时感知共享变量的修改，并使得其他线程可以立即得到变量的最新值，例如，用于 修饰状态标记量 和 Double-Check (双重检查)中。</p>
+<p>　　volatile关键字 虽然从字面上理解起来比较简单，但是要用好不是一件容易的事情。由于 volatile关键字 是与 内存模型 紧密相关，因此在讲述 volatile关键字 之前，我们有必要先去了解与内存模型相关的概念和知识，然后回头再分析 volatile关键字 的实现原理，最后在给出 volatile关键字 的使用场景。</p>
+<h2 id="内存模型的相关概念"><a href="#内存模型的相关概念" class="headerlink" title="内存模型的相关概念"></a>内存模型的相关概念</h2><p>　　大家都知道，计算机在执行程序时，每条指令都是在 CPU 中执行的，而执行指令过程中，势必涉及到数据的读取和写入。由于程序运行过程中的临时数据是存放在主存（物理内存）当中的，这时就存在一个问题：由于 CPU 执行速度很快，而从内存读取数据和向内存写入数据的过程跟 CPU 执行指令的速度比起来要慢的多，因此如果任何时候对数据的操作都要通过和内存的交互来进行，会大大降低指令执行的速度。因此，在 CPU 里面就有了 高速缓存（寄存器）。<br>　　<br>　　也就是说，在程序运行过程中，会将运算需要的数据从主存复制一份到 CPU 的高速缓存当中，那么， CPU 进行计算时就可以直接从它的高速缓存读取数据和向其中写入数据，当运算结束之后，再将高速缓存中的数据刷新到主存当中。举个简单的例子，比如下面的这段代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i = i + 1;</span><br></pre></td></tr></table></figure></p>
+<p>　　当线程执行这个语句时，会先从主存当中读取 i 的值，然后复制一份到高速缓存当中，然后CPU执行指令对 i 进行加1操作，然后将数据写入高速缓存，最后将高速缓存中 i 最新的值刷新到主存当中。</p>
+<p>　　这个代码在单线程中运行是没有任何问题的，但是在多线程中运行就会有问题了。在多核 CPU 中，每个线程可能运行于不同的 CPU 中，因此每个线程运行时有自己的高速缓存（对单核CPU来说，其实也会出现这种问题，只不过是以线程调度的形式来分别执行的）。本文我们以多核CPU为例。</p>
+<p>　　比如，同时有两个线程执行这段代码，假如初始时 i 的值为 0，那么我们希望两个线程执行完之后 i 的值变为 2。但是事实会是这样吗？</p>
+<p>　　可能存在下面一种情况：初始时，两个线程分别读取 i 的值存入各自所在的 CPU 的高速缓存当中，然后线程1 进行加 1 操作，然后把 i 的最新值 1 写入到内存。此时线程 2 的高速缓存当中 i 的值还是 0，进行加 1 操作之后，i 的值为 1，然后线程 2 把 i 的值写入内存。</p>
+<p>　　最终结果 i 的值是 1，而不是 2 。这就是著名的 缓存一致性问题 。通常称这种被多个线程访问的变量为 共享变量 。</p>
+<p>　　也就是说，如果一个变量在多个 CPU 中都存在缓存（一般在多线程编程时才会出现），那么就可能存在 缓存不一致 的问题。</p>
+<p>　　为了解决缓存不一致性问题，在 硬件层面 上通常来说有以下两种解决方法：</p>
+<ul>
+<li>通过在 总线加 LOCK# 锁 的方式 （在软件层面，效果等价于使用 synchronized 关键字）；</li>
+<li>通过 缓存一致性协议 （在软件层面，效果等价于使用 volatile 关键字）。</li>
+</ul>
+<p>　　在早期的 CPU 当中，是通过在总线上加 LOCK# 锁的形式来解决缓存不一致的问题。因为 CPU 和其他部件进行通信都是通过总线来进行的，如果对总线加 LOCK# 锁的话，也就是说阻塞了其他 CPU 对其他部件访问（如内存），从而使得只能有一个CPU能使用这个变量的内存。比如上面例子中， 如果一个线程在执行 i = i + 1，如果在执行这段代码的过程中，在总线上发出了 LCOK# 锁的信号，那么只有等待这段代码完全执行完毕之后，其他 CPU 才能从变量 i 所在的内存读取变量，然后进行相应的操作，这样就解决了缓存不一致的问题。但是上面的方式会有一个问题，由于在锁住总线期间，其他 CPU 无法访问内存，导致效率低下。</p>
+<p>　　所以，就出现了 缓存一致性协议 ，其中最出名的就是 Intel 的 MESI 协议。MESI 协议保证了每个缓存中使用的共享变量的副本是一致的。它核心的思想是： 当 CPU 写数据时，如果发现操作的变量是共享变量，即在其他 CPU 中也存在该变量的副本，会发出信号通知其他 CPU 将该变量的缓存行置为无效状态。因此，当其他 CPU 需要读取这个变量时，发现自己缓存中缓存该变量的缓存行是无效的，那么它就会从内存重新读取。 </p>
+<h2 id="并发编程中的三个概念"><a href="#并发编程中的三个概念" class="headerlink" title="并发编程中的三个概念"></a>并发编程中的三个概念</h2><h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p><strong>原子性</strong>： 即一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。</p>
+<h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p><strong>可见性</strong>： 指当多个线程访问同一个共享变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。<br>　　举个简单的例子，看下面这段代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//线程1执行的代码</span><br><span class="line">int i = 0;</span><br><span class="line">i = 10;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//线程2执行的代码</span><br><span class="line">j = i;</span><br></pre></td></tr></table></figure></p>
+<p>　　假若执行 线程1 的是 CPU1，执行 线程2 的是 CPU2。由上面的分析可知，当 线程1 执行 i = 10 这句时，会先把 i 的初始值加载到 CPU1 的高速缓存中，然后赋值为10，那么在 CPU1 的高速缓存当中 i 的值变为 10 了，却没有立即写入到主存当中。此时，线程2 执行 j = i，它会先去主存读取 i 的值并加载到 CPU2 的缓存当中，注意此时内存当中 i 的值还是 0，那么就会使得 j 的值为 0，而不是 10。</p>
+<p>　　这就是可见性问题，线程1 对变量 i 修改了之后，线程2 没有立即看到 线程1 修改后的值。</p>
+<h3 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h3><p><strong>有序性</strong>：即程序执行的顺序按照代码的先后顺序执行。</p>
+<ul>
+<li>指令重排序:处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行先后顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的（单线程情形下）。指令重排序不会影响单个线程的执行，但是会影响到线程并发执行的正确性<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a = 10;    //语句1</span><br><span class="line">int r = 2;    //语句2</span><br><span class="line">a = a + 3;    //语句3</span><br><span class="line">r = a*a;     //语句4</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>　　这段代码有4个语句，那么可能的一个执行顺序是：2 → 1 → 3 → 4 这就是指令重排序<br>　　那么可不可能是这个执行顺序呢：2 → 1 → 4 → 3<br>　　答案是不可能，因为处理器在进行重排序时会考虑指令之间的<strong>数据依赖性</strong>，如果一个指令 Instruction 2 必须用到 Instruction 1 的结果，那么处理器会保证 Instruction 1 会在 Instruction 2 之前执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//线程1:</span><br><span class="line">context = loadContext();   //语句1</span><br><span class="line">inited = true;             //语句2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//线程2:</span><br><span class="line">while(!inited )&#123;</span><br><span class="line">  sleep()</span><br><span class="line">&#125;</span><br><span class="line">doSomethingwithconfig(context);</span><br></pre></td></tr></table></figure></p>
+<p>　　上面代码中，由于 语句1 和 语句2 没有数据依赖性，因此可能会被重排序。假如发生了重排序，在 线程1 执行过程中先执行 语句2，而此时 线程2 会以为初始化工作已经完成，那么就会跳出 while循环 ，去执行 doSomethingwithconfig(context) 方法，而此时 context 并没有被初始化，就会导致程序出错。</p>
+<p>　　从上面可以看出，指令重排序不会影响单个线程的执行，但是会影响到线程并发执行的正确性。也就是说，要想使并发程序正确地执行，必须要保证原子性、可见性以及有序性。只要有一个没有被保证，就有可能会导致程序运行不正确。</p>
+<h2 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h2><p>　　在 Java虚拟机规范 中，试图定义一种 Java内存模型（Java Memory Model，JMM） 来屏蔽各个硬件平台和操作系统的内存访问差异，以实现让 Java 程序在各种平台下都能达到一致的内存访问效果。在此之前，主流程序语言（c/c++）直接使用物理硬件和操作系统的内存模型，因此会由于不同平台上内存模型的差异，有可能导致程序在一套平台上并发完全正常，而在另一套平台上并发访问却经常出错。</p>
+<p>　　Java内存模型 规定所有的变量都是存在主存当中（类似于前面说的物理内存），每个线程都有自己的工作内存（类似于前面的高速缓存）。线程对变量的所有操作都必须在工作内存中进行，而不能直接对主存进行操作，并且每个线程不能访问其他线程的工作内存。</p>
+<p>　　举个简单的例子：在java中，执行下面这个语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i  = 10;</span><br></pre></td></tr></table></figure></p>
+<p>　　执行线程必须先在自己的工作线程中对 变量i 所在的缓存进行赋值操作，然后再写入主存当中，而不是直接将数值10写入主存当中。</p>
+<p>　　这里讲的主内存，工作内存与Java内存区域中的Java堆、栈、方法区等并不是同一个层次的内存划分，这两者基本上是没有关系的，如果两者一定要勉强对应起来，那主内存对应于Java堆中的对象实例数据 部分，而工作内存则对应于虚拟机栈中的部分区域。</p>
+<h3 id="内存交互操作"><a href="#内存交互操作" class="headerlink" title="内存交互操作"></a>内存交互操作</h3><p>　　关于主内存与工作内存之间具体的交互协议，即一个变量如何从主内存拷贝到工作内存、如何从工作内存同步回主内存之类的实现细节，Java内存模型中定义了以下8种操作来完成<br><strong>lock(锁定)</strong>： 作用与主内存的变量，它把一个变量标识为一条线程独占的状态。<br><strong>unlock(解锁)</strong>：作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定<br><strong>read(读取)</strong>：作用于主内存的变量，它把一个变量的值从主内存传输到线程的工作内存中<br><strong>load(载入)</strong>：作用于工作内存的变量，它把read操作从主内存得到的变量放入工作内存的变量副本中<br><strong>use(使用)</strong>：作用于工作内存的变量，它把工作内存中一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用到变量的值的字节码指令时将会执行这个操作<br><strong>assign(赋值)</strong>：作用于工作内存的变量他把 一个从执行引擎接收到的值赋给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作<br><strong>store(存储)</strong>：作用于 工作内存的变量，它把工作内存中一个变量的值传送到主内存中，以便随后write操作使用<br><strong>write(写入)</strong>：作用于主内存的变量，它把store操作从工作内存中得到的变量的值放入主内存的变量中</p>
+<h3 id="原子性-1"><a href="#原子性-1" class="headerlink" title="原子性"></a>原子性</h3><p>　　由Java内存模型来直接保证原子性变量操作包括 read,load,assign,use,store,write，我们大致可以认为 基本数据类型的访问读写是具备原子性的（读+写就不是了）<br>　　如果要实现更大范围操作的原子性，可以通过 synchronized 和 Lock 来实现。由于 synchronized 和 Lock 能够保证任一时刻只有一个线程执行该代码块，那么自然就不存在原子性问题了，从而保证了原子性。</p>
+<h3 id="可见性-1"><a href="#可见性-1" class="headerlink" title="可见性"></a>可见性</h3><p>　　对于可见性，Java 提供了 volatile关键字 来保证可见性。<br>　　当一个共享变量被 volatile 修饰时，它会保证修改的值会立即被更新到主存，当有其他线程需要读取时，它会去内存中读取新值。而普通的共享变量不能保证可见性，因为普通共享变量被修改之后，什么时候被写入主存是不确定的，当其他线程去读取时，此时内存中可能还是原来的旧值，因此无法保证可见性。<br>　　另外，通过 synchronized 和 Lock 也能够保证可见性，synchronized 和 Lock 能保证同一时刻只有一个线程获取锁然后执行同步代码，并且 在释放锁之前会将对变量的修改刷新到主存当中，因此可以保证可见性。</p>
+<h3 id="有序性-1"><a href="#有序性-1" class="headerlink" title="有序性"></a>有序性</h3><p>　　Java中天然的有序性可以总结为一句话：如果在本线程中观察，所有的操作都是有序的，如果在一个线程中观察另一个线程，所有的操作都是无序的。前半句是指”线程内 表现为串行的语句”，后半句是指指令重排序现象和工作内存与主内存同步延迟现象<br>　　在 Java 中，可以通过 volatile 关键字来保证一定的“有序性”（具体原理在下一节讲述）。另外，我们千万不能想当然地认为，可以通过synchronized 和 Lock 来保证有序性，也就是说，不能由于 synchronized 和 Lock 可以让线程串行执行同步代码，就说它们可以保证指令不会发生重排序，这根本不是一个粒度的问题。</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><h3 id="volatile关键字的两层语义"><a href="#volatile关键字的两层语义" class="headerlink" title="volatile关键字的两层语义"></a>volatile关键字的两层语义</h3><p>　　一旦一个共享变量（类的成员变量、类的静态成员变量）被 volatile 修饰后，那么就具备了两层语义：</p>
+<ul>
+<li>保证了不同线程对共享变量进行操作时的可见性，即一个线程修改了某个变量的值，这个新值对其他线程来说是 立即可见 的；</li>
+<li>禁止进行指令重排序，即保证有序性<h3 id="volatile不保证原子性"><a href="#volatile不保证原子性" class="headerlink" title="volatile不保证原子性"></a>volatile不保证原子性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//线程类</span><br><span class="line">class MyThread extends Thread &#123;</span><br><span class="line">    // volatile 共享静态变量，类成员</span><br><span class="line">    public volatile static int count;</span><br><span class="line"></span><br><span class="line">    private static void addCount() &#123;</span><br><span class="line">        for (int i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;count=&quot; + count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        addCount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//测试类</span><br><span class="line">public class Run &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //创建 100个线程并启动</span><br><span class="line">        MyThread[] mythreadArray = new MyThread[100];</span><br><span class="line">        for (int i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">            mythreadArray[i] = new MyThread();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">            mythreadArray[i].start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;/* Output(循环): </span><br><span class="line">       ... ...</span><br><span class="line">       count=9835</span><br><span class="line"> *///:~</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>　　大家想一下这段程序的输出结果是多少？也许有些朋友认为是 10000。但是事实上运行它会发现每次运行结果都不一致，都是一个 小于 10000 的数字。可能有的朋友就会有疑问，不对啊，上面是对变量 count 进行自增操作，由于 volatile 保证了可见性，那么在每个线程中对 count 自增完之后，在其他线程中都能看到修改后的值啊，所以有 100个 线程分别进行了 100 次操作，那么最终 count 的值应该是 100*100=10000。</p>
+<p>　　这里面就有一个误区了，volatile 关键字能保证可见性没有错，但是上面的程序错在没能保证原子性。可见性只能保证每次读取的是最新的值，但是 volatile 没办法保证对变量的操作的原子性。在前面已经提到过，自增操作是不具备原子性的，它包括 读取变量的原始值、进行加1操作 和 写入工作内存 三个原子操作。那么就是说，这三个子操作可能会分割开执行，所以就有可能导致下面这种情况出现：</p>
+<p>　　假如某个时刻 变量count 的值为 10，线程1 对变量进行自增操作，线程1 先读取了 变量count 的原始值，然后 线程1 被阻塞了；然后，线程2 对变量进行自增操作，线程2 也去读取 变量count 的原始值，由于 线程1 只是对 变量count 进行读取操作，而没有对变量进行修改操作，所以不会导致 线程2 的工作内存中缓存变量 count 的缓存行无效，所以 线程2 会直接去主存读取 count的值 ，发现 count 的值是 10，然后进行加 1 操作。注意，此时 线程2 只是执行了 count + 1 操作，还没将其值写到 线程2 的工作内存中去！此时线程2 被阻塞，线程1 进行加 1 操作时，注意操作数count仍然是 10！然后，线程2 把 11 写入工作内存并刷到主内存。虽然此时 线程1 能感受到 线程2 对count的修改，但由于线程1只剩下对count的写操作了，而不必对count进行读操作了，所以此时 线程2 对count的修改并不能影响到 线程1。于是，线程1 也将 11 写入工作内存并刷到主内存。也就是说，两个线程分别进行了一次自增操作后，count 只增加了 1。</p>
+<h3 id="使用volatile关键字的场景"><a href="#使用volatile关键字的场景" class="headerlink" title="使用volatile关键字的场景"></a>使用volatile关键字的场景</h3><p>　　synchronized 关键字是防止多个线程同时执行一段代码，那么就会很影响程序执行效率；而 volatile 关键字在某些情况下性能要优于 synchronized，但是要注意 volatile 关键字是无法替代 synchronized 关键字的，因为 volatile 关键字无法保证操作的原子性。通常来说，使用 volatile 必须具备以下两个条件：</p>
+<ul>
+<li>对变量的写操作不依赖于当前值；</li>
+<li>该变量没有包含在具有其他变量的不变式中。</li>
+</ul>
+<p>　　实际上，这些条件表明，可以被写入 volatile 变量的这些有效值 独立于任何程序的状态，包括变量的当前状态。事实上，上面的两个条件就是保证对 该volatile变量 的操作是原子操作，这样才能保证使用 volatile关键字 的程序在并发时能够正确执行。</p>
+<p>特别地，关键字 volatile 主要使用的场合是:</p>
+<p>　　在多线程环境下及时感知共享变量的修改，并使得其他线程可以立即得到变量的最新值。</p>
+<h4 id="状态标记量"><a href="#状态标记量" class="headerlink" title="状态标记量"></a>状态标记量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 示例 1</span><br><span class="line">volatile boolean flag = false;</span><br><span class="line"></span><br><span class="line">while(!flag)&#123;</span><br><span class="line">    doSomething();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void setFlag() &#123;</span><br><span class="line">    flag = true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 示例 2</span><br><span class="line">volatile boolean inited = false;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//线程1:</span><br><span class="line">context = loadContext();  </span><br><span class="line">inited = true;            </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//线程2:</span><br><span class="line">while(!inited )&#123;</span><br><span class="line">    sleep()</span><br><span class="line">&#125;</span><br><span class="line">doSomethingwithconfig(context);</span><br></pre></td></tr></table></figure>
+<h4 id="Double-Check-双重检查"><a href="#Double-Check-双重检查" class="headerlink" title="Double-Check (双重检查)"></a>Double-Check (双重检查)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Singleton&#123;</span><br><span class="line">    private volatile static Singleton instance = null;</span><br><span class="line"></span><br><span class="line">    private Singleton() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Singleton getInstance() &#123;</span><br><span class="line">        if(instance==null) &#123;</span><br><span class="line">            synchronized (Singleton.class) &#123;</span><br><span class="line">                if(instance==null)</span><br><span class="line">                    instance = new Singleton();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>　　关键字volatile 与内存模型紧密相关，是线程同步的轻量级实现，其性能要比 synchronized关键字 好。在作用对象和作用范围上， volatile 用于修饰变量，而 synchronized关键字 用于修饰方法和代码块，而且 synchronized 语义范围不但包括 volatile拥有的可见性，还包括volatile 所不具有的原子性，但不包括 volatile 拥有的有序性，即允许指令重排序。因此，在多线程环境下，volatile关键字 主要用于及时感知共享变量的修改，并保证其他线程可以及时得到变量的最新值<br><img src="/img/thread/volatile和synchronized的关系.png" alt="线程生命周期"></p>
+
+      
+    </div>
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-并发/" rel="tag"><i class="fa fa-tag"></i> Java 并发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/12/Synchronized/" rel="next" title="Synchronized">
+                <i class="fa fa-chevron-left"></i> Synchronized
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzc0OC8xNDI3OQ"></div>
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="kangshifu" />
+            
+              <p class="site-author-name" itemprop="name">kangshifu</p>
+              <p class="site-description motion-element" itemprop="description">当时共我赏花人,点检如今无一半</p>
+          </div>
+<!--my custom code begin-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+        <script type="text/javascript">
+        $("#sidebar").hover(function(){
+          $("#mydivshow").velocity('stop').velocity({opacity: 1});
+        },function(){
+         $("#mydivshow").velocity('stop').velocity({opacity: 0});
+       });
+      </script>
+
+      <div id="mydivshow" class="mydivshow">
+ <!--my custom code end-->
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+<div id="player1" class="aplayer"></div>
+<script src="/js/src/APlayer.min.js"></script>
+<script type="text/javascript"></script>
+        </div>
+<!--my custom code begin-->
+      </div>
+<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型的相关概念"><span class="nav-number">1.</span> <span class="nav-text">内存模型的相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程中的三个概念"><span class="nav-number">2.</span> <span class="nav-text">并发编程中的三个概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性"><span class="nav-number">2.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">2.2.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性"><span class="nav-number">2.3.</span> <span class="nav-text">有序性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内存模型"><span class="nav-number">3.</span> <span class="nav-text">Java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存交互操作"><span class="nav-number">3.1.</span> <span class="nav-text">内存交互操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性-1"><span class="nav-number">3.2.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性-1"><span class="nav-number">3.3.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性-1"><span class="nav-number">3.4.</span> <span class="nav-text">有序性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile"><span class="nav-number">4.</span> <span class="nav-text">volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile关键字的两层语义"><span class="nav-number">4.1.</span> <span class="nav-text">volatile关键字的两层语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile不保证原子性"><span class="nav-number">4.2.</span> <span class="nav-text">volatile不保证原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用volatile关键字的场景"><span class="nav-number">4.3.</span> <span class="nav-text">使用volatile关键字的场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#状态标记量"><span class="nav-number">4.3.1.</span> <span class="nav-text">状态标记量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Double-Check-双重检查"><span class="nav-number">4.3.2.</span> <span class="nav-text">Double-Check (双重检查)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kangshifu</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+
+var ap = new APlayer({
+	    element: document.getElementById('player1'),                       // （可选）播放器袖珍风格
+	    narrow: false,                                                     // （可选）自动播放，移动端浏览器暂不支持此功能
+	    autoplay: true,                                                    // （可选）曲目循环类型，有'random'（随机），'single'(单曲)，'circulation'(循环)，'order'(列表)，默认'circulation'
+	    showlrc: 0,                                                        // （可选）歌词显示配置项，可选项1、2、3
+	    mutex: true,                                                       // （可选）该选项开启时，同页有其它aplayer播放则该播放器暂停
+	    theme: '#8B008B',                                                  // （可选）播放器风格色彩设置，默#b7daff
+	    mode: 'random',                                                    // （可选）曲目循环类型，有'random'（随机），'single'(单曲)，'circulation'(循环)，'order'(列表)，默认'circulation'
+	    preload: 'metadata',                                               // （可选）音乐文件预载入模式，可选项'none'、'metadata'、'auto'，默'auto'
+	    listmaxheight: '250px',                                            // （可选）该播放列表最大长度
+	    music: [
+	    {
+	    	title: '七月上',                                         
+	        author: 'Jam',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E4%B8%83%E6%9C%88%E4%B8%8A%20-%20Jam.mp3', 
+	        pic: 'http://p1.music.126.net/9kZl6NRj3HxmQQ8DqTjZ4Q==/17729624997966923.jpg?param=130y130'
+	    },
+	    {
+	    	title: '匆匆 ',                                         
+	        author: '二珂.',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%8C%86%E5%8C%86%20-%20%E8%B5%B5%E9%92%B6%2C%E4%BA%8C%E7%8F%82.mp3', 
+	        pic: 'http://p1.music.126.net/8GXkHa3eq63ikMMZ2nY8Gw==/109951163249852201.jpg?param=130y130'
+	    },{
+	    	title: '匆匆那年',                                         
+	        author: '王菲',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%8C%86%E5%8C%86%E9%82%A3%E5%B9%B4%20-%20%E7%8E%8B%E8%8F%B2.mp3', 
+	        pic: 'http://p1.music.126.net/yXyeAl-7m0tqfx4AX7BDSQ==/2542070884980240.jpg?param=130y130'
+	    },{
+	    	title: '后来我们会怎样',                                         
+	        author: '刘惜君',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%90%8E%E6%9D%A5%E6%88%91%E4%BB%AC%E4%BC%9A%E6%80%8E%E6%A0%B7%20-%20%E5%88%98%E6%83%9C%E5%90%9B.mp3', 
+	        pic: 'http://p1.music.126.net/C0nqK9yq5_LRHbQ6EqfzNg==/3384296793240085.jpg?param=130y130'
+	    },{
+	    	title: '小幸运',                                         
+	        author: '田馥甄',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%B0%8F%E5%B9%B8%E8%BF%90%20-%20%E7%94%B0%E9%A6%A5%E7%94%84.mp3', 
+	        pic: 'http://p4.music.126.net/oTF9i5fY79GdAwbLQ7xMCQ==/109951163272573333.jpg?param=50y50'
+	    },{
+	    	title: '岁月神偷',                                         
+	        author: '金玟岐',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%B2%81%E6%9C%88%E7%A5%9E%E5%81%B7%20-%20%E9%87%91%E7%8E%9F%E5%B2%90.mp3', 
+	        pic: 'http://p1.music.126.net/RTuj3aTIZrR-v0-W_dD2VQ==/19080924788792622.jpg?param=50y50'
+	    },{
+	    	title: '愿得一人心',                                         
+	        author: '谭艳',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%84%BF%E5%BE%97%E4%B8%80%E4%BA%BA%E5%BF%83%20-%20%E8%B0%AD%E8%89%B3.mp3', 
+	        pic: 'http://p4.music.126.net/1N8HiCwgY7DqO-wILpJTeQ==/3438172872014843.jpg?param=50y50'
+	    },{
+	    	title: '我们不是说好了吗 ',                                         
+	        author: '白百何',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%88%91%E4%BB%AC%E4%B8%8D%E6%98%AF%E8%AF%B4%E5%A5%BD%E4%BA%86%E5%90%97%20-%20%E5%BD%AD%E4%BA%8E%E6%99%8F%2C%E7%99%BD%E7%99%BE%E4%BD%95.mp3', 
+	        pic: 'http://p1.music.126.net/Wc7s_rVkVHTKrMRu4xFNzQ==/2315571488119029.jpg?param=130y130'
+	    },{
+	    	title: '我们都被忘了',                                         
+	        author: '谢安琪',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%88%91%E4%BB%AC%E9%83%BD%E8%A2%AB%E5%BF%98%E4%BA%86%20-%20%E8%B0%A2%E5%AE%89%E7%90%AA.mp3', 
+	        pic: 'http://p3.music.126.net/fBDRSoH46yYAldgmUAu7hw==/18684001092518241.jpg?param=50y50'
+	    },{
+	    	title: '泡沫',                                         
+	        author: '邓紫棋',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%B3%A1%E6%B2%AB%20-%20G.E.M.%E9%82%93%E7%B4%AB%E6%A3%8B.mp3', 
+	        pic: 'http://p3.music.126.net/P8VwgDjdLDN4spkwIv8QXg==/18722483999690981.jpg?param=50y50'
+	    },{
+	    	title: '漂洋过海来看你',                                         
+	        author: '李宗盛',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%BC%82%E6%B4%8B%E8%BF%87%E6%B5%B7%E6%9D%A5%E7%9C%8B%E4%BD%A0%C2%A0%5B20170527-%E5%B9%B4%E5%BA%A6%E7%AC%AC4%E6%AC%A1%E6%AD%A3%E5%BC%8F%E6%B4%BB%E5%8A%A8%5D%EF%BC%88Cover%20%E6%9D%8E%E5%AE%97%E7%9B%9B%20%EF%BC%8F%20%E5%A8%83%E5%A8%83%EF%BC%89%20-%20%E5%AD%A6%E5%94%B1%E5%9B%A2.mp3', 
+	        pic: 'http://p1.music.126.net/IXm8On-EZt82SnBz00GQ3Q==/109951162940064301.jpg?param=130y130'
+	    },{
+	    	title: '纸短情长',                                         
+	        author: '烟把儿',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E7%BA%B8%E7%9F%AD%E6%83%85%E9%95%BF%EF%BC%88%E5%AE%8C%E6%95%B4%E7%89%88%EF%BC%89%20-%20%E7%83%9F%E6%8A%8A%E5%84%BF.mp3', 
+	        pic: 'http://p1.music.126.net/tbZaE-DjL_BkemynFlL1cQ==/109951163052534918.jpg?param=130y130'
+	    },{
+	    	title: '美丽世界的孤儿',                                         
+	        author: '汪峰',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E7%BE%8E%E4%B8%BD%E4%B8%96%E7%95%8C%E7%9A%84%E5%AD%A4%E5%84%BF%20-%20%E6%B1%AA%E5%B3%B0.ncm', 
+	        pic: 'http://p3.music.126.net/pP2sbfkvd6nsmdbmFTIEJQ==/109951163116154677.jpg?param=50y50'
+	    },{
+	    	title: '致青春',                                         
+	        author: '王菲',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%87%B4%E9%9D%92%E6%98%A5%20-%20%E7%8E%8B%E8%8F%B2.mp3', 
+	        pic: 'http://p3.music.126.net/WjDAZ9C8whAB6yfE_sfIFw==/109951163244980773.jpg?param=50y50'
+	    },{
+	    	title: '说散就散',                                         
+	        author: '袁娅维',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%AF%B4%E6%95%A3%E5%B0%B1%E6%95%A3%20-%20%E8%A2%81%E5%A8%85%E7%BB%B4.ncm', 
+	        pic: 'http://p4.music.126.net/zsRaHUdZO7LQ0hTX5ptqGg==/109951163102064502.jpg?param=50y50'
+	    },{
+	    	title: '走在冷风中',                                         
+	        author: '二珂',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%B5%B0%E5%9C%A8%E5%86%B7%E9%A3%8E%E4%B8%AD%20-%20%E4%BA%8C%E7%8F%82.mp3', 
+	        pic: 'http://p1.music.126.net/iAaRt_l_ussYqkLVuDEpqg==/2931298001578529.jpg?param=130y130'
+	    },{
+	    	title: '追光者',                                         
+	        author: '岑宁儿',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%BF%BD%E5%85%89%E8%80%85%20-%20%E5%B2%91%E5%AE%81%E5%84%BF.mp3', 
+	        pic: 'http://p4.music.126.net/1N8HiCwgY7DqO-wILpJTeQ==/3438172872014843.jpg?param=50y50'
+	    },
+	    ]
+});
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:true,
+		position:{top:'150px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+You can't see this
+  
+  undefined
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"scale":2,"hHeadPos":0.5,"vHeadPos":0.618},"display":{"superSample":3,"width":100,"height":200,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</html>
