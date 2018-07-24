@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Java SE," />
+  <meta name="keywords" content="Java 并发," />
 
 
 
@@ -87,19 +87,30 @@
 
 
 <meta name="description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
-<meta name="keywords" content="Java SE">
+<meta name="keywords" content="Java 并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="接口和抽象类">
-<meta property="og:url" content="http://yoursite.com/2018/06/06/接口和抽象类/index.html">
+<meta property="og:title" content="Thread">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/Thread/index.html">
 <meta property="og:site_name" content="千山暮雪">
 <meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/img/se/接口抽象类区别.png">
-<meta property="og:updated_time" content="2018-07-17T12:06:06.221Z">
+<meta property="og:image" content="http://yoursite.com/img/thread/003.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/004.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/005.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/006.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/007.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/008.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/009.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/010.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/011.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/012.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/013.png">
+<meta property="og:image" content="http://yoursite.com/img/thread/014.png">
+<meta property="og:updated_time" content="2018-07-24T16:20:43.735Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="接口和抽象类">
+<meta name="twitter:title" content="Thread">
 <meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
-<meta name="twitter:image" content="http://yoursite.com/img/se/接口抽象类区别.png">
+<meta name="twitter:image" content="http://yoursite.com/img/thread/003.png">
 
 
 
@@ -129,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/06/接口和抽象类/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/08/Thread/"/>
 
 
 
 
 
-  <title>接口和抽象类 | 千山暮雪</title>
+  <title>Thread | 千山暮雪</title>
   
 
 
@@ -274,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/接口和抽象类/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/Thread/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kangshifu">
@@ -291,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">接口和抽象类</h1>
+          <h1 class="post-title" itemprop="name headline">Thread</h1>
         
 
         <div class="post-meta">
@@ -303,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T19:29:41+08:00">
-                2018-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T19:29:41+08:00">
+                2018-07-08
               </time>
             
 
@@ -369,26 +380,81 @@
 
       
         <p><em>Add this line to Using the more label,but it’s too short to look bad,addition point length</em><br><a id="more"></a> </p>
-<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>我们都知道在面向对象的领域一切都是对象。同时，所有的对象都是通过类来描述的，但是并不是所有的类都是可以描述对象（对象 = 状态 + 行为）的。如果一个类没有足够的信息来描述一个具体的对象，那么我们就可以将这样的类设为抽象类。抽象类只能被public和默认修饰符修饰。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//抽象方法是一种特殊的方法：它只有声明，而没有具体的实现</span><br><span class="line">abstract void func();</span><br></pre></td></tr></table></figure></p>
-<p>抽象方法必须用abstract关键字进行修饰。如果一个类含有抽象方法，则称这个类为抽象类,特别需要注意的是，抽象类也可以不包含抽象方法，即其中所有的方法都是具体方法。<br>因为抽象类中含有未具体实现的方法，所以不能用抽象类创建对象。抽象类就是为了继承而存在的，如果你定义了一个抽象类，却不去继承它，那么等于白白创建了这个抽象类，因为你不能用它来做任何事情<br>包含抽象方法的类称为抽象类，但并不意味着抽象类中只能有抽象方法，它和普通类一样，同样可以拥有成员变量和普通的成员方法。注意，抽象类和普通类的主要有三点区别：</p>
+<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">状态</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">new</td>
+<td style="text-align:left">创建状态—&gt;使用new关键字，创建一个线程,但是还没有调用start方法，仅仅由JVM分配内存，并初始化成员变量</td>
+</tr>
+<tr>
+<td style="text-align:left">runnable/start</td>
+<td style="text-align:left">就緒状态—&gt;调用start()后处于就绪状态，JVM为其创建方法调用栈和程序计数器，但线程并没有开始运行，仅表示可以运行。何时开始，取决于JVM里的线程调度器的调度</td>
+</tr>
+<tr>
+<td style="text-align:left">running</td>
+<td style="text-align:left">运行状态—&gt;处于就绪状态的线程，获得了CPU，开始执行run()方法，则处于运行状态</td>
+</tr>
+<tr>
+<td style="text-align:left">blocked</td>
+<td style="text-align:left">阻塞状态—&gt;表示线程阻塞于锁。线程之间需要切换，时间段用完后，系统会剥夺线程占用的资源，让其他线程执行，选择哪个线程，系统会考虑线程的优先级。调用sleep(),调用阻塞式IO方法，等待同步锁，等待通知wait()，suspend(),join()，这些将使得线程进入阻塞状态</td>
+</tr>
+<tr>
+<td style="text-align:left">waiting</td>
+<td style="text-align:left">等待状态—&gt;进入该状态后需要其他线程做出通知动作，也可以算是阻塞状态。需要notify()唤醒线程，使之进入就绪状态</td>
+</tr>
+<tr>
+<td style="text-align:left">timewaiting</td>
+<td style="text-align:left">超时等状态状态—&gt;该状态与WAITING不同，它是可以在指定时间内自行返回的。相当于在等待状态基础上，增加了时间的限制，超过了设定的时间限制就会返回到运行状态</td>
+</tr>
+<tr>
+<td style="text-align:left">dead/terminated</td>
+<td style="text-align:left">死亡状态—&gt;线程执行完毕。run()或call()执行完成,线程抛出未捕获的Exception或Error，调用该线程的stop()，都会结束线程。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/img/thread/003.png" alt="线程生命周期"></p>
+<h2 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h2><p>在Java中，创建线程去执行子任务一般有两种方式：继承Thread类和实现Runnable接口。 其中，Thread类本身就实现了Runnable 接口，而使用继承Therad类的方式创建线程的最大局限就是不支持多继承。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//线程创建示例代码</span><br><span class="line">public class ThreadTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        //使用继承Thread类的方式创建线程</span><br><span class="line">        new Thread()&#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                System.out.println(&quot;Thread&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line"></span><br><span class="line">        //使用实现Runnable接口的方式创建线程</span><br><span class="line">        Thread thread = new Thread(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                System.out.println(&quot;Runnable&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        //JVM 创建的主线程 main</span><br><span class="line">        System.out.println(&quot;main&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>run()方法中只是定义需要执行的任务，并且不需要用户来调用。当通过start()方法启动一个线程之后，若线程获得了CPU执行时间，便进入 run()方法去执行具体的任务。如果用户直接调用run()方法相当于在主线程中执行run()方法，跟普通的方法调用没有任何区别。</p>
+<h2 id="Thread类详解"><a href="#Thread类详解" class="headerlink" title="Thread类详解"></a>Thread类详解</h2><p>Thread 类实现了 Runnable 接口，在 Thread 类中，有一些比较关键的属性，比如name是表示Thread的名字，可以通过Thread类的构造器中的参数来指定线程名字，priority表示线程的优先级（最大值为10，最小值为1，默认值为5），daemon表示线程是否是守护线程，target表示要执行的任务。</p>
+<h3 id="start-方法"><a href="#start-方法" class="headerlink" title="start 方法"></a>start 方法</h3><p>start()用来启动一个线程，当调用该方法后，相应线程就会进入就绪状态，该线程中的run()方法会在某个时间被调用</p>
+<h3 id="run-方法"><a href="#run-方法" class="headerlink" title="run 方法"></a>run 方法</h3><p>run()方法是不需要用户来调用的。当通过start()方法启动一个线程之后，一旦线程获得了CPU执行时间，便进入run()方法体去执行具体的任务。注意，创建线程是必须要重写run()方法，以定义具体要执行的任务<br><img src="/img/thread/004.png" alt="run方法实现"></p>
+<h3 id="sleep方法"><a href="#sleep方法" class="headerlink" title="sleep方法"></a>sleep方法</h3><p>sleep()方法的作用是在指定的毫秒数内让当前正在执行的线程睡眠，并交出CPU让其去执行其他的任务。当线程睡眠时间满后，不一定会立即得到执行，因为此时CPU正在执行其他的任务。所以说，调用sleep方法相当于让线程进入阻塞状态。该方法有如下两条特征：</p>
 <ul>
-<li>抽象方法必须为public或者protected（因为如果为private，则不能被子类继承，子类便无法实现该方法），缺省情况下默认为public。</li>
-<li>抽象类不能用来创建对象；</li>
-<li>如果一个类继承于一个抽象类，则子类必须实现父类的抽象方法。如果子类没有实现父类的抽象方法，则必须将子类也定义为为abstract类。</li>
+<li>如果调用了sleep方法，必须捕获InterruptedException异常或将该异常向上层抛出</li>
+<li>sleep方法不会释放锁，也就是说如果当前线程持有对某个对象的锁，则即使调用sleep方法，其他线程也无法访问这个对象<br><img src="/img/thread/005.png" alt="sleep方法"></li>
 </ul>
-<p>抽象类比具体类仅多一点抽象因素：行为层面的抽象（可以包含抽象方法）；</p>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>在软件工程中，接口泛指供别人调用的方法或者函数。从这里，我们可以体会到Java语言设计者的初衷，它是对行为的抽象。接口只能被public和默认修饰符修饰。 在Java中，定义一个接口的形式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface InterfaceName &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接口中可以含有 变量和方法。但是要注意，接口中的 变量 会被隐式地指定为 public static final变量并且只能是public static final变量),而 方法 会被隐式地指定为 public abstract方法且只能是 public abstract 方法,且接口中所有的方法不能有具体的实现，也就是说，接口中的方法必须都是抽象方法。从这里可以隐约看出接口和抽象类的区别，接口是一种极度抽象的类型，它比抽象类更加“抽象”。</p>
-<h2 id="接口和抽象类的区别"><a href="#接口和抽象类的区别" class="headerlink" title="接口和抽象类的区别"></a>接口和抽象类的区别</h2><h3 id="语法层面上的区别"><a href="#语法层面上的区别" class="headerlink" title="语法层面上的区别"></a>语法层面上的区别</h3><ul>
-<li>抽象类可以提供成员方法的实现细节，而接口中只能存在 public abstract (可省) 方法；</li>
-<li>抽象类中的成员变量可以是各种类型的，而接口中的成员变量只能是 public static final (可省) 类型的；</li>
-<li>抽象类可以有静态代码块和静态方法,接口中不能含有静态代码块以及静态方法;</li>
-<li>一个类只能继承一个抽象类，而一个类却可以实现多个接口。<br><img src="/img/se/接口抽象类区别.png" alt="接口抽象类区别"></li>
+<h3 id="yield方法"><a href="#yield方法" class="headerlink" title="yield方法"></a>yield方法</h3><p>调用yield()方法会让当前线程 交出CPU资源，让CPU去执行 其他 线程，但是，yield()不能控制具体的交出CPU的时间，需要注意的是</p>
+<ul>
+<li>yield()方法只能让拥有相同优先级的线程有获取CPU执行时间的机会</li>
+<li>调用yield()方法并不会让线程进入阻塞状态，而是让线程重回就绪状态，塔只需要等待重新得到CPU的执行<br><img src="/img/thread/006.png" alt="yield实现"></li>
 </ul>
-<h3 id="设计层面上的区别"><a href="#设计层面上的区别" class="headerlink" title="设计层面上的区别"></a>设计层面上的区别</h3><ul>
-<li>抽象类是对一种事物的抽象，即对类抽象，而接口是对行为的抽象。抽象类是对整个类整体进行抽象，包括属性、行为，但是接口却是对类局部（行为）进行抽象。</li>
-<li>设计层面不同，抽象类作为很多子类的父类，它是一种模板式设计。而接口是一种行为规范(契约)，它可以跨越不同的类，是一种辐射式设计。</li>
-<li>对于抽象类，如果需要添加新的方法，可以直接在抽象类中添加具体的实现，子类可以不进行变更；而对于接口则不行，如果接口进行了变更，则所有实现这个接口的类都必须进行相应的改动。</li>
+<h3 id="join方法"><a href="#join方法" class="headerlink" title="join方法"></a>join方法</h3><p>假如在main线程 中调用thread.join方法，则main线程会等待thread线程执行完毕或者等待一定的时间。详细地，如果调用的是无参join方法，则等待thread执行完毕；如果调用的是指定了时间参数的join方法，则等待一定的时间。join()方法有三个重载版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public final void join() throws InterruptedException &#123;...&#125;</span><br><span class="line">public final synchronized void join(long millis) throws InterruptedException &#123;...&#125;</span><br><span class="line">public final synchronized void join(long millis, int nanos) throws InterruptedException &#123;...&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以join(long millis) 方法为例，其内部调用了Object的wait方法，如下图<br><img src="/img/thread/007.png" alt="join方法"><br>根据以上源代码可以看出，join()方法是通过wait()方法 (Object 提供的方法) 实现的。当 millis == 0 时，会进入 while(isAlive()) 循环，并且只要子线程是活的，宿主线程就不停的等待。 wait(0) 的作用是让当前线程(宿主线程)等待，而这里的当前线程是指 Thread.currentThread() 所返回的线程。所以，虽然是子线程对象调用wait()方法，但是阻塞的是宿主线程。</p>
+<h3 id="interrupt方法"><a href="#interrupt方法" class="headerlink" title="interrupt方法"></a>interrupt方法</h3><p>interrupt,顾名思义，即中断的意思。单独调用interrupt方法可以使得处于阻塞状态的线程抛出一个异常，也就是说，它可以用来中断一个正处于阻塞状态的线程；另外，通过interrupted()方法和isInterrupted()方法可以停止正在运行的线程。interrupt方法在JDK中的定义为：<br><img src="/img/thread/008.png" alt="interrupt方法"><br>interrupted()和isInterrupted()方法在JDK中的定义分别为：<br><img src="/img/thread/009.png" alt="interrupt方法"></p>
+<h3 id="stop方法"><a href="#stop方法" class="headerlink" title="stop方法"></a>stop方法</h3><p>stop()方法已经是一个废弃的方法，它是一个不安全的方法。因为调用 stop()方法会直接终止run方法的调用，并且会抛出一个ThreadDeath错误，如果线程持有某个对象的话，会完全释放锁，导致对象状态不一致。所以，stop()方法基本是不会被用到的。</p>
+<h3 id="线程暂停-恢复"><a href="#线程暂停-恢复" class="headerlink" title="线程暂停/恢复"></a>线程暂停/恢复</h3><p>暂停线程意味着此线程还可以恢复运行，我们可以使用suspend()方法暂停线程，使用resume()方法恢复线程的执行，但是这两个方法已被废弃，因为他们具有固有的死锁倾向。如果目标线程挂起时在保护关键系统资源的监视器上保持有锁，则在目标线程重新开始以前，任何线程都不能访问该资源。如果重新开始目标线程的线程想在调用 resume 之前锁定该监视器，则会发生死锁。具体地，在使用 suspend 和 resume 方法时，如果使用不当，极易造成公共的同步对象的独占，使得其他线程无法得到公共同步对象锁，从而造成死锁</p>
+<h2 id="线程常用操作"><a href="#线程常用操作" class="headerlink" title="线程常用操作"></a>线程常用操作</h2><h3 id="currentThread方法"><a href="#currentThread方法" class="headerlink" title="currentThread方法"></a>currentThread方法</h3><p>currentThread()方法返回代码正在执行当前代码的线程。其在Thrad类中定义如下:<br><img src="/img/thread/010.png" alt="currentThread方法"></p>
+<h3 id="isAlive"><a href="#isAlive" class="headerlink" title="isAlive"></a>isAlive</h3><p>isAlve()的功能是判断调用该方法的线程是否处于活动状态。其中，活动状态是指线程已经start（无论是否获得CPU资源并运行）且尚未结束<br><img src="/img/thread/011.png" alt="isAlive方法"></p>
+<h3 id="getId"><a href="#getId" class="headerlink" title="getId"></a>getId</h3><p>getId()作用是获取线程唯一标识，由JVM自动给出<br><img src="/img/thread/012.png" alt="getId方法"></p>
+<h3 id="getName-setName"><a href="#getName-setName" class="headerlink" title="getName/setName"></a>getName/setName</h3><p>用来得到或者设置线程名称。如果我们不手动设置线程的名字，JVM会为该线程自动创建一个表示名，形式为;Thread-数字</p>
+<h3 id="getPriority和setPriority"><a href="#getPriority和setPriority" class="headerlink" title="getPriority和setPriority"></a>getPriority和setPriority</h3><p>在操作系统中，线程可以划分优先级，优先级较高的线程得到的CPU资源较多，也就是CPU优先执行优先级较高的线程。设置线程优先级有助于帮助“线程规划器”确定在下一次选择哪个线程 来获得CPU资源。在Java中，线程的优先级分为1~10这十个等级，如果小于1或大于10，则JDK抛出异常IllegalArgumentException,JDK中 使用3个常量来预置定义优先级的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static final int MIN_PRIORITY = 1; </span><br><span class="line">public static final int NORM_PRIORITY = 5; </span><br><span class="line">public static final int MAX_PRIORITY = 10;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/img/thread/013.png" alt="setPriority方法"></p>
+<h4 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h4><h5 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h5><p>在 Java 中，线程的优先级具有继承性，比如 A 线程启动 B 线程， 那么 B 线程的优先级与 A 是一样的。</p>
+<h5 id="规则性和随机性"><a href="#规则性和随机性" class="headerlink" title="规则性和随机性"></a>规则性和随机性</h5><p>线程的优先级具有一定的规则性，也就是CPU尽量将执行资源让给优先级比较高的线程。特别地，高优先级的线程总是大部分先执行完，但并不一定所有的高优先级线程都能先执行完。</p>
+<h3 id="守护线程-Daemon"><a href="#守护线程-Daemon" class="headerlink" title="守护线程(Daemon)"></a>守护线程(Daemon)</h3><p>在 Java 中，线程可以分为两种类型，即用户线程和守护线程。守护线程是一种特殊的线程，具有“陪伴”的含义：当进程中不存在非守护线程时，则守护线程自动销毁，典型的守护线程就是垃圾回收线程。任何一个守护线程都是整个JVM中所有非守护线程的保姆，只要当前JVM实例中存在任何一个非守护线程没有结束，守护线程就在工作；只有当最后一个非守护线程结束时，守护线程才随着JVM一同结束工作。 在 Thread类中，方法 setDaemon() 的定义为：<br><img src="/img/thread/014.png" alt="setPriority方法"></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="对于上述线程的各项基本操作，其-所操作的对象-满足："><a href="#对于上述线程的各项基本操作，其-所操作的对象-满足：" class="headerlink" title="对于上述线程的各项基本操作，其 所操作的对象 满足："></a>对于上述线程的各项基本操作，其 所操作的对象 满足：</h3><ul>
+<li>若该操作是静态方法，也就是说，该方法属于类而非具体的某个对象，那么该操作的作用对象就是 currentThread() 方法所返回 Thread 对象</li>
+<li>若该操作是实例方法，也就是说，该方法属于对象，那么该操作的作用对象就是调用该方法的 Thread 对象。<h3 id="对于上述线程的各项基本操作，有："><a href="#对于上述线程的各项基本操作，有：" class="headerlink" title="对于上述线程的各项基本操作，有："></a>对于上述线程的各项基本操作，有：</h3></li>
+<li>线程一旦被阻塞，就会释放 CPU.</li>
+<li>当线程出现异常且没有捕获处理时，JVM会自动释放当前线程占用的锁，因此不会由于异常导致出现死锁现象。</li>
+<li>对于一个线程，CPU 的释放 与 锁的释放没有必然联系。</li>
 </ul>
 
       
@@ -415,7 +481,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java-SE/" rel="tag"><i class="fa fa-tag"></i> Java SE</a>
+            <a href="/tags/Java-并发/" rel="tag"><i class="fa fa-tag"></i> Java 并发</a>
           
         </div>
       
@@ -428,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/01/对象克隆/" rel="next" title="对象克隆">
-                <i class="fa fa-chevron-left"></i> 对象克隆
+              <a href="/2018/07/03/HashMap/" rel="next" title="HashMap">
+                <i class="fa fa-chevron-left"></i> HashMap
               </a>
             
           </div>
@@ -438,8 +504,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/21/建造者模式/" rel="prev" title="建造者模式">
-                建造者模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/12/Synchronized/" rel="prev" title="Synchronized">
+                Synchronized <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -605,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类"><span class="nav-number">1.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口和抽象类的区别"><span class="nav-number">3.</span> <span class="nav-text">接口和抽象类的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法层面上的区别"><span class="nav-number">3.1.</span> <span class="nav-text">语法层面上的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计层面上的区别"><span class="nav-number">3.2.</span> <span class="nav-text">设计层面上的区别</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的生命周期"><span class="nav-number">1.</span> <span class="nav-text">线程的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的创建"><span class="nav-number">2.</span> <span class="nav-text">线程的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread类详解"><span class="nav-number">3.</span> <span class="nav-text">Thread类详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#start-方法"><span class="nav-number">3.1.</span> <span class="nav-text">start 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-方法"><span class="nav-number">3.2.</span> <span class="nav-text">run 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep方法"><span class="nav-number">3.3.</span> <span class="nav-text">sleep方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield方法"><span class="nav-number">3.4.</span> <span class="nav-text">yield方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join方法"><span class="nav-number">3.5.</span> <span class="nav-text">join方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interrupt方法"><span class="nav-number">3.6.</span> <span class="nav-text">interrupt方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stop方法"><span class="nav-number">3.7.</span> <span class="nav-text">stop方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程暂停-恢复"><span class="nav-number">3.8.</span> <span class="nav-text">线程暂停/恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程常用操作"><span class="nav-number">4.</span> <span class="nav-text">线程常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#currentThread方法"><span class="nav-number">4.1.</span> <span class="nav-text">currentThread方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isAlive"><span class="nav-number">4.2.</span> <span class="nav-text">isAlive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getId"><span class="nav-number">4.3.</span> <span class="nav-text">getId</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getName-setName"><span class="nav-number">4.4.</span> <span class="nav-text">getName/setName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getPriority和setPriority"><span class="nav-number">4.5.</span> <span class="nav-text">getPriority和setPriority</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程优先级"><span class="nav-number">4.5.1.</span> <span class="nav-text">线程优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#继承性"><span class="nav-number">4.5.1.1.</span> <span class="nav-text">继承性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#规则性和随机性"><span class="nav-number">4.5.1.2.</span> <span class="nav-text">规则性和随机性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#守护线程-Daemon"><span class="nav-number">4.6.</span> <span class="nav-text">守护线程(Daemon)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于上述线程的各项基本操作，其-所操作的对象-满足："><span class="nav-number">5.1.</span> <span class="nav-text">对于上述线程的各项基本操作，其 所操作的对象 满足：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于上述线程的各项基本操作，有："><span class="nav-number">5.2.</span> <span class="nav-text">对于上述线程的各项基本操作，有：</span></a></li></ol></li></ol></div>
             
 
           </div>
