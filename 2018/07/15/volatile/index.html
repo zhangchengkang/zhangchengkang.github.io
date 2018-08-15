@@ -95,7 +95,7 @@
 <meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/thread/volatile和synchronized的关系.png">
-<meta property="og:updated_time" content="2018-07-17T15:12:17.061Z">
+<meta property="og:updated_time" content="2018-07-25T02:50:15.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="volatile">
 <meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
@@ -368,7 +368,8 @@
       
 
       
-        <p><em>Add this line to Using the more label,but it’s too short to look bad,addition point length</em><br><a id="more"></a><br>　  在 Java 并发编程中，要想使并发程序能够正确地执行，必须要保证三条原则，即：原子性、可见性和有序性。只要有一条原则没有被保证，就有可能会导致程序运行不正确。volatile关键字 被用来保证可见性，即保证共享变量的内存可见性以解决缓存一致性问题。一旦一个共享变量被 volatile关键字 修饰，那么就具备了两层语义：内存可见性和禁止进行指令重排序。在多线程环境下，volatile关键字 主要用于及时感知共享变量的修改，并使得其他线程可以立即得到变量的最新值，例如，用于 修饰状态标记量 和 Double-Check (双重检查)中。</p>
+        <p><em>Add this line to Using the more label,but it’s too short to look bad,addition point length</em><br><a id="more"></a> </p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>　  在 Java 并发编程中，要想使并发程序能够正确地执行，必须要保证三条原则，即：原子性、可见性和有序性。只要有一条原则没有被保证，就有可能会导致程序运行不正确。volatile关键字 被用来保证可见性，即保证共享变量的内存可见性以解决缓存一致性问题。一旦一个共享变量被 volatile关键字 修饰，那么就具备了两层语义：内存可见性和禁止进行指令重排序。在多线程环境下，volatile关键字 主要用于及时感知共享变量的修改，并使得其他线程可以立即得到变量的最新值，例如，用于 修饰状态标记量 和 Double-Check (双重检查)中。</p>
 <p>　　volatile关键字 虽然从字面上理解起来比较简单，但是要用好不是一件容易的事情。由于 volatile关键字 是与 内存模型 紧密相关，因此在讲述 volatile关键字 之前，我们有必要先去了解与内存模型相关的概念和知识，然后回头再分析 volatile关键字 的实现原理，最后在给出 volatile关键字 的使用场景。</p>
 <h2 id="内存模型的相关概念"><a href="#内存模型的相关概念" class="headerlink" title="内存模型的相关概念"></a>内存模型的相关概念</h2><p>　　大家都知道，计算机在执行程序时，每条指令都是在 CPU 中执行的，而执行指令过程中，势必涉及到数据的读取和写入。由于程序运行过程中的临时数据是存放在主存（物理内存）当中的，这时就存在一个问题：由于 CPU 执行速度很快，而从内存读取数据和向内存写入数据的过程跟 CPU 执行指令的速度比起来要慢的多，因此如果任何时候对数据的操作都要通过和内存的交互来进行，会大大降低指令执行的速度。因此，在 CPU 里面就有了 高速缓存（寄存器）。<br>　　<br>　　也就是说，在程序运行过程中，会将运算需要的数据从主存复制一份到 CPU 的高速缓存当中，那么， CPU 进行计算时就可以直接从它的高速缓存读取数据和向其中写入数据，当运算结束之后，再将高速缓存中的数据刷新到主存当中。举个简单的例子，比如下面的这段代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i = i + 1;</span><br></pre></td></tr></table></figure></p>
 <p>　　当线程执行这个语句时，会先从主存当中读取 i 的值，然后复制一份到高速缓存当中，然后CPU执行指令对 i 进行加1操作，然后将数据写入高速缓存，最后将高速缓存中 i 最新的值刷新到主存当中。</p>
@@ -474,6 +475,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/07/20/ThreadLocal/" rel="prev" title="ThreadLocal">
+                ThreadLocal <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -577,7 +582,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -637,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型的相关概念"><span class="nav-number">1.</span> <span class="nav-text">内存模型的相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程中的三个概念"><span class="nav-number">2.</span> <span class="nav-text">并发编程中的三个概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性"><span class="nav-number">2.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">2.2.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性"><span class="nav-number">2.3.</span> <span class="nav-text">有序性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内存模型"><span class="nav-number">3.</span> <span class="nav-text">Java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存交互操作"><span class="nav-number">3.1.</span> <span class="nav-text">内存交互操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性-1"><span class="nav-number">3.2.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性-1"><span class="nav-number">3.3.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性-1"><span class="nav-number">3.4.</span> <span class="nav-text">有序性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile"><span class="nav-number">4.</span> <span class="nav-text">volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile关键字的两层语义"><span class="nav-number">4.1.</span> <span class="nav-text">volatile关键字的两层语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile不保证原子性"><span class="nav-number">4.2.</span> <span class="nav-text">volatile不保证原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用volatile关键字的场景"><span class="nav-number">4.3.</span> <span class="nav-text">使用volatile关键字的场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#状态标记量"><span class="nav-number">4.3.1.</span> <span class="nav-text">状态标记量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Double-Check-双重检查"><span class="nav-number">4.3.2.</span> <span class="nav-text">Double-Check (双重检查)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型的相关概念"><span class="nav-number">2.</span> <span class="nav-text">内存模型的相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程中的三个概念"><span class="nav-number">3.</span> <span class="nav-text">并发编程中的三个概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性"><span class="nav-number">3.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">3.2.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性"><span class="nav-number">3.3.</span> <span class="nav-text">有序性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内存模型"><span class="nav-number">4.</span> <span class="nav-text">Java内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存交互操作"><span class="nav-number">4.1.</span> <span class="nav-text">内存交互操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性-1"><span class="nav-number">4.2.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性-1"><span class="nav-number">4.3.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性-1"><span class="nav-number">4.4.</span> <span class="nav-text">有序性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile"><span class="nav-number">5.</span> <span class="nav-text">volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile关键字的两层语义"><span class="nav-number">5.1.</span> <span class="nav-text">volatile关键字的两层语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile不保证原子性"><span class="nav-number">5.2.</span> <span class="nav-text">volatile不保证原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用volatile关键字的场景"><span class="nav-number">5.3.</span> <span class="nav-text">使用volatile关键字的场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#状态标记量"><span class="nav-number">5.3.1.</span> <span class="nav-text">状态标记量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Double-Check-双重检查"><span class="nav-number">5.3.2.</span> <span class="nav-text">Double-Check (双重检查)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>

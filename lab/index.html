@@ -93,13 +93,13 @@
 <meta property="og:site_name" content="千山暮雪">
 <meta property="og:description" content="我的简历">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://zckdpic-1257031229.cos.ap-guangzhou.myqcloud.com/IMG_0008.jpg">
+<meta property="og:image" content="http://yoursite.com/lab/img/zck.jpg">
 <meta property="og:image" content="https://zckdpic-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180724153229.jpg ">
-<meta property="og:updated_time" content="2018-07-24T16:19:16.765Z">
+<meta property="og:updated_time" content="2018-07-25T14:34:24.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="千山暮雪">
 <meta name="twitter:description" content="我的简历">
-<meta name="twitter:image" content="https://zckdpic-1257031229.cos.ap-guangzhou.myqcloud.com/IMG_0008.jpg">
+<meta name="twitter:image" content="http://yoursite.com/lab/img/zck.jpg">
 
 
 
@@ -310,7 +310,7 @@
     ============================ -->
         <div id="header" class="row">
             <div class="col-sm-2">
-                <img class="propic" src="https://zckdpic-1257031229.cos.ap-guangzhou.myqcloud.com/IMG_0008.jpg">
+                <img class="propic" src="./img/zck.jpg" alt="">
             </div>
             <!-- photo end-->
 
@@ -478,20 +478,10 @@
         <!--right end-->
     </div>
     <!--container end-->
-    <!-- <footer class="text-center">
-        <p>power by
-            <a href="http://www.birdgis.com/">birdgis</a>
-        </p>
-    </footer> -->
     <div class="btn-group-vertical fixed-btn">
         <button type="button" class="btn btn-default">
             <a href="#" title="回到顶部">
                 <span class="social fa fa-2x fa-arrow-up" style="margin-right:0px"></span>
-            </a>
-        </button>
-        <button type="button" class="btn btn-default">
-            <a href="https://zhangchengkang.github.io/" title="回到首页" target="_blank" rel="noopener">
-                <span class="social fa fa-2x fa-home" style="margin-right:0px"></span>
             </a>
         </button>
         <button type="button" class="btn btn-default" v-on:click="renderPdf">
@@ -519,7 +509,7 @@
             },
             jobExp: [{
                 position: "Java开发工程师",
-                company: "湖北金拓维科技有限公司",
+                company: "湖北金拓维信息技术有限公司",
                 time: "2016.11-至今",
                 describe: "任职于平台服务部服务组，负责公司大数据Gis平台三大系统的业务层开发和维护以及定制项目的接口提供，由于直接与前端对接，所以还为其提供测试环境 "
             }],
@@ -614,9 +604,9 @@
                         var imgWidth = 595.28;
                         var imgHeight = 595.28 / contentWidth * contentHeight;
                         //返回图片URL，参数：图片格式和清晰度(0-1)
-                        var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                        var pageData = canvas.toDataURL('image/png', 1.0);
                         //方向默认竖直，尺寸ponits，格式a4【595.28,841.89]
-                        var pdf = new jsPDF('', 'pt', 'oouyang');
+                        var pdf = new jsPDF('', 'pt', [595.28, 841.89]);
                         //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
                         //当内容未超过pdf一页显示的范围，无需分页
                         // if (leftHeight < pageHeight) {
@@ -634,8 +624,8 @@
                         // }
 
                         //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
-                        pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 900);
-                        pdf.save('oouyang.pdf');
+                        pdf.addImage(pageData, 'PNG', 0, 0, 595.28, 841.89);
+                        pdf.save('zck.pdf');
 
                         // document.body.appendChild(canvas);
                     }
@@ -735,7 +725,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

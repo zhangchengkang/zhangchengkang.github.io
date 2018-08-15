@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java 并发," />
 
 
 
@@ -86,16 +86,18 @@
 
 
 
-<meta name="description" content="当时共我赏花人,点检如今无一半">
-<meta property="og:type" content="website">
-<meta property="og:title" content="千山暮雪">
-<meta property="og:url" content="http://yoursite.com/tags/随笔/index.html">
+<meta name="description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
+<meta name="keywords" content="Java 并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThreadLocal">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/ThreadLocal/index.html">
 <meta property="og:site_name" content="千山暮雪">
-<meta property="og:description" content="当时共我赏花人,点检如今无一半">
+<meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-25T07:11:47.362Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="千山暮雪">
-<meta name="twitter:description" content="当时共我赏花人,点检如今无一半">
+<meta name="twitter:title" content="ThreadLocal">
+<meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
 
 
 
@@ -125,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/随笔/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/20/ThreadLocal/"/>
 
 
 
 
 
-  <title>标签: 随笔 | 千山暮雪</title>
+  <title>ThreadLocal | 千山暮雪</title>
   
 
 
@@ -150,7 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband">
     <a href="https://github.com/zhangchengkang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
     </div>
@@ -256,54 +258,190 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>随笔<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/ThreadLocal/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kangshifu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千山暮雪">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/05/16/葬花吟/" itemprop="url">
-              
-                <span itemprop="name">葬花吟</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">ThreadLocal</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-16T22:28:31+08:00"
-              content="2018-05-16" >
-          05-16
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T20:07:33+08:00">
+                2018-07-20
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
+      
 
+      
+        <p><em>Add this line to Using the more label,but it’s too short to look bad,addition point length</em><br><a id="more"></a><br>ThreadLocal 又名线程局部变量，是 Java 中一种较为特殊的线程绑定机制，用于保证变量在不同线程间的隔离性，以方便每个线程处理自己的状态。</p>
+<h2 id="ThreadLocal-概述"><a href="#ThreadLocal-概述" class="headerlink" title="ThreadLocal 概述"></a>ThreadLocal 概述</h2><p>　　ThreadLocal 又名 线程局部变量 ，是 Java 中一种较为特殊的线程绑定机制，可以为每一个使用该变量的线程都提供一个变量值的副本，并且每一个线程都可以独立地改变自己的副本，而不会与其它线程的副本发生冲突。一般而言，通过 ThreadLocal 存取的数据总是与当前线程相关，也就是说，JVM 为每个运行的线程绑定了私有的本地实例存取空间，从而为多线程环境常出现的并发访问问题提供了一种 隔离机制 。</p>
+<p>　　如果一段代码中所需要的数据必须与其他代码共享，那就看看这些共享数据的代码能否保证在同一个线程中执行？如果能保证，我们就可以把共享数据的可见范围限制在同一个线程之内，这样，无须同步也能保证线程之间不出现数据争用的问题。也就是说，如果一个某个变量要被某个线程 独享，那么我们就可以通过ThreadLocal来实现线程本地存储功能。</p>
+<h3 id="ThreadLocal-在-JDK-中的定义"><a href="#ThreadLocal-在-JDK-中的定义" class="headerlink" title="ThreadLocal 在 JDK 中的定义"></a>ThreadLocal 在 JDK 中的定义</h3>
+      
+    </div>
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-并发/" rel="tag"><i class="fa fa-tag"></i> Java 并发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/15/volatile/" rel="next" title="volatile">
+                <i class="fa fa-chevron-left"></i> volatile
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -311,6 +449,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzc0OC8xNDI3OQ"></div>
+    </div>
+
+  
+
+
 
 
         </div>
@@ -332,8 +479,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -414,6 +570,22 @@
 <!--my custom code end-->
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal-概述"><span class="nav-number">1.</span> <span class="nav-text">ThreadLocal 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal-在-JDK-中的定义"><span class="nav-number">1.1.</span> <span class="nav-text">ThreadLocal 在 JDK 中的定义</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -574,6 +746,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -602,6 +778,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
