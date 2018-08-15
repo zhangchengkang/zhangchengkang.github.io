@@ -331,3 +331,131 @@ final Node<K,V>[] resize() {
 在jdk8中，HashMap处理“碰撞”增加了红黑树这种数据结构，当碰撞结点较少时，采用链表存储，当较大时（>8个），采用红黑树存储
 * 有一个阀值控制，大于阀值(8个)，将链表存储转换成红黑树存储
 ![红黑树](/img/se/001.jpg) 
+
+## 手写简易版HashMAp
+````
+package org.kang.entity;
+
+public interface MyMap<K, V> {
+    V put(K key, V value);
+
+    V get(K key);
+
+    interface Entry<K,V>{
+        V setValue(V value);
+        Entry<K,V> setNext(Entry<K,V> entry);
+    }
+}
+````
+````
+package org.kang.entity;
+
+public class MyHashMap<K, V> implements MyMap<K, V> {
+    //定义了一个存Node<K,V>的数组
+    private Node<K, V> table[] = null;
+    //数组元素个数
+    private int size;
+    //数组默认长度
+    private static int defaultCapacity = 1 << 4;
+    //默认的加载因子
+    private static float defaultLoadFactor = 0.75f;
+    private int threshold;
+
+    private MyHashMap() {
+        threshold = (int) (defaultCapacity * defaultLoadFactor);
+    }
+
+    @Override
+    public V put(K key, V value) {
+        if (table == null) {
+            table = new Node[this.defaultCapacity];
+        }
+        //通过hsah算法，得到index值
+        int index = getIndex(key, this.table.length);
+        //判断是否是修改
+        Node<K, V> node = table[index];
+        for (; node != null; node = node.next) {
+            if (node.key == key || (node.key != null && node.key.equals(key))) {
+                return node.setValue(value);
+            }
+        }
+        //扩容
+        if (size >= threshold) {
+            resize();
+        }
+        //创建Node元素，并存放在table的index位置
+        table[index] = new Node<>(key, value, table[index]);
+        ++size;
+        return null;
+    }
+
+    @Override
+    public V get(K key) {
+        if (table != null) {
+            int index = getIndex(key, this.table.length);
+            Node<K, V> node = table[index];
+            for (; node != null; node = node.next) {
+                if (node.key == key || (node.key != null && node.key.equals(key))) {
+                    return node.value;
+                }
+            }
+        }
+        return null;
+    }
+
+    //扩容，重新散列  消耗空间及时间
+    private void resize() {
+        Node<K, V> newTable[] = new Node[table.length << 1];
+        //循环数组
+        for (int i = 0; i < table.length; i++) {
+            Node<K, V> node = table[i];
+            //循环链表
+            for (; node != null; ) {
+                //Key在新的数组上的位置 ，重新进行哈希计算
+                int index = getIndex(node.key, newTable.length);
+                Node<K, V> oldNode = node.next;
+                node.next = newTable[index];
+                newTable[index] = node;
+                node = oldNode;
+            }
+        }
+        table = newTable;
+        this.defaultCapacity = newTable.length;
+        threshold = (int) (defaultCapacity * defaultLoadFactor);
+    }
+
+    private int getIndex(K key, int length) {
+        if (key == null) {
+            return 0;
+        }
+        return key.hashCode() & (length - 1);
+    }
+
+    //链表
+    static class Node<K, V> implements Entry<K, V> {
+        K key;
+        V value;
+        Node<K, V> next;
+
+        public Node(K key, V value, Node<K, V> next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        @Override
+        public V setValue(V value) {
+            V oldValue = this.value;
+            this.value = value;
+            return oldValue;
+        }
+
+        @Override
+        public Entry<K, V> setNext(Entry<K, V> entry) {
+            Entry<K, V> oldEntry = this.next;
+            this.next = (Node<K, V>) entry;
+            return oldEntry;
+        }
+    }
+}
+````
