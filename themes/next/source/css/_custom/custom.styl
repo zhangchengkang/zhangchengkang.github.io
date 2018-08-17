@@ -1,0 +1,135 @@
+// Custom styles.
+//背景颜色  图片
+body{   
+        background: url("/images/background.jpg");
+        background-size:cover;
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+        background-position:center; 
+     }
+
+//正文背景透明度
+.content {
+            border-radius: 10px;
+            margin-top: 60px;
+            background:rgba(208,222,231,0.8) none repeat scroll !important;
+         }
+
+ //页面宽度
+.main-inner {width: 900px;}
+
+//侧栏背景图以及内部文字颜色的修改
+#sidebar {
+            background:url("/images/leftlan.jpg");
+            background-size: cover;
+            background-position:center;
+            background-repeat:no-repeat;
+            p,span,a{color: #f7b892;font-size:16px;}
+            li{font-size:20px;}
+}
+//作者字体
+.site-author-name{
+   font-size:22px !important;
+}
+
+//描述的字体
+.site-description{
+    font-size:12px !important;
+ }
+
+
+//侧栏文字版颜色
+.sidebar-inner {
+            border-radius: 10px;
+            margin-top: 25px;
+            background:rgba(4,4,4,0.6) none repeat scroll !important;
+         }
+
+//头像样式
+.site-overview{
+  margin-top:20px
+}
+
+//评论背景色
+#lv-container {
+       border-radius: 10px;
+       background:rgba(208,222,231,0.8) none repeat scroll !important;
+    }
+
+
+//文章内链接文本样式
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  &:hover {
+    color: #0477ab;
+    text-decoration: underline;
+  }
+}
+
+// Custom styles.
+code {
+    color: #ff7600;
+    background: #fbf7f8;
+    margin: 2px;
+}
+// 大代码块的自定义样式
+.highlight, pre {
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 3px;
+}
+.highlight, code, pre {
+    border: 1px solid #d6d6d6;
+}
+
+// 主页文章添加阴影效果
+ .post {
+   margin-top: 60px;
+   margin-bottom: 60px;
+   padding: 25px;
+   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+  }
+// 鼠标样式
+//* {
+//      cursor: url("http://om8u46rmb.bkt.clouddn.com/sword2.ico"),auto!important
+//  }
+ // :active {
+//      cursor: url("http://om8u46rmb.bkt.clouddn.com/sword1.ico"),auto!important
+ // }
+//页面头部和底部栏的背景色修改
+.header {
+          background:rgba(6,27,40,0.8) none repeat scroll !important;
+        }
+
+.footer {
+          background:rgba(98,78,65,0.8) none repeat scroll !important;
+        }
+.footer-inner {color: #99f808;}
+//自定义区域的初始化设置
+.mydivshow {opacity: 0;}
+
+//音乐播放器
+.aplayer-list ol li:hover {   /*列表悬停颜色*/
+                  background:rgba(#6b6c6d,0.5) none repeat scroll !important;}
+
+.aplayer-list ol li {   /*列表底色*/
+                        background:rgba(#7a7b7c,0.5);}
+
+.aplayer-list-light {   /*列表播放歌曲颜色*/
+                      background:rgba(#e3e7e8,1) none repeat scroll !important;}
+
+//音乐播放器样式
+#player1 {    /*边框样式*/
+          margin-top:50px;
+          border-radius: 6px;
+          div,ol {border-radius: 6px;}
+        }
+
+#player1 *{color: #ffffff;}    /*字体颜色*/
+
+/*列表歌曲信息的排版*/
+.aplayer-list-index{float:left;}
+.aplayer-list-title{float:left;}
+.aplayer-list-author{float:right;}
