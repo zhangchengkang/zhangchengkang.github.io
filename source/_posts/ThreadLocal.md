@@ -7,9 +7,9 @@ categories: JAVA
 ---
 *Add this line to Using the more label,but it's too short to look bad,addition point length*
 <!--more--> 
-    ThreadLocal 又名线程局部变量，是 Java 中一种较为特殊的线程绑定机制，用于保证变量在不同线程间的隔离性，以方便每个线程处理自己的状态。
+
 ## ThreadLocal 概述
-　　ThreadLocal 又名 线程局部变量 ，是 Java 中一种较为特殊的线程绑定机制，可以为每一个使用该变量的线程都提供一个变量值的副本，并且每一个线程都可以独立地改变自己的副本，而不会与其它线程的副本发生冲突。一般而言，通过 ThreadLocal 存取的数据总是与当前线程相关，也就是说，JVM 为每个运行的线程绑定了私有的本地实例存取空间，从而为多线程环境常出现的并发访问问题提供了一种 隔离机制 。
+　　**ThreadLocal 又名 线程局部变量 ，是 Java 中一种较为特殊的线程绑定机制，可以为每一个使用该变量的线程都提供一个变量值的副本，并且每一个线程都可以独立地改变自己的副本，而不会与其它线程的副本发生冲突,以方便每个线程处理自己的状态.** 一般而言，通过 ThreadLocal 存取的数据总是与当前线程相关，也就是说，JVM 为每个运行的线程绑定了私有的本地实例存取空间，从而为多线程环境常出现的并发访问问题提供了一种 隔离机制 。
 
 　　如果一段代码中所需要的数据必须与其他代码共享，那就看看这些共享数据的代码能否保证在同一个线程中执行？如果能保证，我们就可以把共享数据的可见范围限制在同一个线程之内，这样，无须同步也能保证线程之间不出现数据争用的问题。也就是说，如果一个某个变量要被某个线程 独享，那么我们就可以通过ThreadLocal来实现线程本地存储功能。
 
@@ -20,7 +20,8 @@ categories: JAVA
 
   
 ## 深入分析ThreadLocal类   
-    下面，我们来看一下 ThreadLocal 的具体实现，该类一共提供的四个方法：
+
+　　下面，我们来看一下 ThreadLocal 的具体实现，该类一共提供的四个方法：
 
 ````
     public T get() { }
@@ -29,7 +30,7 @@ categories: JAVA
     protected T initialValue() { }
 ````
 
-    　　其中，get()方法是用来获取 ThreadLocal变量 在当前线程中保存的值，set() 用来设置 ThreadLocal变量 在当前线程中的值，remove() 用来移除当前线程中相关 ThreadLocal变量，initialValue() 是一个 protected 方法，一般需要重写。
+　　其中，get()方法是用来获取 ThreadLocal变量 在当前线程中保存的值，set() 用来设置 ThreadLocal变量 在当前线程中的值，remove() 用来移除当前线程中相关 ThreadLocal变量，initialValue() 是一个 protected 方法，一般需要重写。
 
 ### get()
 
@@ -100,6 +101,18 @@ categories: JAVA
     public static Connection getConnection() {
         return connectionHolder.get();
     }
+
+
+	//Java 8
+	 private static ThreadLocal<Connection> connectionHolder2 = ThreadLocal.withInitial(() -> {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("url");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return conn;
+    });
 ````
 
 ###  Session管理
@@ -120,9 +133,30 @@ categories: JAVA
         return s;
     }    
 ````
+### SimpleDateFormat
+　　大家都知道，SimpleDateFomat是线程不安全的，因为里面用了Calendar 这个成员变量来实现SimpleDataFormat,并且在Parse 和Format的时候对Calendar 进行了修改，calendar.clear()，calendar.setTime(date)。总之在多线程情况下，若是用同一个SimpleDateFormat是要出问题的
+````
+public static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>(){
+        @Override
+        protected DateFormat initialValue(){
+            return new SimpleDateFormat("yyyy-mm-dd");
+        }
+    };
+
+	//Java 8
+    public static final ThreadLocal<DateFormat> df1 = ThreadLocal.withInitial(()-> new SimpleDateFormat("yyyy-mm-dd"));
+
+````
+
+## ThreadLocal内存泄露问题
+　　每个Thread含有的ThreadLocalMap中的Key为ThreadLocal变量的弱引用，如果一个ThreadLocal变量没有外部强引用来引用它，那么它在JVM下一次GC的时候会被垃圾回收掉，这时候，Map中就存在了key为NULL的value，这个value无法被访问。如果当前线程再迟迟不结束的话（例如当前线程在一个线程池中），那么value所指向的对象可能永远无法释放，也即不能被回收，造成内存泄露。
+
+　　ThreadLocalMap的设计者很显然也想到了这个问题，所以其在每一次对ThreadLocalMap的set，get，remove等操作中，都会清除Map中key为null的Entry。因此，ThreadLocal一般是不会存在内存泄露风险的。
+
+　　但是，将清除NULL对象的工作交给别人，并不是一个明智的选择，所以，在Thread中使用完ThreadLocal对象后，一定要记得调用ThreadLocal的remove方法，进行手动清除。
 
 ## ThreadLocal 一般使用步骤
-    ThreadLocal 使用步骤一般分为三步：
+　　ThreadLocal 使用步骤一般分为三步：
 
 * 创建一个 ThreadLocal 对象 threadXxx，用来保存线程间需要隔离处理的对象 xxx；
 
