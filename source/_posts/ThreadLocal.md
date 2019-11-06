@@ -23,7 +23,7 @@ categories: JAVA
 
 　　下面，我们来看一下 ThreadLocal 的具体实现，该类一共提供的四个方法：
 
-````
+````java
     public T get() { }
     public void set(T value) { }
     public void remove() { }
@@ -34,7 +34,7 @@ categories: JAVA
 
 ### get()
 
-````
+````java
     public T get() {
         Thread t = Thread.currentThread();    // 获取当前线程对象
         ThreadLocalMap map = getMap(t);     // 获取当前线程的成员变量 threadLocals
@@ -46,11 +46,11 @@ categories: JAVA
         }
         return setInitialValue();  
     }
-````    
+````
 
 ### setInitialValue()
 
-````
+````java
     private T setInitialValue() {
         T value = initialValue();     // 默认实现返回 null
         Thread t = Thread.currentThread();   // 获得当前线程
@@ -65,7 +65,7 @@ categories: JAVA
 
 ###  initialValue()
 
-````
+````java
     protected T initialValue() {
         return null;            // 默认实现返回 null
     }
@@ -73,7 +73,7 @@ categories: JAVA
 
 ###  createMap()
 
-````
+````java
    void createMap(Thread t, T firstValue) {
         t.threadLocals = new ThreadLocalMap(this, firstValue); // this 指代当前 ThreadLocal 变量，为 map 的键  
     }
@@ -91,7 +91,7 @@ categories: JAVA
 
 ### 数据库连接问题
 
-````
+````java
     private static ThreadLocal<Connection> connectionHolder = new ThreadLocal<Connection>() {
         public Connection initialValue() {
            return DriverManager.getConnection(DB_URL);
@@ -117,7 +117,7 @@ categories: JAVA
 
 ###  Session管理
 
-````
+````java
     private static final ThreadLocal threadSession = new ThreadLocal();
 
     public static Session getSession() throws InfrastructureException {
@@ -135,7 +135,7 @@ categories: JAVA
 ````
 ### SimpleDateFormat
 　　大家都知道，SimpleDateFomat是线程不安全的，因为里面用了Calendar 这个成员变量来实现SimpleDataFormat,并且在Parse 和Format的时候对Calendar 进行了修改，calendar.clear()，calendar.setTime(date)。总之在多线程情况下，若是用同一个SimpleDateFormat是要出问题的
-````
+````java
 public static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>(){
         @Override
         protected DateFormat initialValue(){

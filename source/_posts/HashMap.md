@@ -2,7 +2,7 @@
 toc: true
 title:  HashMap
 date: 2018-07-03 20:57:50
-tags: [Java SE]
+tags: [Collection]
 categories: JAVA
 ---
 *Add this line to Using the more label,but it's too short to look bad,addition point length*
@@ -12,11 +12,11 @@ categories: JAVA
 
 ## JDK1.8中的涉及到的数据结构
 ### 位桶数组
-````
+````java
 transient Node<k,v>[] table;//存储（位桶）的数组</k,v>
 ````
 ### 数组元素Node<K,V>实现了Entry接口
-````
+````java
 
 //Node是单向链表，它实现了Map.Entry接口
 static class Node<k,v> implements Map.Entry<k,v> {
@@ -60,7 +60,7 @@ static class Node<k,v> implements Map.Entry<k,v> {
     }
 ````
 ### 红黑树
-````
+````java
 
 static final class TreeNode<k,v> extends LinkedHashMap.Entry<k,v> {
     TreeNode<k,v> parent;  // 父节点
@@ -83,7 +83,7 @@ static final class TreeNode<k,v> extends LinkedHashMap.Entry<k,v> {
 ````
 
 ## HashMap的构造函数
-````
+````java
 public HashMap(int initialCapacity, float loadFactor) {
     //指定的初始容量非负
     if (initialCapacity < 0)
@@ -118,7 +118,7 @@ public HashMap(Map<!--? extends K, ? extends V--> m) {
 ## HashMap的存取
 ### HashMap如何getvalue值
 get(key)方法时获取key的hash值，计算hash&(n-1)得到在链表数组中的位置first=tab[hash&(n-1)],先判断first的key是否与参数key相等，不等就遍历后面的链表找到相同的key值返回对应的Value值即可
-````
+````java
 public V get(Object key) {
         Node<K,V> e;
         return (e = getNode(hash(key), key)) == null ? null : e.value;
@@ -163,7 +163,7 @@ public V get(Object key) {
 * 根据键值key计算hash值得到插入的数组索引i，如果tab[i]==null，直接新建节点添加，否则转入3
 * 判断当前数组中处理hash冲突的方式为链表还是红黑树(check第一个节点类型即可),分别处理
 
-````
+````java
 public V put(K key, V value) {
         return putVal(hash(key), key, value, false, true);
     }
@@ -235,7 +235,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 ## HashMap的扩容机制resize()
 构造hash表时，如果不指明初始大小，默认大小为16（即Node数组大小16），如果Node[]数组中的元素达到（填充比*Node.length）容量的0.75时,重新调整HashMap大小 变为原来2倍大小,扩容很耗时
 
-````
+````java
 final Node<K,V>[] resize() {
         Node<K,V>[] oldTab = table;
         int oldCap = (oldTab == null) ? 0 : oldTab.length;
@@ -333,7 +333,7 @@ final Node<K,V>[] resize() {
 ![红黑树](/img/se/001.jpg) 
 
 ## 手写简易版HashMAp
-````
+````java
 package org.kang.entity;
 
 public interface MyMap<K, V> {
@@ -347,7 +347,7 @@ public interface MyMap<K, V> {
     }
 }
 ````
-````
+````java
 package org.kang.entity;
 
 public class MyHashMap<K, V> implements MyMap<K, V> {
@@ -459,3 +459,4 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     }
 }
 ````
+

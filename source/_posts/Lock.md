@@ -8,7 +8,7 @@ categories: JAVA
 *Add this line to Using the more label,but it's too short to look bad,addition point length*
 <!--more--> 
 ## Lock
-````
+````java
     public interface Lock {
     void lock();
     void lockInterruptibly() throws InterruptedException;  // 可以响应中断
@@ -24,7 +24,7 @@ categories: JAVA
 
 　　在Lock中声明了四个方法来获取锁，那么这四个方法有何区别呢？首先，lock()方法是平常使用得最多的一个方法，就是用来获取锁。如果锁已被其他线程获取，则进行等待。需要注意的是，如果采用Lock，必须主动去释放锁，并且在发生异常时，不会自动释放锁。因此，一般来说，使用Lock必须在try…catch…块中进行，并且将释放锁的操作放在finally块中进行，以保证锁一定被被释放，防止死锁的发生。通常使用Lock来进行同步的话，是以下面这种形式去使用的：
 
-````
+````java
 Lock lock = new ReentrantLock();
 lock.lock();
 try{
@@ -38,7 +38,7 @@ try{
 ### tryLock()&Lock(long time,TimeUnit unit)
 　　tryLock()方法是有返回值的，它表示用来尝试获取锁，如果获取成功，则返回true；如果获取失败（即锁已被其他线程获取），则返回false，也就是说，这个方法无论如何都会立即返回（在拿不到锁时不会一直在那等待）。
 　　tryLock(long time, TimeUnit unit)方法和tryLock()方法是类似的，只不过区别在于这个方法在拿不到锁时会等待一定的时间，在时间期限之内如果还拿不到锁，就返回false，同时可以响应中断。如果一开始拿到锁或者在等待期间内拿到了锁，则返回true。
-````
+````java
 Lock lock = new ReentrantLock();
 if(lock.tryLock()) {
      try{
@@ -56,7 +56,7 @@ if(lock.tryLock()) {
 　　lockInterruptibly()方法比较特殊，当通过这个方法去获取锁时，如果线程 正在等待获取锁，则这个线程能够响应中断，即中断线程的等待状态。例如，当两个线程同时通过lock.lockInterruptibly()想获取某个锁时，假若此时线程A获取到了锁，而线程B只有在等待，那么对线程B调用threadB.interrupt()方法能够中断线程B的等待过程。
 
 　　由于lockInterruptibly()的声明中抛出了异常，所以lock.lockInterruptibly()必须放在try块中或者在调用lockInterruptibly()的方法外声明抛出 InterruptedException，但推荐使用后者，原因稍后阐述。因此，lockInterruptibly()一般的使用形式如下：
-````
+````java
 public void method() throws InterruptedException {
     lock.lockInterruptibly();
     try {  
@@ -71,7 +71,7 @@ public void method() throws InterruptedException {
 
 ## ReentrantLock
 　　ReentrantLock，即可重入锁。ReentrantLock是唯一实现了Lock接口的类.
-````
+````java
 isFair() //判断锁是否是公平锁
 
 isLocked() //判断锁是否被任何线程获取了
@@ -86,7 +86,7 @@ getQueueLength() // 获取正在等待此锁的线程数
 
 getWaitQueueLength(Condition condition) // 获取正在等待此锁相关条件condition的线程数
 ````
-````
+````java
 public class Test {
     private ArrayList<Integer> arrayList = new ArrayList<Integer>();
 
@@ -129,7 +129,7 @@ public class Test {
  *///:~
 ````
 　　结果或许让人觉得诧异。第二个线程怎么会在第一个线程释放锁之前得到了锁？原因在于，在insert方法中的lock变量是局部变量，每个线程执行该方法时都会保存一个副本，那么每个线程执行到lock.lock()处获取的是不同的锁，所以就不会对临界资源形成同步互斥访问。因此，我们只需要将lock声明为成员变量即可，如下所示。
-````
+````java
 public class Test {
     private ArrayList<Integer> arrayList = new ArrayList<Integer>();
     private Lock lock = new ReentrantLock();  // 注意这个地方:lock被声明为成员变量
@@ -144,7 +144,7 @@ public class Test {
 
 ## ReadWriteLock
 　　ReadWriteLock也是一个接口，在它里面只定义了两个方法：
-````
+````java
 public interface ReadWriteLock {
     /**
      * Returns the lock used for reading.
@@ -165,7 +165,7 @@ public interface ReadWriteLock {
 
 ## ReentrantReadWriteLock
 　　ReentrantReadWriteLock 实现了 ReadWriteLock 接口( 注意，ReentrantReadWriteLock 并没有实现 Lock 接口 )，其包含两个很重要的方法：readLock() 和 writeLock() 分别用来获取读锁和写锁，并且这两个锁实现了Lock接口。
-````
+````java
 public class Test {
     private ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 
@@ -221,7 +221,7 @@ public class Test {
 ##  锁的相关概念介绍
 ### 可重入锁
 　　如果锁具备可重入性，则称作为 可重入锁 。像 synchronized 和 ReentrantLock 都是可重入锁，可重入性实际上表明了 锁的分配粒度：基于线程的分配，而不是基于方法调用的分配。举个简单的例子，当一个线程执行到某个synchronized方法时，比如说method1，而在method1中会调用另外一个synchronized方法method2，此时线程不必重新去申请锁，而是可以直接执行方法method2
-````
+````java
 class MyClass {
     public synchronized void method1() {
         method2();

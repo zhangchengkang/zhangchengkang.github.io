@@ -23,7 +23,7 @@ categories: JAVA
 ## 线程的创建
 在Java中，创建线程去执行子任务一般有两种方式：继承Thread类和实现Runnable接口。 其中，Thread类本身就实现了Runnable 接口，而使用继承Therad类的方式创建线程的最大局限就是不支持多继承。
 
-````
+````java
 //线程创建示例代码
 public class ThreadTest {
     public static void main(String[] args) {
@@ -76,7 +76,7 @@ sleep()方法的作用是在指定的毫秒数内让当前正在执行的线程�
 
 ### join方法
 假如在main线程 中调用thread.join方法，则main线程会等待thread线程执行完毕或者等待一定的时间。详细地，如果调用的是无参join方法，则等待thread执行完毕；如果调用的是指定了时间参数的join方法，则等待一定的时间。join()方法有三个重载版本：
-```` 
+```` java
 public final void join() throws InterruptedException {...}
 public final synchronized void join(long millis) throws InterruptedException {...}
 public final synchronized void join(long millis, int nanos) throws InterruptedException {...}
@@ -117,7 +117,7 @@ getId()作用是获取线程唯一标识，由JVM自动给出
 
 ### getPriority和setPriority
 在操作系统中，线程可以划分优先级，优先级较高的线程得到的CPU资源较多，也就是CPU优先执行优先级较高的线程。设置线程优先级有助于帮助“线程规划器”确定在下一次选择哪个线程 来获得CPU资源。在Java中，线程的优先级分为1~10这十个等级，如果小于1或大于10，则JDK抛出异常IllegalArgumentException,JDK中 使用3个常量来预置定义优先级的值
-````
+````java
 public static final int MIN_PRIORITY = 1; 
 public static final int NORM_PRIORITY = 5; 
 public static final int MAX_PRIORITY = 10; 

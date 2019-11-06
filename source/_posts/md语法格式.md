@@ -1,12 +1,13 @@
 ---
 toc: true
-title: md语法格式
+title: MarkDown语法格式
 date: 2018-05-16 18:53:40
-tags: [Markdown]
+tags: [MarkDown]
 categories: JavaScript
 ---
 *Add this line to Using the more label,but it's too short to look bad,addition point length*
 <!--more-->
+
 ## 1. 标题
 # 一级标题
 ## 二级标题
@@ -27,8 +28,10 @@ categories: JavaScript
 
 ## 3. 区块引用
 1. 毛主席曾经说过
+	
 	> 不以结婚为目的的谈恋爱都叫耍流氓
 2. 听说你缺个对象
+	
 	> Object object = new Object();
 3.	>一级引用
 	>>二级引用
@@ -36,6 +39,7 @@ categories: JavaScript
 	>>>>四级引用
 	>>>>>五级引用
 	>>>>>>六级引用
+	>>>>>>
 	>>>>>>>七级引用
 	
 ## 4.华丽的分割线
@@ -43,7 +47,7 @@ categories: JavaScript
 *************************
 _________________________
 _________________________
-* * * * * * * * *   *  * 
+* * * * * * * * *   *  *
 
 ## 5.链接
 

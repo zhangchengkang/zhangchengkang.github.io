@@ -33,7 +33,7 @@ categories: JAVA
 * 对于JVM的方法区，可能听得最多的是另外一个说法——永久代（Permanent Generation），呼应堆的新生代和老年代。方法区和堆的划分是JVM规范的定义，而不同虚拟机有不同实现，对于Hotspot虚拟机来说，将方法区纳入GC管理范围，这样就不必单独管理方法区的内存，所以就有了”永久代“这么一说，但使用永久代来实现方法区现在看来并不是很好，因为这样更容易遇到内存溢出的问题，（永久代有-XX:MaxPermSize的上限，J9和JRockit只要没有触碰到进程可用内存的上限，例如64为系统中的4GB，就不会有问题），而且有极少数方法（例如String.intern()）会因为这个原因导致不同虚拟机下有不同的表现。因此，现在对于HotSpot虚拟机，已经改为采用Native Memory来实现方法区规划了，而且在JDK1.7的HotSpot中，已经把原本放在永久代的字符串常量池移出。
 **举例**
 现设置JVM参数为”-XX:MaxPermSize=20M”（方法区最大内存为20M）
-```
+```java
 public class Test {
 
     public static void main(String[] args) {
@@ -49,7 +49,7 @@ public class Test {
 #### 2.2.1 运行时常量池(Runtime Constant Pool)
 * 运行时常量池是方法区的一部分,Class文件中除了有类的版本、字段、方法、接口等描述信息外,还有一项是常量池,用于存放编译期生成的各种字面量和符号引用,这部分内容将在类加载后进入方法区的运行时常量池中存放
 * Java语言并不要求常量一定只有编译期才能产生，也就是并非预置入Class文件中常量池的内容才能进入方法区运行时常量池，运行期间也可能将新的常量放入池中，这种特性被开发人员利用得比较多的是String类的intern()方法
-```
+```java
  public static void main(String[] args) {
 
         String s1 = "abc";
