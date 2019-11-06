@@ -90,13 +90,13 @@
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java内存区域">
-<meta property="og:url" content="http://yoursite.com/2018/05/23/java内存区域/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/05/23/Java内存区域/index.html">
 <meta property="og:site_name" content="千山暮雪">
 <meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/jvm/jvm001.png">
 <meta property="og:image" content="http://yoursite.com/img/jvm/jvm002.png">
-<meta property="og:updated_time" content="2018-07-01T11:38:12.549Z">
+<meta property="og:updated_time" content="2019-10-23T13:47:00.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java内存区域">
 <meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
@@ -130,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/23/java内存区域/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/23/Java内存区域/"/>
 
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/java内存区域/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/Java内存区域/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kangshifu">
@@ -387,12 +387,12 @@
 <li>从内存分配的角度来看，线程共享的Java堆中可能划分出多个线程私有的分配缓冲区（Thread Local Allocation Buffer,TLAB）<h3 id="2-2-方法区-Method-Area"><a href="#2-2-方法区-Method-Area" class="headerlink" title="2.2 方法区(Method Area)"></a>2.2 方法区(Method Area)</h3></li>
 <li>存储内容: 所有的class(字节码文件)和static变量,方法区中包含的都是在整个程序中永远唯一的元素</li>
 <li><p>对于JVM的方法区，可能听得最多的是另外一个说法——永久代（Permanent Generation），呼应堆的新生代和老年代。方法区和堆的划分是JVM规范的定义，而不同虚拟机有不同实现，对于Hotspot虚拟机来说，将方法区纳入GC管理范围，这样就不必单独管理方法区的内存，所以就有了”永久代“这么一说，但使用永久代来实现方法区现在看来并不是很好，因为这样更容易遇到内存溢出的问题，（永久代有-XX:MaxPermSize的上限，J9和JRockit只要没有触碰到进程可用内存的上限，例如64为系统中的4GB，就不会有问题），而且有极少数方法（例如String.intern()）会因为这个原因导致不同虚拟机下有不同的表现。因此，现在对于HotSpot虚拟机，已经改为采用Native Memory来实现方法区规划了，而且在JDK1.7的HotSpot中，已经把原本放在永久代的字符串常量池移出。<br><strong>举例</strong><br>现设置JVM参数为”-XX:MaxPermSize=20M”（方法区最大内存为20M）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        List&lt;String&gt; list = new ArrayList&lt;String&gt;();</span><br><span class="line">        int i = 0;</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            list.add(String.valueOf(i++).intern());   </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            list.add(String.valueOf(i++).intern());   </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>实际上对于以上代码，在JDK6、JDK7、JDK8运行结果均不一样。原因就在于字符串常量池在JDK6的时候还是存放在方法区（永久代）所以它会抛出OutOfMemoryError:Permanent Space；而JDK7后则将字符串常量池移到了Java堆中，上面的代码不会抛出OOM，若将堆内存改为20M则会抛出OutOfMemoryError:Java heap space；至于JDK8则是纯粹取消了方法区这个概念，取而代之的是”元空间（Metaspace）“，所以在JDK8中虚拟机参数”-XX:MaxPermSize”也就没有了任何意义，取代它的是”-XX:MetaspaceSize“和”-XX:MaxMetaspaceSize”等。</p>
 <h4 id="2-2-1-运行时常量池-Runtime-Constant-Pool"><a href="#2-2-1-运行时常量池-Runtime-Constant-Pool" class="headerlink" title="2.2.1 运行时常量池(Runtime Constant Pool)"></a>2.2.1 运行时常量池(Runtime Constant Pool)</h4></li>
 <li>运行时常量池是方法区的一部分,Class文件中除了有类的版本、字段、方法、接口等描述信息外,还有一项是常量池,用于存放编译期生成的各种字面量和符号引用,这部分内容将在类加载后进入方法区的运行时常量池中存放</li>
-<li>Java语言并不要求常量一定只有编译期才能产生，也就是并非预置入Class文件中常量池的内容才能进入方法区运行时常量池，运行期间也可能将新的常量放入池中，这种特性被开发人员利用得比较多的是String类的intern()方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">       String s1 = &quot;abc&quot;;</span><br><span class="line">       String s2 = &quot;abc&quot;;</span><br><span class="line"></span><br><span class="line">       String s3= new String(&quot;abc&quot;);</span><br><span class="line"></span><br><span class="line">       System.out.println(s1 == s2);　//true</span><br><span class="line">       System.out.println(s2 == s3);  //false</span><br><span class="line">       System.out.println(s2 == s3.intern());  //true </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<li>Java语言并不要求常量一定只有编译期才能产生，也就是并非预置入Class文件中常量池的内容才能进入方法区运行时常量池，运行期间也可能将新的常量放入池中，这种特性被开发人员利用得比较多的是String类的intern()方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       String s1 = <span class="string">"abc"</span>;</span><br><span class="line">       String s2 = <span class="string">"abc"</span>;</span><br><span class="line"></span><br><span class="line">       String s3= <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line"></span><br><span class="line">       System.out.println(s1 == s2);　<span class="comment">//true</span></span><br><span class="line">       System.out.println(s2 == s3);  <span class="comment">//false</span></span><br><span class="line">       System.out.println(s2 == s3.intern());  <span class="comment">//true </span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="3-直接内存"><a href="#3-直接内存" class="headerlink" title="3. 直接内存"></a>3. 直接内存</h2><ul>
@@ -554,7 +554,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -576,7 +576,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

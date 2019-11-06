@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Collection," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Blessed is he who expects nothing, for he shall never be disappointed">
+<meta name="keywords" content="Collection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LinkedList">
+<meta property="og:url" content="http://yoursite.com/2019/10/06/LinkedList/index.html">
+<meta property="og:site_name" content="千山暮雪">
+<meta property="og:description" content="Blessed is he who expects nothing, for he shall never be disappointed">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/LinkedList%E7%B1%BB%E5%9B%BE.png">
+<meta property="og:updated_time" content="2019-11-06T11:42:22.327Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LinkedList">
+<meta name="twitter:description" content="Blessed is he who expects nothing, for he shall never be disappointed">
+<meta name="twitter:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/LinkedList%E7%B1%BB%E5%9B%BE.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/06/LinkedList/"/>
+
+
+
+
+
+  <title>LinkedList | 千山暮雪</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+    <a href="https://github.com/zhangchengkang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千山暮雪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">只影向谁去</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/06/LinkedList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kangshifu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千山暮雪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LinkedList</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-06T17:22:11+08:00">
+                2019-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>Blessed is he who expects nothing, for he shall never be disappointed</em><br><a id="more"></a> </p>
+<p>LinkedList 的继承体系较为复杂，继承自 AbstractSequentialList，同时又实现了 List 和 Deque 接口</p>
+<p>AbstractSequentialList 提供了一套基于顺序访问的接口。通过继承此类，子类仅需实现部分代码即可拥有完整的一套访问某种序列表（比如链表）的接口。</p>
+<p>另外，LinkedList 还实现了 Deque (double ended queue)，Deque 又继承自 Queue 接口。这样 LinkedList 就具备了队列的功能。</p>
+<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/LinkedList%E7%B1%BB%E5%9B%BE.png" alt="LinkedList类图"></p>
+<h2 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h2><p>在<code>LinkedList</code>中，每一个元素都是<code>Node</code>存储，<code>Node</code>拥有一个存储值的<code>item</code>与一个前驱<code>prev</code>和一个后继<code>next</code>，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    E item;<span class="comment">// 存储元素</span></span><br><span class="line">    Node&lt;E&gt; next;<span class="comment">// 指向上一个元素</span></span><br><span class="line">    Node&lt;E&gt; prev;<span class="comment">// 指向下一个元素</span></span><br><span class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item = element;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">        <span class="keyword">this</span>.prev = prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;<span class="comment">//当前列表的元素个数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">transient</span> Node&lt;E&gt; first;<span class="comment">// 第一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">transient</span> Node&lt;E&gt; last;<span class="comment">// 最后一个元素</span></span><br></pre></td></tr></table></figure>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//无参构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedList</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LinkedList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>();</span><br><span class="line">    addAll(c);<span class="comment">//将c中的元素都添加到此列表中</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> addAll(size, c);<span class="comment">//此时 size == 0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(<span class="keyword">int</span> index, Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 检查index是否在[0,size]内，注意是闭区间 否则报异常</span></span><br><span class="line">    checkPositionIndex(index);</span><br><span class="line">    Object[] a = c.toArray();<span class="comment">// 得到一个元素数组</span></span><br><span class="line">    <span class="keyword">int</span> numNew = a.length;<span class="comment">// c中元素的数量</span></span><br><span class="line">    <span class="keyword">if</span> (numNew == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;<span class="comment">// 没有元素，添加失败</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 主要功能是找到第size个元素的前驱和后继。得到此元素需要分情况讨论。</span></span><br><span class="line">    Node&lt;E&gt; pred, succ;<span class="comment">// 前驱与后继</span></span><br><span class="line">    <span class="keyword">if</span> (index == size) &#123;<span class="comment">// 如果位置与当前的size相同</span></span><br><span class="line">        succ = <span class="keyword">null</span>;<span class="comment">// 无后继</span></span><br><span class="line">        pred = last;<span class="comment">// 前驱为last，即第size个元素(最后一个元素)</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;<span class="comment">// 若与size不同，即index位于[0, size)之间</span></span><br><span class="line">        succ = node(index);<span class="comment">// 后继为第index个元素</span></span><br><span class="line">        pred = succ.prev;<span class="comment">// 前驱为后继的前驱</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 开始逐个插入</span></span><br><span class="line">    <span class="keyword">for</span> (Object o : a) &#123;</span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>) E e = (E) o;</span><br><span class="line">        <span class="comment">// 新建一个以pred为前驱、null为后继、值为e的节点</span></span><br><span class="line">        Node&lt;E&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(pred, e, <span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">if</span> (pred == <span class="keyword">null</span>)<span class="comment">// 前驱为空，则此节点被当做列表的第一个节点</span></span><br><span class="line">            first = newNode;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">// 规避掉了NullPointerException，感觉又达到了目的，又实现了逻辑</span></span><br><span class="line">            pred.next = newNode;<span class="comment">// 不为空，则将前驱的后继改成当前节点</span></span><br><span class="line">        pred = newNode;<span class="comment">// 将前驱改成当前节点，以便后续添加c中其它的元素</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 至此，c中元素已添加到链表上，但链表中从size开始的那些元素还没有链接到列表上</span></span><br><span class="line">    <span class="comment">// 此时就需要利用到之前找出来的succ值，它是作为这个c的整体后继</span></span><br><span class="line">    <span class="keyword">if</span> (succ == <span class="keyword">null</span>) &#123;<span class="comment">// 如果后继为空，说明无整体后继</span></span><br><span class="line">        last = pred;<span class="comment">// c的最后一个元素应当作为列表的尾元素</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;<span class="comment">// 有整体后继</span></span><br><span class="line">        pred.next = succ;<span class="comment">// pred即c中的最后一个元素，其后继指向succ，即整体后继</span></span><br><span class="line">        succ.prev = pred;<span class="comment">// succ的前驱指向c中的最后一个元素</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 添加完毕，修改参数</span></span><br><span class="line">    size += numNew;</span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    checkElementIndex(index);</span><br><span class="line">    <span class="keyword">return</span> node(index).item;<span class="comment">// 获取节点，并返回节点中的元素值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回序号为index的元素节点</span></span><br><span class="line"><span class="function">Node&lt;E&gt; <span class="title">node</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 视其与中值得差距，觉得从前遍历还是从后遍历。</span></span><br><span class="line">    <span class="keyword">if</span> (index &lt; (size &gt;&gt; <span class="number">1</span>)) &#123;</span><br><span class="line">        Node&lt;E&gt; x = first;</span><br><span class="line">        <span class="comment">// 循环index次 迭代到所需要的元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">            x = x.next;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Node&lt;E&gt; x = last;</span><br><span class="line">        <span class="comment">// 循环size-1-index次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = size - <span class="number">1</span>; i &gt; index; i--)</span><br><span class="line">            x = x.prev;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">     checkElementIndex(index);</span><br><span class="line">     Node&lt;E&gt; x = node(index);<span class="comment">// 获取到需要修改元素的节点</span></span><br><span class="line">     E oldVal = x.item;<span class="comment">// 保存之前的值</span></span><br><span class="line">     x.item = element;<span class="comment">// 修改</span></span><br><span class="line">     <span class="keyword">return</span> oldVal;<span class="comment">// 返回修改前的值</span></span><br></pre></td></tr></table></figure>
+<h2 id="link"><a href="#link" class="headerlink" title="link"></a>link</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将e链接成列表的第一个元素</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">linkFirst</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; f = first;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(<span class="keyword">null</span>, e, f);</span><br><span class="line">    first = newNode;</span><br><span class="line">    <span class="keyword">if</span> (f == <span class="keyword">null</span>)<span class="comment">// 若f为空，则表明列表中还没有元素</span></span><br><span class="line">        last = newNode;<span class="comment">// last也应该指向newNode</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        f.prev = newNode;<span class="comment">// 否则，前first的前驱指向newNode</span></span><br><span class="line">    size++;</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将e链接为最后一个元素</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">linkLast</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; l = last;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(l, e, <span class="keyword">null</span>);</span><br><span class="line">    last = newNode;</span><br><span class="line">    <span class="keyword">if</span> (l == <span class="keyword">null</span>)<span class="comment">// 最后一个节点为空，说明列表中无元素</span></span><br><span class="line">        first = newNode;<span class="comment">// first同样指向此节点</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        l.next = newNode;<span class="comment">// 否则，前last的后继指向当前节点</span></span><br><span class="line">    size++;</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将e链接到节点succ前</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">linkBefore</span><span class="params">(E e, Node&lt;E&gt; succ)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; pred = succ.prev; </span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(pred, e, succ);</span><br><span class="line">    succ.prev = newNode;</span><br><span class="line">    <span class="keyword">if</span> (pred == <span class="keyword">null</span>)<span class="comment">// pred为空，说明此时succ为首节点</span></span><br><span class="line">        first = newNode;<span class="comment">// 指向当前节点</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        pred.next = newNode;<span class="comment">// 否则，将succ之前的前驱的后继指向当前节点</span></span><br><span class="line">    size++;</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="unLink"><a href="#unLink" class="headerlink" title="unLink"></a>unLink</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除首节点</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> E <span class="title">unlinkFirst</span><span class="params">(Node&lt;E&gt; f)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> E element = f.item;<span class="comment">// 取出首节点中的元素</span></span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; next = f.next;<span class="comment">// 取出首节点中的后继</span></span><br><span class="line">    f.item = <span class="keyword">null</span>;</span><br><span class="line">    f.next = <span class="keyword">null</span>; <span class="comment">// 方便 GC 回收</span></span><br><span class="line">    first = next;<span class="comment">// first指向前first的后继，也就是列表中的2号位</span></span><br><span class="line">    <span class="keyword">if</span> (next == <span class="keyword">null</span>)<span class="comment">// 如果此时2号位为空，那么列表中此时已无节点</span></span><br><span class="line">        last = <span class="keyword">null</span>;<span class="comment">// last指向null</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        next.prev = <span class="keyword">null</span>;<span class="comment">// 首节点无前驱</span></span><br><span class="line">    size--;</span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="keyword">return</span> element;<span class="comment">// 返回首节点保存的元素值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除尾节点</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> E <span class="title">unlinkLast</span><span class="params">(Node&lt;E&gt; l)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> E element = l.item;<span class="comment">// 取出尾节点中的元素</span></span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; prev = l.prev;<span class="comment">// 取出尾节点中的前驱</span></span><br><span class="line">    l.item = <span class="keyword">null</span>;</span><br><span class="line">    l.prev = <span class="keyword">null</span>; <span class="comment">// help GC</span></span><br><span class="line">    last = prev;<span class="comment">// last指向前last的前驱，也就是列表中的倒数2号位</span></span><br><span class="line">    <span class="keyword">if</span> (prev == <span class="keyword">null</span>)<span class="comment">// 如果此时倒数2号位为空，那么列表中已无节点</span></span><br><span class="line">        first = <span class="keyword">null</span>;<span class="comment">// first指向null</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        prev.next = <span class="keyword">null</span>;<span class="comment">// 尾节点无后继</span></span><br><span class="line">    size--;</span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="keyword">return</span> element;<span class="comment">// 返回尾节点保存的元素值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除某个非空节点</span></span><br><span class="line"> <span class="function">E <span class="title">unlink</span><span class="params">(Node&lt;E&gt; x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> E element = x.item;</span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; next = x.next;</span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; prev = x.prev;</span><br><span class="line"></span><br><span class="line">     	<span class="comment">// 前驱为null，说明x为首节点</span></span><br><span class="line">        <span class="keyword">if</span> (prev == <span class="keyword">null</span>) &#123;</span><br><span class="line">            first = next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            prev.next = next;</span><br><span class="line">            x.prev = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            last = prev;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            next.prev = prev;</span><br><span class="line">            x.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        x.item = <span class="keyword">null</span>;<span class="comment">// help GC</span></span><br><span class="line">        size--;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    linkLast(e);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">    checkPositionIndex(index);</span><br><span class="line">    <span class="keyword">if</span> (index == size)</span><br><span class="line">        linkLast(element);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        linkBefore(element, node(index));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    linkFirst(e);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    linkLast(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">removeFirst</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; f = first;</span><br><span class="line">    <span class="keyword">if</span> (f == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">    <span class="keyword">return</span> unlinkFirst(f);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">removeLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Node&lt;E&gt; l = last;</span><br><span class="line">    <span class="keyword">if</span> (l == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">    <span class="keyword">return</span> unlinkLast(l);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历列表中所有的节点，找到相同的元素，然后删除它</span></span><br><span class="line"><span class="comment">//跟indexof类似</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (o == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (Node&lt;E&gt; x = first; x != <span class="keyword">null</span>; x = x.next) &#123;</span><br><span class="line">            <span class="keyword">if</span> (x.item == <span class="keyword">null</span>) &#123;</span><br><span class="line">                unlink(x);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Node&lt;E&gt; x = first; x != <span class="keyword">null</span>; x = x.next) &#123;</span><br><span class="line">            <span class="keyword">if</span> (o.equals(x.item)) &#123;</span><br><span class="line">                unlink(x);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    checkElementIndex(index);</span><br><span class="line">    <span class="keyword">return</span> unlink(node(index));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf"></a>indexOf</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (o == <span class="keyword">null</span>) &#123;<span class="comment">// null时分开处理</span></span><br><span class="line">        <span class="keyword">for</span> (Node&lt;E&gt; x = first; x != <span class="keyword">null</span>; x = x.next) &#123;</span><br><span class="line">            <span class="keyword">if</span> (x.item == <span class="keyword">null</span>)<span class="comment">// 说明找到</span></span><br><span class="line">                <span class="keyword">return</span> index;<span class="comment">// 返回下标</span></span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Node&lt;E&gt; x = first; x != <span class="keyword">null</span>; x = x.next) &#123;</span><br><span class="line">            <span class="keyword">if</span> (o.equals(x.item))<span class="comment">// 说明找到</span></span><br><span class="line">                <span class="keyword">return</span> index;<span class="comment">// 返回下标</span></span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">// 未找到，返回-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><p>通常情况下，我们会使用 foreach 遍历 LinkedList，而 foreach 最终转换成迭代器形式。所以分析 LinkedList 的遍历的核心就是它的迭代器实现，相关代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListIterator&lt;E&gt; <span class="title">listIterator</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    checkPositionIndex(index);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ListItr(index);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ListItr</span> <span class="keyword">implements</span> <span class="title">ListIterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Node&lt;E&gt; lastReturned;</span><br><span class="line">    <span class="keyword">private</span> Node&lt;E&gt; next;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> nextIndex;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 构造方法将 next 引用指向指定位置的节点 */</span></span><br><span class="line">    ListItr(<span class="keyword">int</span> index) &#123;</span><br><span class="line">        next = (index == size) ? <span class="keyword">null</span> : node(index);</span><br><span class="line">        nextIndex = index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> nextIndex &lt; size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        checkForComodification();</span><br><span class="line">        <span class="keyword">if</span> (!hasNext())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line"></span><br><span class="line">        lastReturned = next;</span><br><span class="line">        next = next.next;    <span class="comment">// 调用 next 方法后，next 引用都会指向他的后继节点</span></span><br><span class="line">        nextIndex++;</span><br><span class="line">        <span class="keyword">return</span> lastReturned.item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Collection/" rel="tag"><i class="fa fa-tag"></i> Collection</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/03/ArrayList/" rel="next" title="ArrayList">
+                <i class="fa fa-chevron-left"></i> ArrayList
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/13/CAS/" rel="prev" title="CAS">
+                CAS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzc0OC8xNDI3OQ"></div>
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="kangshifu" />
+            
+              <p class="site-author-name" itemprop="name">kangshifu</p>
+              <p class="site-description motion-element" itemprop="description">当时共我赏花人,点检如今无一半</p>
+          </div>
+<!--my custom code begin-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+        <script type="text/javascript">
+        $("#sidebar").hover(function(){
+          $("#mydivshow").velocity('stop').velocity({opacity: 1});
+        },function(){
+         $("#mydivshow").velocity('stop').velocity({opacity: 0});
+       });
+      </script>
+
+      <div id="mydivshow" class="mydivshow">
+ <!--my custom code end-->
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+<div id="player1" class="aplayer"></div>
+<script src="/js/src/APlayer.min.js"></script>
+<script type="text/javascript"></script>
+        </div>
+<!--my custom code begin-->
+      </div>
+<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node"><span class="nav-number">1.</span> <span class="nav-text">Node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员变量"><span class="nav-number">2.</span> <span class="nav-text">成员变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">3.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get"><span class="nav-number">4.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set"><span class="nav-number">5.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#link"><span class="nav-number">6.</span> <span class="nav-text">link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unLink"><span class="nav-number">7.</span> <span class="nav-text">unLink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add"><span class="nav-number">8.</span> <span class="nav-text">add</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove"><span class="nav-number">9.</span> <span class="nav-text">remove</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#indexOf"><span class="nav-number">10.</span> <span class="nav-text">indexOf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foreach"><span class="nav-number">11.</span> <span class="nav-text">foreach</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kangshifu</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+
+var ap = new APlayer({
+	    element: document.getElementById('player1'),                       // （可选）播放器袖珍风格
+	    narrow: false,                                                     // （可选）自动播放，移动端浏览器暂不支持此功能
+	    autoplay: true,                                                    // （可选）曲目循环类型，有'random'（随机），'single'(单曲)，'circulation'(循环)，'order'(列表)，默认'circulation'
+	    showlrc: 0,                                                        // （可选）歌词显示配置项，可选项1、2、3
+	    mutex: true,                                                       // （可选）该选项开启时，同页有其它aplayer播放则该播放器暂停
+	    theme: '#8B008B',                                                  // （可选）播放器风格色彩设置，默#b7daff
+	    mode: 'random',                                                    // （可选）曲目循环类型，有'random'（随机），'single'(单曲)，'circulation'(循环)，'order'(列表)，默认'circulation'
+	    preload: 'metadata',                                               // （可选）音乐文件预载入模式，可选项'none'、'metadata'、'auto'，默'auto'
+	    listmaxheight: '250px',                                            // （可选）该播放列表最大长度
+	    music: [
+	    {
+	    	title: '七月上',                                         
+	        author: 'Jam',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E4%B8%83%E6%9C%88%E4%B8%8A%20-%20Jam.mp3', 
+	        pic: 'http://p1.music.126.net/9kZl6NRj3HxmQQ8DqTjZ4Q==/17729624997966923.jpg?param=130y130'
+	    },
+	    {
+	    	title: '匆匆 ',                                         
+	        author: '二珂.',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%8C%86%E5%8C%86%20-%20%E8%B5%B5%E9%92%B6%2C%E4%BA%8C%E7%8F%82.mp3', 
+	        pic: 'http://p1.music.126.net/8GXkHa3eq63ikMMZ2nY8Gw==/109951163249852201.jpg?param=130y130'
+	    },{
+	    	title: '匆匆那年',                                         
+	        author: '王菲',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%8C%86%E5%8C%86%E9%82%A3%E5%B9%B4%20-%20%E7%8E%8B%E8%8F%B2.mp3', 
+	        pic: 'http://p1.music.126.net/yXyeAl-7m0tqfx4AX7BDSQ==/2542070884980240.jpg?param=130y130'
+	    },{
+	    	title: '后来我们会怎样',                                         
+	        author: '刘惜君',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%90%8E%E6%9D%A5%E6%88%91%E4%BB%AC%E4%BC%9A%E6%80%8E%E6%A0%B7%20-%20%E5%88%98%E6%83%9C%E5%90%9B.mp3', 
+	        pic: 'http://p1.music.126.net/C0nqK9yq5_LRHbQ6EqfzNg==/3384296793240085.jpg?param=130y130'
+	    },{
+	    	title: '小幸运',                                         
+	        author: '田馥甄',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%B0%8F%E5%B9%B8%E8%BF%90%20-%20%E7%94%B0%E9%A6%A5%E7%94%84.mp3', 
+	        pic: 'http://p4.music.126.net/oTF9i5fY79GdAwbLQ7xMCQ==/109951163272573333.jpg?param=50y50'
+	    },{
+	    	title: '岁月神偷',                                         
+	        author: '金玟岐',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%B2%81%E6%9C%88%E7%A5%9E%E5%81%B7%20-%20%E9%87%91%E7%8E%9F%E5%B2%90.mp3', 
+	        pic: 'http://p1.music.126.net/RTuj3aTIZrR-v0-W_dD2VQ==/19080924788792622.jpg?param=50y50'
+	    },{
+	    	title: '愿得一人心',                                         
+	        author: '谭艳',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%84%BF%E5%BE%97%E4%B8%80%E4%BA%BA%E5%BF%83%20-%20%E8%B0%AD%E8%89%B3.mp3', 
+	        pic: 'http://p4.music.126.net/1N8HiCwgY7DqO-wILpJTeQ==/3438172872014843.jpg?param=50y50'
+	    },{
+	    	title: '我们不是说好了吗 ',                                         
+	        author: '白百何',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%88%91%E4%BB%AC%E4%B8%8D%E6%98%AF%E8%AF%B4%E5%A5%BD%E4%BA%86%E5%90%97%20-%20%E5%BD%AD%E4%BA%8E%E6%99%8F%2C%E7%99%BD%E7%99%BE%E4%BD%95.mp3', 
+	        pic: 'http://p1.music.126.net/Wc7s_rVkVHTKrMRu4xFNzQ==/2315571488119029.jpg?param=130y130'
+	    },{
+	    	title: '我们都被忘了',                                         
+	        author: '谢安琪',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%88%91%E4%BB%AC%E9%83%BD%E8%A2%AB%E5%BF%98%E4%BA%86%20-%20%E8%B0%A2%E5%AE%89%E7%90%AA.mp3', 
+	        pic: 'http://p3.music.126.net/fBDRSoH46yYAldgmUAu7hw==/18684001092518241.jpg?param=50y50'
+	    },{
+	    	title: '泡沫',                                         
+	        author: '邓紫棋',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%B3%A1%E6%B2%AB%20-%20G.E.M.%E9%82%93%E7%B4%AB%E6%A3%8B.mp3', 
+	        pic: 'http://p3.music.126.net/P8VwgDjdLDN4spkwIv8QXg==/18722483999690981.jpg?param=50y50'
+	    },{
+	    	title: '漂洋过海来看你',                                         
+	        author: '李宗盛',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%BC%82%E6%B4%8B%E8%BF%87%E6%B5%B7%E6%9D%A5%E7%9C%8B%E4%BD%A0%C2%A0%5B20170527-%E5%B9%B4%E5%BA%A6%E7%AC%AC4%E6%AC%A1%E6%AD%A3%E5%BC%8F%E6%B4%BB%E5%8A%A8%5D%EF%BC%88Cover%20%E6%9D%8E%E5%AE%97%E7%9B%9B%20%EF%BC%8F%20%E5%A8%83%E5%A8%83%EF%BC%89%20-%20%E5%AD%A6%E5%94%B1%E5%9B%A2.mp3', 
+	        pic: 'http://p1.music.126.net/IXm8On-EZt82SnBz00GQ3Q==/109951162940064301.jpg?param=130y130'
+	    },{
+	    	title: '纸短情长',                                         
+	        author: '烟把儿',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E7%BA%B8%E7%9F%AD%E6%83%85%E9%95%BF%EF%BC%88%E5%AE%8C%E6%95%B4%E7%89%88%EF%BC%89%20-%20%E7%83%9F%E6%8A%8A%E5%84%BF.mp3', 
+	        pic: 'http://p1.music.126.net/tbZaE-DjL_BkemynFlL1cQ==/109951163052534918.jpg?param=130y130'
+	    },{
+	    	title: '美丽世界的孤儿',                                         
+	        author: '汪峰',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E7%BE%8E%E4%B8%BD%E4%B8%96%E7%95%8C%E7%9A%84%E5%AD%A4%E5%84%BF%20-%20%E6%B1%AA%E5%B3%B0.ncm', 
+	        pic: 'http://p3.music.126.net/pP2sbfkvd6nsmdbmFTIEJQ==/109951163116154677.jpg?param=50y50'
+	    },{
+	    	title: '致青春',                                         
+	        author: '王菲',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%87%B4%E9%9D%92%E6%98%A5%20-%20%E7%8E%8B%E8%8F%B2.mp3', 
+	        pic: 'http://p3.music.126.net/WjDAZ9C8whAB6yfE_sfIFw==/109951163244980773.jpg?param=50y50'
+	    },{
+	    	title: '说散就散',                                         
+	        author: '袁娅维',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%AF%B4%E6%95%A3%E5%B0%B1%E6%95%A3%20-%20%E8%A2%81%E5%A8%85%E7%BB%B4.ncm', 
+	        pic: 'http://p4.music.126.net/zsRaHUdZO7LQ0hTX5ptqGg==/109951163102064502.jpg?param=50y50'
+	    },{
+	    	title: '走在冷风中',                                         
+	        author: '二珂',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%B5%B0%E5%9C%A8%E5%86%B7%E9%A3%8E%E4%B8%AD%20-%20%E4%BA%8C%E7%8F%82.mp3', 
+	        pic: 'http://p1.music.126.net/iAaRt_l_ussYqkLVuDEpqg==/2931298001578529.jpg?param=130y130'
+	    },{
+	    	title: '追光者',                                         
+	        author: '岑宁儿',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%BF%BD%E5%85%89%E8%80%85%20-%20%E5%B2%91%E5%AE%81%E5%84%BF.mp3', 
+	        pic: 'http://p4.music.126.net/1N8HiCwgY7DqO-wILpJTeQ==/3438172872014843.jpg?param=50y50'
+	    },
+	    ]
+});
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:true,
+		position:{top:'150px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+You can't see this
+  
+  undefined
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"scale":2,"hHeadPos":0.5,"vHeadPos":0.618},"display":{"superSample":3,"width":100,"height":200,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</html>

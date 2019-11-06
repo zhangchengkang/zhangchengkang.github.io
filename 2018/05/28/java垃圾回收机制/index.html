@@ -90,7 +90,7 @@
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java垃圾回收机制">
-<meta property="og:url" content="http://yoursite.com/2018/05/28/java垃圾回收机制/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/05/28/Java垃圾回收机制/index.html">
 <meta property="og:site_name" content="千山暮雪">
 <meta property="og:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
 <meta property="og:locale" content="zh-Hans">
@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://yoursite.com/img/jvm/jvm011.JPG">
 <meta property="og:image" content="http://yoursite.com/img/jvm/jvm007.jpg">
 <meta property="og:image" content="http://yoursite.com/img/jvm/jvm008.jpg">
-<meta property="og:updated_time" content="2018-07-01T11:38:18.684Z">
+<meta property="og:updated_time" content="2019-10-23T13:46:51.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java垃圾回收机制">
 <meta name="twitter:description" content="Add this line to Using the more label,but it’s too short to look bad,addition point length">
@@ -134,7 +134,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/28/java垃圾回收机制/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/28/Java垃圾回收机制/"/>
 
 
 
@@ -279,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/28/java垃圾回收机制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/28/Java垃圾回收机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kangshifu">
@@ -411,7 +411,7 @@
 <h3 id="2-4-分代收集算法"><a href="#2-4-分代收集算法" class="headerlink" title="2.4 分代收集算法"></a>2.4 分代收集算法</h3><ul>
 <li>对于一个大型的系统，当创建的对象和方法变量比较多时，堆内存中的对象也会比较多，如果逐一分析对象是否该回收，那么势必造成效率低下。分代收集算法是基于这样一个事实：<strong>不同的对象的生命周期(存活情况)是不一样的，而不同生命周期的对象位于堆中不同的区域，因此对堆内存不同区域采用不同的策略进行回收可以提高 JVM 的执行效率。</strong>当代商用虚拟机使用的都是分代收集算法：新生代对象存活率低，就采用复制算法；老年代存活率高，就用标记清除算法或者标记整理算法。Java堆内存一般可以分为新生代、老年代和永久代三个模块，如下图所示：<br><img src="/img/jvm/jvm007.jpg" alt="分代收集算法总"></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Minor GC：对新生代进行回收，不会影响到年老代。因为新生代的 Java 对象大多死亡频繁，所以 Minor GC 非常频繁，一般在这里使用速度快、效率高的算法，使垃圾回收能尽快完成。</span><br><span class="line"></span><br><span class="line">Full GC：也叫 Major GC，对整个堆进行回收，包括新生代和老年代。由于Full GC需要对整个堆进行回收，所以比Minor GC要慢，因此应该尽可能减少Full GC的次数，导致Full GC的原因包括：老年代被写满、永久代（Perm）被写满和System.gc()被显式调用等。</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Minor GC：对新生代进行回收，不会影响到年老代。因为新生代的 Java 对象大多死亡频繁，所以 Minor GC 非常频繁，一般在这里使用速度快、效率高的算法，使垃圾回收能尽快完成。</span><br><span class="line"></span><br><span class="line">Full GC：也叫 Major GC，对整个堆进行回收，包括新生代和老年代。由于Full GC需要对整个堆进行回收，所以比Minor GC要慢，因此应该尽可能减少Full GC的次数，导致Full GC的原因包括：老年代被写满、永久代（Perm）被写满和System.gc()被显式调用等。</span><br></pre></td></tr></table></figure>
 <h4 id="2-4-1-新生代（Young-Generation）"><a href="#2-4-1-新生代（Young-Generation）" class="headerlink" title="2.4.1 新生代（Young Generation）"></a>2.4.1 新生代（Young Generation）</h4><ul>
 <li>新生代的目标就是尽可能快速的收集掉那些生命周期短的对象，一般情况下，所有新生成的对象首先都是放在新生代的。</li>
 <li>新生代内存按照 8:1:1 的比例分为一个eden区和两个survivor(survivor0，survivor1)区，大部分对象在Eden区中生成。在进行垃圾回收时，先将eden区存活对象复制到survivor0区，然后清空eden区，当这个survivor0区也满了时，则将eden区和survivor0区存活对象复制到survivor1区，然后清空eden和这个survivor0区，此时survivor0区是空的，然后交换survivor0区和survivor1区的角色（即下次垃圾回收时会扫描Eden区和survivor1区），即保持survivor0区为空，如此往复。特别地，当survivor1区也不足以存放eden区和survivor0区的存活对象时，就将存活对象直接存放到老年代。如果老年代也满了，就会触发一次FullGC，也就是新生代、老年代都进行回收。注意，新生代发生的GC也叫做MinorGC，MinorGC发生频率比较高，不一定等 Eden区满了才触发。</li>
@@ -612,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -634,7 +634,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
