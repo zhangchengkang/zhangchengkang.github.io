@@ -12,7 +12,7 @@ categories: JAVA
 
 
 
-## 类图
+### 类图
 
 ![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%B1%BB%E5%9B%BE.jpg)
 
@@ -94,9 +94,9 @@ ThreadPoolExecutor.CallerRunsPolicy//用调用者所在的线程来执行任务
 
 ### 三种线程池
 
-线程池都继承了ExecutorService的接口，所以他们都具有ExecutorService的生命周期方法：运行，关闭，终止；
+　　　　线程池都继承了ExecutorService的接口，所以他们都具有ExecutorService的生命周期方法：运行，关闭，终止；
 
-因为继承了ExecutorService接口，所以它在被创建的时候就是处于运行状态，当线程没有任务执行时，就会进入关闭状态，只有调用了shutdown（）的时候才是正式的终止了这个线程池。
+　　　　因为继承了ExecutorService接口，所以它在被创建的时候就是处于运行状态，当线程没有任务执行时，就会进入关闭状态，只有调用了shutdown（）的时候才是正式的终止了这个线程池。
 
 #### newFixedThreadPool
 
@@ -125,9 +125,9 @@ public static ExecutorService newSingleThreadExecutor() {
     }
 ```
 
-初始化的线程池中只有一个线程，如果该线程异常结束，会重新创建一个新的线程继续执行任务，唯一的线程可以保证所提交任务的顺序执行.
+　　　　初始化的线程池中只有一个线程，如果该线程异常结束，会重新创建一个新的线程继续执行任务，唯一的线程可以保证所提交任务的顺序执行.
 
-由于使用了无界队列, 所以SingleThreadPool永远不会拒绝, 即饱和策略失效
+　　　　由于使用了无界队列, 所以SingleThreadPool永远不会拒绝, 即饱和策略失效
 
 #### newCachedThreadPool
 
