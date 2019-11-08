@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Design Pattern," />
+  <meta name="keywords" content="Mybatis," />
 
 
 
@@ -86,22 +86,22 @@
 
 
 
-<meta name="description" content="better late than never">
-<meta name="keywords" content="Design Pattern">
+<meta name="description" content="one today is worth two tomorrows">
+<meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis SQL执行入口">
-<meta property="og:url" content="http://yoursite.com/2019/10/19/MybatisSQL执行入口/index.html">
+<meta property="og:title" content="Mybatis源码分析(二) SQL执行入口">
+<meta property="og:url" content="http://yoursite.com/2019/10/20/MybatisSQL执行入口/index.html">
 <meta property="og:site_name" content="千山暮雪">
-<meta property="og:description" content="better late than never">
+<meta property="og:description" content="one today is worth two tomorrows">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96SqlSessionFactory%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
 <meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96SqlSession%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
 <meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96MapperProxy%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
 <meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/Mapper%E6%89%A7%E8%A1%8C%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9.jpg">
-<meta property="og:updated_time" content="2019-11-07T13:13:56.368Z">
+<meta property="og:updated_time" content="2019-11-08T14:48:18.385Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis SQL执行入口">
-<meta name="twitter:description" content="better late than never">
+<meta name="twitter:title" content="Mybatis源码分析(二) SQL执行入口">
+<meta name="twitter:description" content="one today is worth two tomorrows">
 <meta name="twitter:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96SqlSessionFactory%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/19/MybatisSQL执行入口/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/10/20/MybatisSQL执行入口/"/>
 
 
 
 
 
-  <title>Mybatis SQL执行入口 | 千山暮雪</title>
+  <title>Mybatis源码分析(二) SQL执行入口 | 千山暮雪</title>
   
 
 
@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/MybatisSQL执行入口/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/20/MybatisSQL执行入口/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kangshifu">
@@ -294,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis SQL执行入口</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis源码分析(二) SQL执行入口</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-19T16:12:35+08:00">
-                2019-10-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-20T15:54:12+08:00">
+                2019-10-20
               </time>
             
 
@@ -371,19 +371,14 @@
       
 
       
-        <p><em>better late than never</em><br><a id="more"></a>  </p>
+        <p><em>one today is worth two tomorrows</em><br><a id="more"></a>  </p>
 <h2 id="MyBatis工作流程简述"><a href="#MyBatis工作流程简述" class="headerlink" title="MyBatis工作流程简述"></a>MyBatis工作流程简述</h2><h3 id="使用sqlSession-旧"><a href="#使用sqlSession-旧" class="headerlink" title="使用sqlSession(旧)"></a>使用sqlSession(旧)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		InputStream inputStream = Resources.getResourceAsStream(<span class="string">"mybatis-config.xml"</span>);</span><br><span class="line">		SqlSessionFactory factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">		SqlSession sqlSession = factory.openSession();</span><br><span class="line">		String name = <span class="string">"ksf"</span>;</span><br><span class="line">        List&lt;User&gt; list = sqlSession.selectList(<span class="string">"com.demo.mapper.UserMapper.queryById"</span>,params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="使用mapper-一般用这个"><a href="#使用mapper-一般用这个" class="headerlink" title="使用mapper(一般用这个)"></a>使用mapper(一般用这个)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//前三步都相同</span></span><br><span class="line">		InputStream inputStream = Resources.getResourceAsStream(<span class="string">"mybatis-config.xml"</span>);</span><br><span class="line">		SqlSessionFactory factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">		SqlSession sqlSession = factory.openSession();</span><br><span class="line">		<span class="comment">//这里不再调用SqlSession 的api，而是获得了接口对象，调用接口中的方法。</span></span><br><span class="line">		UserMapper mapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">		List&lt;User&gt; list = mapper.getUserByName(<span class="string">"ksf"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="获取sqlsessionFactory"><a href="#获取sqlsessionFactory" class="headerlink" title="获取sqlsessionFactory"></a>获取sqlsessionFactory</h4><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96SqlSessionFactory%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt=""></p>
 <h4 id="获取sqlSession"><a href="#获取sqlSession" class="headerlink" title="获取sqlSession"></a>获取sqlSession</h4><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96SqlSession%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt=""></p>
 <h4 id="获取接口代理对象MapperProxy"><a href="#获取接口代理对象MapperProxy" class="headerlink" title="获取接口代理对象MapperProxy"></a>获取接口代理对象MapperProxy</h4><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96MapperProxy%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt=""></p>
 <h4 id="执行增删改查"><a href="#执行增删改查" class="headerlink" title="执行增删改查"></a>执行增删改查</h4><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/Mapper%E6%89%A7%E8%A1%8C%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9.jpg" alt=""></p>
-<h2 id="使用Mapper源码分析"><a href="#使用Mapper源码分析" class="headerlink" title="使用Mapper源码分析"></a>使用Mapper源码分析</h2><h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><ul>
-<li>我们既然能够从SqlSession中得到BlogMapper接口的，那么我们肯定需要先在哪里把它放进去了，然后 SqlSession 才能生成我们想要的代理类啊。我们可以从getMapper()联系，可能会有一个setMapper()或者addMapper()方法。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> MapperRegistry mapperRegistry = <span class="keyword">new</span> MapperRegistry(<span class="keyword">this</span>);</span><br><span class="line">        </span><br><span class="line">	<span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">addMapper</span><span class="params">(Class&lt;T&gt; type)</span> </span>&#123;</span><br><span class="line">    	mapperRegistry.addMapper(type);</span><br><span class="line">  	&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapperRegistry</span> </span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;Class&lt;?&gt;, MapperProxyFactory&lt;?&gt;&gt; knownMappers = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">addMapper</span><span class="params">(Class&lt;T&gt; type)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (type.isInterface()) &#123; <span class="comment">// 只添加接口</span></span><br><span class="line">      <span class="keyword">if</span> (hasMapper(type)) &#123; <span class="comment">// 不允许重复添加</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> BindingException(<span class="string">"Type "</span> + type + <span class="string">" is already known to the MapperRegistry."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">boolean</span> loadCompleted = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 添加到 knownMappers 中</span></span><br><span class="line">        knownMappers.put(type, <span class="keyword">new</span> MapperProxyFactory&lt;T&gt;(type));</span><br><span class="line">        MapperAnnotationBuilder parser = <span class="keyword">new</span> MapperAnnotationBuilder(config, type);</span><br><span class="line">        parser.parse();</span><br><span class="line">        <span class="comment">// 标记加载完成 </span></span><br><span class="line">        loadCompleted = <span class="keyword">true</span>;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">         <span class="comment">// 若加载未完成，从 knownMappers 中移除</span></span><br><span class="line">        <span class="keyword">if</span> (!loadCompleted) &#123;</span><br><span class="line">          knownMappers.remove(type);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultSqlSession</span> <span class="keyword">implements</span> <span class="title">SqlSession</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">final</span> Configuration configuration;</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">final</span> Executor executor;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">getMapper</span><span class="params">(Class&lt;T&gt; type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> configuration.getMapper(type, <span class="keyword">this</span>);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="getMapper源码分析"><a href="#getMapper源码分析" class="headerlink" title="getMapper源码分析"></a>getMapper源码分析</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultSqlSession</span> <span class="keyword">implements</span> <span class="title">SqlSession</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">final</span> Configuration configuration;</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">final</span> Executor executor;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">getMapper</span><span class="params">(Class&lt;T&gt; type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> configuration.getMapper(type, <span class="keyword">this</span>);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Configuration</span> </span>&#123;</span><br><span class="line">      <span class="keyword">protected</span> <span class="keyword">final</span> MapperRegistry mapperRegistry = <span class="keyword">new</span> MapperRegistry(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">getMapper</span><span class="params">(Class&lt;T&gt; type, SqlSession sqlSession)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mapperRegistry.getMapper(type, sqlSession);</span><br><span class="line">      &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapperRegistry</span> </span>&#123;</span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">getMapper</span><span class="params">(Class&lt;T&gt; type, SqlSession sqlSession)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> MapperProxyFactory&lt;T&gt; mapperProxyFactory = (MapperProxyFactory&lt;T&gt;) knownMappers.get(type);</span><br><span class="line">        <span class="keyword">if</span> (mapperProxyFactory == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> BindingException(<span class="string">"Type "</span> + type + <span class="string">" is not known to the MapperRegistry."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> mapperProxyFactory.newInstance(sqlSession);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> BindingException(<span class="string">"Error getting mapper instance. Cause: "</span> + e, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapperProxyFactory</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">newInstance</span><span class="params">(SqlSession sqlSession)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> MapperProxy&lt;T&gt; mapperProxy = <span class="keyword">new</span> MapperProxy&lt;&gt;(sqlSession, mapperInterface, methodCache);</span><br><span class="line">        <span class="keyword">return</span> newInstance(mapperProxy);</span><br><span class="line">  	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">  	<span class="function"><span class="keyword">protected</span> T <span class="title">newInstance</span><span class="params">(MapperProxy&lt;T&gt; mapperProxy)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//通过Proxy.newProxyInstance产生了一个Mapper的代理对象</span></span><br><span class="line">    	<span class="keyword">return</span> (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), <span class="keyword">new</span> Class[] &#123; mapperInterface &#125;, mapperProxy);</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -414,7 +409,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Design-Pattern/" rel="tag"><i class="fa fa-tag"></i> Design Pattern</a>
+            <a href="/tags/Mybatis/" rel="tag"><i class="fa fa-tag"></i> Mybatis</a>
           
         </div>
       
@@ -427,8 +422,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/13/CAS/" rel="next" title="CAS">
-                <i class="fa fa-chevron-left"></i> CAS
+              <a href="/2019/10/19/Mybatis配置文件解析/" rel="next" title="Mybatis源码分析(一) 配置文件解析过程">
+                <i class="fa fa-chevron-left"></i> Mybatis源码分析(一) 配置文件解析过程
               </a>
             
           </div>
@@ -437,8 +432,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/10/20/Mybatis查询语句执行过程/" rel="prev" title="Mybatis查询语句执行过程">
-                Mybatis查询语句执行过程 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/26/Mybatis查询语句执行过程/" rel="prev" title="Mybatis源码分析(三) SQL执行过程">
+                Mybatis源码分析(三) SQL执行过程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,7 +539,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -604,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatis工作流程简述"><span class="nav-number">1.</span> <span class="nav-text">MyBatis工作流程简述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用sqlSession-旧"><span class="nav-number">1.1.</span> <span class="nav-text">使用sqlSession(旧)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用mapper-一般用这个"><span class="nav-number">1.2.</span> <span class="nav-text">使用mapper(一般用这个)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取sqlsessionFactory"><span class="nav-number">1.2.1.</span> <span class="nav-text">获取sqlsessionFactory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取sqlSession"><span class="nav-number">1.2.2.</span> <span class="nav-text">获取sqlSession</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取接口代理对象MapperProxy"><span class="nav-number">1.2.3.</span> <span class="nav-text">获取接口代理对象MapperProxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行增删改查"><span class="nav-number">1.2.4.</span> <span class="nav-text">执行增删改查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Mapper源码分析"><span class="nav-number">2.</span> <span class="nav-text">使用Mapper源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#set"><span class="nav-number">2.1.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get"><span class="nav-number">2.2.</span> <span class="nav-text">get</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatis工作流程简述"><span class="nav-number">1.</span> <span class="nav-text">MyBatis工作流程简述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用sqlSession-旧"><span class="nav-number">1.1.</span> <span class="nav-text">使用sqlSession(旧)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用mapper-一般用这个"><span class="nav-number">1.2.</span> <span class="nav-text">使用mapper(一般用这个)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取sqlsessionFactory"><span class="nav-number">1.2.1.</span> <span class="nav-text">获取sqlsessionFactory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取sqlSession"><span class="nav-number">1.2.2.</span> <span class="nav-text">获取sqlSession</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取接口代理对象MapperProxy"><span class="nav-number">1.2.3.</span> <span class="nav-text">获取接口代理对象MapperProxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行增删改查"><span class="nav-number">1.2.4.</span> <span class="nav-text">执行增删改查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getMapper源码分析"><span class="nav-number">2.</span> <span class="nav-text">getMapper源码分析</span></a></li></ol></div>
             
 
           </div>

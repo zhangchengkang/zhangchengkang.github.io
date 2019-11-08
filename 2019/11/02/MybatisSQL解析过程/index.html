@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Mybatis," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Don’t give up and don’t give in">
+<meta name="keywords" content="Mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis源码分析(四) SQL解析过程">
+<meta property="og:url" content="http://yoursite.com/2019/11/02/MybatisSQL解析过程/index.html">
+<meta property="og:site_name" content="千山暮雪">
+<meta property="og:description" content="Don’t give up and don’t give in">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/SqlNode%E7%B1%BB%E5%9B%BE.png">
+<meta property="og:updated_time" content="2019-11-08T14:48:23.262Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mybatis源码分析(四) SQL解析过程">
+<meta name="twitter:description" content="Don’t give up and don’t give in">
+<meta name="twitter:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/SqlNode%E7%B1%BB%E5%9B%BE.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/02/MybatisSQL解析过程/"/>
+
+
+
+
+
+  <title>Mybatis源码分析(四) SQL解析过程 | 千山暮雪</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+    <a href="https://github.com/zhangchengkang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千山暮雪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">只影向谁去</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/02/MybatisSQL解析过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kangshifu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千山暮雪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mybatis源码分析(四) SQL解析过程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-02T19:38:56+08:00">
+                2019-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>Don’t give up and don’t give in</em><br><a id="more"></a>  </p>
+<h2 id="从哪里开始"><a href="#从哪里开始" class="headerlink" title="从哪里开始"></a>从哪里开始</h2><p>SQL是从哪被要求解析的呢?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//BaseExecutor.java</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> &lt;E&gt; <span class="function">List&lt;E&gt; <span class="title">query</span><span class="params">(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">  <span class="comment">// &lt;1&gt; 获得 BoundSql 对象</span></span><br><span class="line">  BoundSql boundSql = ms.getBoundSql(parameter);<span class="comment">//↓↓↓↓↓</span></span><br><span class="line">  <span class="comment">// &lt;2&gt; 创建 CacheKey 对象</span></span><br><span class="line">  CacheKey key = createCacheKey(ms, parameter, rowBounds, boundSql);</span><br><span class="line">  <span class="keyword">return</span> query(ms, parameter, rowBounds, resultHandler, key, boundSql);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>boundSql长啥样?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*一次可执行的 SQL 封装</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BoundSql</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * SQL 语句</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String sql;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 参数映射列表，SQL 中的每个 #&#123;xxx&#125; 占位符都会被解析成相</span></span><br><span class="line"><span class="comment">   * 应的 ParameterMapping 对象</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> List&lt;ParameterMapping&gt; parameterMappings;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 运行时参数，即用户传入的参数，比如 User 对象，或是其他的参数</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Object parameterObject;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 附加参数集合，用于存储一些额外的信息，比如 datebaseId</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; additionalParameters;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * &#123;<span class="doctag">@link</span> #additionalParameters&#125; 的 元数据 对象</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> MetaObject metaParameters;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解析过程"><a href="#解析过程" class="headerlink" title="解析过程"></a>解析过程</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//MappedStatement.java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BoundSql <span class="title">getBoundSql</span><span class="params">(Object parameterObject)</span> </span>&#123;</span><br><span class="line">  BoundSql boundSql = sqlSource.getBoundSql(parameterObject);<span class="comment">//↓↓↓↓↓</span></span><br><span class="line">  List&lt;ParameterMapping&gt; parameterMappings = boundSql.getParameterMappings();</span><br><span class="line">  <span class="keyword">if</span> (parameterMappings == <span class="keyword">null</span> || parameterMappings.isEmpty()) &#123;</span><br><span class="line">    boundSql = <span class="keyword">new</span> BoundSql(configuration, boundSql.getSql(), parameterMap.getParameterMappings(), parameterObject);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (ParameterMapping pm : boundSql.getParameterMappings()) &#123;</span><br><span class="line">    String rmId = pm.getResultMapId();</span><br><span class="line">    <span class="keyword">if</span> (rmId != <span class="keyword">null</span>) &#123;</span><br><span class="line">      ResultMap rm = configuration.getResultMap(rmId);</span><br><span class="line">      <span class="keyword">if</span> (rm != <span class="keyword">null</span>) &#123;</span><br><span class="line">        hasNestedResultMaps |= rm.hasNestedResultMaps();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> boundSql;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//DynamicSqlSource.java</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BoundSql <span class="title">getBoundSql</span><span class="params">(Object parameterObject)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//DynamicContext存有解析后的sql,主要包含appendSql和getSql方法</span></span><br><span class="line">  DynamicContext context = <span class="keyword">new</span> DynamicContext(configuration, parameterObject);</span><br><span class="line">  <span class="comment">//解析SQL片段,并将解析结果存储到DynamicContext中</span></span><br><span class="line">  rootSqlNode.apply(context);<span class="comment">//↓↓↓↓↓</span></span><br><span class="line">  SqlSourceBuilder sqlSourceParser = <span class="keyword">new</span> SqlSourceBuilder(configuration);</span><br><span class="line">  Class&lt;?&gt; parameterType = parameterObject == <span class="keyword">null</span> ? Object.class : parameterObject.getClass();</span><br><span class="line">  <span class="comment">//构建StaticSqlSource,在此过程中sql语句中的占位符#&#123;&#125;会替换为?</span></span><br><span class="line">  <span class="comment">//并为每个占位符构建相应的ParameterMapping</span></span><br><span class="line">  SqlSource sqlSource = sqlSourceParser.parse(context.getSql(), parameterType, context.getBindings());<span class="comment">//↓↓↓↓↓</span></span><br><span class="line">  <span class="comment">//调用StaticSqlSource的getBoundSql获取BoundSql</span></span><br><span class="line">  BoundSql boundSql = sqlSource.getBoundSql(parameterObject);</span><br><span class="line">  <span class="comment">//将DynamicContext的ContextMap(上下文的参数集合)中的内容拷贝到BoundSql中</span></span><br><span class="line">  context.getBindings().forEach(boundSql::setAdditionalParameter);</span><br><span class="line">  <span class="keyword">return</span> boundSql;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于一个包含了${}占位符，或<if>、<where>等标签的SQL，在解析的过程中，会被分解 成多个片段。每个片段都有对应的类型，每种类型的片段都有不同的解析逻辑。在源码中， 片段这个概念等价于sql 节点，即SqlNode。SqlNode 是一个接口，它有众多的实现类。其继 承体系如下：<br><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/SqlNode%E7%B1%BB%E5%9B%BE.png" alt=""></where></if></p>
+<p>StaticTextSqlNode 用于存储静态文本，TextSqlNode用于存储带有${}占位 符的文本，IfSqlNode 则用于存储<if>节点的内容。MixedSqlNode 内部维护了一个 SqlNode 集合，用于存储各种各样的SqlNode</if></p>
+<h3 id="MixedSqlNode"><a href="#MixedSqlNode" class="headerlink" title="MixedSqlNode"></a>MixedSqlNode</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MixedSqlNode</span> <span class="keyword">implements</span> <span class="title">SqlNode</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> List&lt;SqlNode&gt; contents;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MixedSqlNode</span><span class="params">(List&lt;SqlNode&gt; contents)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.contents = contents;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(DynamicContext context)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//遍历 然后调用SqlNode对象本身的apply方法解析sql</span></span><br><span class="line">    contents.forEach(node -&gt; node.apply(context));<span class="comment">//↓↓↓↓↓</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>MixedSqlNode 可以看做是 SqlNode 实现类对象的容器，凡是实现了 SqlNode 接口的类 都可以存储到 MixedSqlNode 中，包括它自己。MixedSqlNode 解析方法 apply 逻辑比较简单， 即遍历 SqlNode 集合，并调用其他 SalNode 实现类对象的 apply 方法解析 sql。</p>
+<h3 id="StaticTextSqlNode"><a href="#StaticTextSqlNode" class="headerlink" title="StaticTextSqlNode"></a>StaticTextSqlNode</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//StaticTextSqlNode 用于存储静态文本，所以它不需要什么解析逻辑</span></span><br><span class="line"><span class="comment">//直接将其存储的SQL 片段添加到 DynamicContext 中即可</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticTextSqlNode</span> <span class="keyword">implements</span> <span class="title">SqlNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String text;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StaticTextSqlNode</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.text = text; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(DynamicContext context)</span> </span>&#123;</span><br><span class="line">        context.appendSql(text);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="TextSqlNode"><a href="#TextSqlNode" class="headerlink" title="TextSqlNode"></a>TextSqlNode</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TextSqlNode</span> <span class="keyword">implements</span> <span class="title">SqlNode</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String text;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Pattern injectionFilter;</span><br><span class="line">    </span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(DynamicContext context)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建$&#123;&#125;占位符解析器</span></span><br><span class="line">    GenericTokenParser parser = createParser(<span class="keyword">new</span> BindingTokenParser(context, injectionFilter));</span><br><span class="line">    <span class="comment">//解析$&#123;&#125;占位符，并将结果添加到DynamicContext</span></span><br><span class="line">    context.appendSql(parser.parse(text));<span class="comment">//↓↓↓↓↓</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">private</span> GenericTokenParser <span class="title">createParser</span><span class="params">(TokenHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建占位符解析器，GenericTokenParser是一个通用解析器</span></span><br><span class="line">    <span class="comment">//并非只能解析$&#123;&#125;占位符</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> GenericTokenParser(<span class="string">"$&#123;"</span>, <span class="string">"&#125;"</span>, handler);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * GenericTokenParser 是一个通用的标记解析器，用于解析形如$&#123;xxx&#125;，#&#123;xxx&#125;等标</span></span><br><span class="line"><span class="comment">记 。</span></span><br><span class="line"><span class="comment">*GenericTokenParser 负责将标记中的内容抽取出来，并将标记内容交给相应的</span></span><br><span class="line"><span class="comment">TokenHandler 去处理。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTokenParser</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String openToken;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String closeToken;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> TokenHandler handler;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">GenericTokenParser</span><span class="params">(String openToken, String closeToken, TokenHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.openToken = openToken;</span><br><span class="line">    <span class="keyword">this</span>.closeToken = closeToken;</span><br><span class="line">    <span class="keyword">this</span>.handler = handler;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 解析以 openToken 开始，以 closeToken 结束的 Token ，并提交给 handler(TokenHandler ) 进行处理</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">parse</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (text == <span class="keyword">null</span> || text.isEmpty()) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// search open token</span></span><br><span class="line">    <span class="comment">// 寻找开始的 openToken 的位置</span></span><br><span class="line">    <span class="keyword">int</span> start = text.indexOf(openToken);</span><br><span class="line">    <span class="comment">// 找不到，直接返回</span></span><br><span class="line">    <span class="keyword">if</span> (start == -<span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> text;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span>[] src = text.toCharArray();</span><br><span class="line">    <span class="comment">// 起始查找位置</span></span><br><span class="line">    <span class="keyword">int</span> offset = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 结果</span></span><br><span class="line">    <span class="keyword">final</span> StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="comment">// 匹配到 openToken 和 closeToken 之间的表达式</span></span><br><span class="line">    StringBuilder expression = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> (start &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">// 转义字符</span></span><br><span class="line">      <span class="keyword">if</span> (start &gt; <span class="number">0</span> &amp;&amp; src[start - <span class="number">1</span>] == <span class="string">'\\'</span>) &#123;</span><br><span class="line">        <span class="comment">// this open token is escaped. remove the backslash and continue.</span></span><br><span class="line">        <span class="comment">// 因为 openToken 前面一个位置是 \ 转义字符，所以忽略 \</span></span><br><span class="line">        <span class="comment">// 添加 [offset, start - offset - 1] 和 openToken 的内容，添加到 builder 中</span></span><br><span class="line">        builder.append(src, offset, start - offset - <span class="number">1</span>).append(openToken);</span><br><span class="line">        <span class="comment">// 修改 offset</span></span><br><span class="line">        offset = start + openToken.length();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// found open token. let's search close token.</span></span><br><span class="line">        <span class="keyword">if</span> (expression == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="comment">// 创建/重置 expression 对象</span></span><br><span class="line">          expression = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          expression.setLength(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        builder.append(src, offset, start - offset);</span><br><span class="line">        offset = start + openToken.length();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 寻找结束的 closeToken 的位置</span></span><br><span class="line">        <span class="keyword">int</span> end = text.indexOf(closeToken, offset);</span><br><span class="line">        <span class="keyword">while</span> (end &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (end &gt; offset &amp;&amp; src[end - <span class="number">1</span>] == <span class="string">'\\'</span>) &#123;</span><br><span class="line">            <span class="comment">// this close token is escaped. remove the backslash and continue.</span></span><br><span class="line">            <span class="comment">// 因为 endToken 前面一个位置是 \ 转义字符，所以忽略 \</span></span><br><span class="line">            <span class="comment">// 添加 [offset, end - offset - 1] 和 endToken 的内容，添加到 builder 中</span></span><br><span class="line">            expression.append(src, offset, end - offset - <span class="number">1</span>).append(closeToken);</span><br><span class="line">            offset = end + closeToken.length();</span><br><span class="line">            <span class="comment">// 继续，寻找结束的 closeToken 的位置</span></span><br><span class="line">            end = text.indexOf(closeToken, offset);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            expression.append(src, offset, end - offset);</span><br><span class="line">            offset = end + closeToken.length();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 拼接内容</span></span><br><span class="line">        <span class="keyword">if</span> (end == -<span class="number">1</span>) &#123;</span><br><span class="line">          <span class="comment">// closeToken 未找到，直接拼接</span></span><br><span class="line">          builder.append(src, start, src.length - start);</span><br><span class="line">          <span class="comment">// 修改 offset</span></span><br><span class="line">          offset = src.length;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// closeToken 找到，将 expression 提交给 handler 处理 ，并将处理结果添加到 builder 中</span></span><br><span class="line">          builder.append(handler.handleToken(expression.toString()));<span class="comment">//↓↓↓↓↓</span></span><br><span class="line">          offset = end + closeToken.length();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 继续，寻找开始的 openToken 的位置</span></span><br><span class="line">      start = text.indexOf(openToken, offset);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 拼接剩余的部分</span></span><br><span class="line">    <span class="keyword">if</span> (offset &lt; src.length) &#123;</span><br><span class="line">      builder.append(src, offset, src.length - offset);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> builder.toString();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TextSqlNode内部类</span></span><br><span class="line"><span class="comment">//BindingTokenParser 负责解析标记内容，并将解析结果返回给GenericTokenParser，用于替换$&#123;xxx&#125;标记。</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">BindingTokenParser</span> <span class="keyword">implements</span> <span class="title">TokenHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> DynamicContext context;</span><br><span class="line">    <span class="keyword">private</span> Pattern injectionFilter;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BindingTokenParser</span><span class="params">(DynamicContext context, Pattern injectionFilter)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.context = context;</span><br><span class="line">      <span class="keyword">this</span>.injectionFilter = injectionFilter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">handleToken</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">      Object parameter = context.getBindings().get(<span class="string">"_parameter"</span>);</span><br><span class="line">      <span class="keyword">if</span> (parameter == <span class="keyword">null</span>) &#123;</span><br><span class="line">        context.getBindings().put(<span class="string">"value"</span>, <span class="keyword">null</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (SimpleTypeRegistry.isSimpleType(parameter.getClass())) &#123;</span><br><span class="line">        context.getBindings().put(<span class="string">"value"</span>, parameter);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//通过 ONGL 从用户传入的参数中获取结果</span></span><br><span class="line">      Object value = OgnlCache.getValue(content, context.getBindings());</span><br><span class="line">      String srtValue = value == <span class="keyword">null</span> ? <span class="string">""</span> : String.valueOf(value); </span><br><span class="line">      <span class="comment">//通过正则表达式检测 srtValue 有效性</span></span><br><span class="line">      checkInjection(srtValue);</span><br><span class="line">      <span class="keyword">return</span> srtValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkInjection</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (injectionFilter != <span class="keyword">null</span> &amp;&amp; !injectionFilter.matcher(value).matches()) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ScriptingException(<span class="string">"Invalid input. Please conform to regex"</span> + injectionFilter.pattern());</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="IfSqlNode"><a href="#IfSqlNode" class="headerlink" title="IfSqlNode"></a>IfSqlNode</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfSqlNode</span> <span class="keyword">implements</span> <span class="title">SqlNode</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> ExpressionEvaluator evaluator;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String test;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> SqlNode contents;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">IfSqlNode</span><span class="params">(SqlNode contents, String test)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.test = test;</span><br><span class="line">    <span class="keyword">this</span>.contents = contents;</span><br><span class="line">    <span class="keyword">this</span>.evaluator = <span class="keyword">new</span> ExpressionEvaluator();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(DynamicContext context)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//通过 OGNL 评估 test 表达式的结果</span></span><br><span class="line">    <span class="comment">//若 test 表达式中的条件成立，则调用其它节点的apply方法进行解析</span></span><br><span class="line">    <span class="keyword">if</span> (evaluator.evaluateBoolean(test, context.getBindings())) &#123;</span><br><span class="line">      <span class="comment">//是&lt;if&gt;节点中也可嵌套其他的动态节点，并非只有纯文本。</span></span><br><span class="line">      <span class="comment">//因此 contents 变量遍历指向的是 MixedSqlNode，而非 StaticTextSqlNode。</span></span><br><span class="line">      contents.apply(context);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="TrimSqlNode"><a href="#TrimSqlNode" class="headerlink" title="TrimSqlNode"></a>TrimSqlNode</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TrimSqlNode.java</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">apply</span><span class="params">(DynamicContext context)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 创建具有过滤功能的 DynamicContext</span></span><br><span class="line">  FilteredDynamicContext filteredDynamicContext = <span class="keyword">new</span> FilteredDynamicContext(context);<span class="comment">//↓↓↓↓↓</span></span><br><span class="line">  <span class="keyword">boolean</span> result = contents.apply(filteredDynamicContext);</span><br><span class="line">  <span class="comment">//// 过滤掉前缀和后缀</span></span><br><span class="line">  filteredDynamicContext.applyAll();</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">FilteredDynamicContext</span> <span class="keyword">extends</span> <span class="title">DynamicContext</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> DynamicContext delegate;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> prefixApplied;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> suffixApplied;</span><br><span class="line">    <span class="keyword">private</span> StringBuilder sqlBuffer;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FilteredDynamicContext</span><span class="params">(DynamicContext delegate)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">super</span>(configuration, <span class="keyword">null</span>);</span><br><span class="line">      <span class="keyword">this</span>.delegate = delegate;</span><br><span class="line">      <span class="keyword">this</span>.prefixApplied = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">this</span>.suffixApplied = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">this</span>.sqlBuffer = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applyAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      sqlBuffer = <span class="keyword">new</span> StringBuilder(sqlBuffer.toString().trim());</span><br><span class="line">      String trimmedUppercaseSql = sqlBuffer.toString().toUpperCase(Locale.ENGLISH);</span><br><span class="line">      <span class="keyword">if</span> (trimmedUppercaseSql.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 对 sql 进行过滤操作，移除掉前缀或后缀</span></span><br><span class="line">        applyPrefix(sqlBuffer, trimmedUppercaseSql);</span><br><span class="line">        applySuffix(sqlBuffer, trimmedUppercaseSql);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 将当前对象的 sqlBuffer 内容添加到代理类中</span></span><br><span class="line">      delegate.appendSql(sqlBuffer.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">applyPrefix</span><span class="params">(StringBuilder sql, String trimmedUppercaseSql)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!prefixApplied) &#123;</span><br><span class="line">        <span class="comment">// 设置 prefixApplied 为 true，以下逻辑仅会被执行一次</span></span><br><span class="line">        prefixApplied = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (prefixesToOverride != <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">for</span> (String toRemove : prefixesToOverride) &#123;</span><br><span class="line">            <span class="comment">// 检测当前 sql 字符串是否包含前缀，比如 'AND ', 'AND\t'等</span></span><br><span class="line">            <span class="keyword">if</span> (trimmedUppercaseSql.startsWith(toRemove)) &#123;</span><br><span class="line">              sql.delete(<span class="number">0</span>, toRemove.trim().length());</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 插入前缀，比如 WHERE</span></span><br><span class="line">        <span class="keyword">if</span> (prefix != <span class="keyword">null</span>) &#123;</span><br><span class="line">          sql.insert(<span class="number">0</span>, <span class="string">" "</span>);</span><br><span class="line">          sql.insert(<span class="number">0</span>, prefix);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">applySuffix</span><span class="params">(StringBuilder sql, String trimmedUppercaseSql)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!suffixApplied) &#123;</span><br><span class="line">        suffixApplied = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (suffixesToOverride != <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">for</span> (String toRemove : suffixesToOverride) &#123;</span><br><span class="line">            <span class="keyword">if</span> (trimmedUppercaseSql.endsWith(toRemove) || trimmedUppercaseSql.endsWith(toRemove.trim())) &#123;</span><br><span class="line">              <span class="keyword">int</span> start = sql.length() - toRemove.trim().length();</span><br><span class="line">              <span class="keyword">int</span> end = sql.length();</span><br><span class="line">              sql.delete(start, end);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (suffix != <span class="keyword">null</span>) &#123;</span><br><span class="line">          sql.append(<span class="string">" "</span>);</span><br><span class="line">          sql.append(suffix);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="WhereSqlNode"><a href="#WhereSqlNode" class="headerlink" title="WhereSqlNode"></a>WhereSqlNode</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基于 TrimSqlNode 实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WhereSqlNode</span> <span class="keyword">extends</span> <span class="title">TrimSqlNode</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> List&lt;String&gt; prefixList = Arrays.asList(<span class="string">"AND "</span>,<span class="string">"OR "</span>,<span class="string">"AND\n"</span>, <span class="string">"OR\n"</span>, <span class="string">"AND\r"</span>, <span class="string">"OR\r"</span>, <span class="string">"AND\t"</span>, <span class="string">"OR\t"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">WhereSqlNode</span><span class="params">(Configuration configuration, SqlNode contents)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(configuration, contents, <span class="string">"WHERE"</span>, prefixList, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="SetSqlNode"><a href="#SetSqlNode" class="headerlink" title="SetSqlNode"></a>SetSqlNode</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同上</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SetSqlNode</span> <span class="keyword">extends</span> <span class="title">TrimSqlNode</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; COMMA = Collections.singletonList(<span class="string">","</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SetSqlNode</span><span class="params">(Configuration configuration,SqlNode contents)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(configuration, contents, <span class="string">"SET"</span>, COMMA, <span class="keyword">null</span>, COMMA);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经过前面的解析，我们已经能从 DynamicContext 获取到完整的 SQL 语句了。但这并不 意味着解析过程就结束了，因为当前的 SQL 语句中还有一种占位符没有处理，即#{}。与${} 占位符的处理方式不同，MyBatis 并不会直接将#{}占位符替换为相应的参数值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构建StaticSqlSource,在此过程中sql语句中的占位符#&#123;&#125;会替换为?</span></span><br><span class="line"><span class="comment">//并为每个占位符构建相应的ParameterMapping</span></span><br><span class="line">SqlSource sqlSource = sqlSourceParser.parse(context.getSql(), parameterType, context.getBindings());</span><br></pre></td></tr></table></figure>
+<p>接着这一句往下分析</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SqlSourceBuilder.java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SqlSource <span class="title">parse</span><span class="params">(String originalSql, Class&lt;?&gt; parameterType, Map&lt;String, Object&gt; additionalParameters)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 创建 #&#123;&#125; 占位符处理器</span></span><br><span class="line">  ParameterMappingTokenHandler handler = <span class="keyword">new</span> ParameterMappingTokenHandler(configuration, parameterType, additionalParameters);</span><br><span class="line">  <span class="comment">// 创建 #&#123;&#125; 占位符解析器</span></span><br><span class="line">  GenericTokenParser parser = <span class="keyword">new</span> GenericTokenParser(<span class="string">"#&#123;"</span>, <span class="string">"&#125;"</span>, handler);</span><br><span class="line">  <span class="comment">// 解析 #&#123;&#125; 占位符，并返回解析结果，源码上面分析过了</span></span><br><span class="line">  String sql = parser.parse(originalSql);</span><br><span class="line">  <span class="comment">// 封装解析结果到 StaticSqlSource 中，并返回</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> StaticSqlSource(configuration, sql, handler.getParameterMappings());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>GenericTokenParser 负责将#{}占位符中的内容抽取出来，并将抽取出的内容传给 handleToken 方法。handleToken 方法负责将传入的参数解析成对应的 ParameterMapping 对象，这步操作由 ParameterMappingTokenHandler方法完成。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SqlSourceBuilder内部类</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ParameterMappingTokenHandler</span> <span class="keyword">extends</span> <span class="title">BaseBuilder</span> <span class="keyword">implements</span> <span class="title">TokenHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;ParameterMapping&gt; parameterMappings = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> Class&lt;?&gt; parameterType;</span><br><span class="line">    <span class="keyword">private</span> MetaObject metaParameters;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParameterMappingTokenHandler</span><span class="params">(Configuration configuration, Class&lt;?&gt; parameterType, Map&lt;String, Object&gt; additionalParameters)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">super</span>(configuration);</span><br><span class="line">      <span class="keyword">this</span>.parameterType = parameterType;</span><br><span class="line">      <span class="keyword">this</span>.metaParameters = configuration.newMetaObject(additionalParameters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;ParameterMapping&gt; <span class="title">getParameterMappings</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> parameterMappings;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">handleToken</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//parameterMappings为SqlSourceBuilder的成员变量，构造返回的StaticSqlSource用</span></span><br><span class="line">      parameterMappings.add(buildParameterMapping(content));</span><br><span class="line">      <span class="comment">//就直接返回个？</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"?"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ParameterMapping <span class="title">buildParameterMapping</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">      Map&lt;String, String&gt; propertiesMap = parseParameterMapping(content);</span><br><span class="line">      String property = propertiesMap.get(<span class="string">"property"</span>);</span><br><span class="line">      Class&lt;?&gt; propertyType;</span><br><span class="line">      <span class="keyword">if</span> (metaParameters.hasGetter(property)) &#123; </span><br><span class="line">        propertyType = metaParameters.getGetterType(property);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (typeHandlerRegistry.hasTypeHandler(parameterType)) &#123;</span><br><span class="line">        propertyType = parameterType;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JdbcType.CURSOR.name().equals(propertiesMap.get(<span class="string">"jdbcType"</span>))) &#123;</span><br><span class="line">        propertyType = java.sql.ResultSet.class;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (property == <span class="keyword">null</span> || Map.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">        propertyType = Object.class;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        MetaClass metaClass = MetaClass.forClass(parameterType, configuration.getReflectorFactory());</span><br><span class="line">        <span class="keyword">if</span> (metaClass.hasGetter(property)) &#123;</span><br><span class="line">          propertyType = metaClass.getGetterType(property);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          propertyType = Object.class;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      ParameterMapping.Builder builder = <span class="keyword">new</span> ParameterMapping.Builder(configuration, property, propertyType);</span><br><span class="line">      Class&lt;?&gt; javaType = propertyType;</span><br><span class="line">      String typeHandlerAlias = <span class="keyword">null</span>;</span><br><span class="line">      <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : propertiesMap.entrySet()) &#123;</span><br><span class="line">        String name = entry.getKey();</span><br><span class="line">        String value = entry.getValue();</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"javaType"</span>.equals(name)) &#123;</span><br><span class="line">          javaType = resolveClass(value);</span><br><span class="line">          builder.javaType(javaType);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"jdbcType"</span>.equals(name)) &#123;</span><br><span class="line">          builder.jdbcType(resolveJdbcType(value));</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"mode"</span>.equals(name)) &#123;</span><br><span class="line">          builder.mode(resolveParameterMode(value));</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"numericScale"</span>.equals(name)) &#123;</span><br><span class="line">          builder.numericScale(Integer.valueOf(value));</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"resultMap"</span>.equals(name)) &#123;</span><br><span class="line">          builder.resultMapId(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"typeHandler"</span>.equals(name)) &#123;</span><br><span class="line">          typeHandlerAlias = value;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"jdbcTypeName"</span>.equals(name)) &#123;</span><br><span class="line">          builder.jdbcTypeName(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"property"</span>.equals(name)) &#123;</span><br><span class="line">          <span class="comment">// Do Nothing</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"expression"</span>.equals(name)) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> BuilderException(<span class="string">"Expression based parameters are not supported yet"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> BuilderException(<span class="string">"An invalid property '"</span> + name + <span class="string">"' was found in mapping #&#123;"</span> + content + <span class="string">"&#125;.  Valid properties are "</span> + PARAMETER_PROPERTIES);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (typeHandlerAlias != <span class="keyword">null</span>) &#123;</span><br><span class="line">        builder.typeHandler(resolveTypeHandler(javaType, typeHandlerAlias));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> builder.build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Map&lt;String, String&gt; <span class="title">parseParameterMapping</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ParameterExpression(content);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (BuilderException ex) &#123;</span><br><span class="line">        <span class="keyword">throw</span> ex;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> BuilderException(<span class="string">"Parsing error was found in mapping #&#123;"</span> + content + <span class="string">"&#125;.  Check syntax #&#123;property|(expression), var1=value1, var2=value2, ...&#125; "</span>, ex);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>接着主线往下走，别岔咯</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用StaticSqlSource的getBoundSql获取BoundSql</span></span><br><span class="line">BoundSql boundSql = sqlSource.getBoundSql(parameterObject);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticSqlSource</span> <span class="keyword">implements</span> <span class="title">SqlSource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String sql;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> List&lt;ParameterMapping&gt; parameterMappings;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Configuration configuration;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">StaticSqlSource</span><span class="params">(Configuration configuration, String sql)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(configuration, sql, <span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">StaticSqlSource</span><span class="params">(Configuration configuration, String sql, List&lt;ParameterMapping&gt; parameterMappings)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.sql = sql;</span><br><span class="line">    <span class="keyword">this</span>.parameterMappings = parameterMappings;</span><br><span class="line">    <span class="keyword">this</span>.configuration = configuration;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> BoundSql <span class="title">getBoundSql</span><span class="params">(Object parameterObject)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BoundSql(configuration, sql, parameterMappings, parameterObject);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很简单，没什么好说的</p>
+<p>然后就没有然后了</p>
+<p>至此SQL解析完毕</p>
+
+      
+    </div>
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mybatis/" rel="tag"><i class="fa fa-tag"></i> Mybatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/26/Mybatis查询语句执行过程/" rel="next" title="Mybatis源码分析(三) SQL执行过程">
+                <i class="fa fa-chevron-left"></i> Mybatis源码分析(三) SQL执行过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNzc0OC8xNDI3OQ"></div>
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="kangshifu" />
+            
+              <p class="site-author-name" itemprop="name">kangshifu</p>
+              <p class="site-description motion-element" itemprop="description">当时共我赏花人,点检如今无一半</p>
+          </div>
+<!--my custom code begin-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+        <script type="text/javascript">
+        $("#sidebar").hover(function(){
+          $("#mydivshow").velocity('stop').velocity({opacity: 1});
+        },function(){
+         $("#mydivshow").velocity('stop').velocity({opacity: 0});
+       });
+      </script>
+
+      <div id="mydivshow" class="mydivshow">
+ <!--my custom code end-->
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+<div id="player1" class="aplayer"></div>
+<script src="/js/src/APlayer.min.js"></script>
+<script type="text/javascript"></script>
+        </div>
+<!--my custom code begin-->
+      </div>
+<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从哪里开始"><span class="nav-number">1.</span> <span class="nav-text">从哪里开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析过程"><span class="nav-number">2.</span> <span class="nav-text">解析过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MixedSqlNode"><span class="nav-number">2.1.</span> <span class="nav-text">MixedSqlNode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StaticTextSqlNode"><span class="nav-number">2.2.</span> <span class="nav-text">StaticTextSqlNode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TextSqlNode"><span class="nav-number">2.3.</span> <span class="nav-text">TextSqlNode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IfSqlNode"><span class="nav-number">2.4.</span> <span class="nav-text">IfSqlNode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TrimSqlNode"><span class="nav-number">2.5.</span> <span class="nav-text">TrimSqlNode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WhereSqlNode"><span class="nav-number">2.5.1.</span> <span class="nav-text">WhereSqlNode</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SetSqlNode"><span class="nav-number">2.6.</span> <span class="nav-text">SetSqlNode</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kangshifu</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+
+var ap = new APlayer({
+	    element: document.getElementById('player1'),                       // （可选）播放器袖珍风格
+	    narrow: false,                                                     // （可选）自动播放，移动端浏览器暂不支持此功能
+	    autoplay: true,                                                    // （可选）曲目循环类型，有'random'（随机），'single'(单曲)，'circulation'(循环)，'order'(列表)，默认'circulation'
+	    showlrc: 0,                                                        // （可选）歌词显示配置项，可选项1、2、3
+	    mutex: true,                                                       // （可选）该选项开启时，同页有其它aplayer播放则该播放器暂停
+	    theme: '#8B008B',                                                  // （可选）播放器风格色彩设置，默#b7daff
+	    mode: 'random',                                                    // （可选）曲目循环类型，有'random'（随机），'single'(单曲)，'circulation'(循环)，'order'(列表)，默认'circulation'
+	    preload: 'metadata',                                               // （可选）音乐文件预载入模式，可选项'none'、'metadata'、'auto'，默'auto'
+	    listmaxheight: '250px',                                            // （可选）该播放列表最大长度
+	    music: [
+	    {
+	    	title: '七月上',                                         
+	        author: 'Jam',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E4%B8%83%E6%9C%88%E4%B8%8A%20-%20Jam.mp3', 
+	        pic: 'http://p1.music.126.net/9kZl6NRj3HxmQQ8DqTjZ4Q==/17729624997966923.jpg?param=130y130'
+	    },
+	    {
+	    	title: '匆匆 ',                                         
+	        author: '二珂.',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%8C%86%E5%8C%86%20-%20%E8%B5%B5%E9%92%B6%2C%E4%BA%8C%E7%8F%82.mp3', 
+	        pic: 'http://p1.music.126.net/8GXkHa3eq63ikMMZ2nY8Gw==/109951163249852201.jpg?param=130y130'
+	    },{
+	    	title: '匆匆那年',                                         
+	        author: '王菲',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%8C%86%E5%8C%86%E9%82%A3%E5%B9%B4%20-%20%E7%8E%8B%E8%8F%B2.mp3', 
+	        pic: 'http://p1.music.126.net/yXyeAl-7m0tqfx4AX7BDSQ==/2542070884980240.jpg?param=130y130'
+	    },{
+	    	title: '后来我们会怎样',                                         
+	        author: '刘惜君',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%90%8E%E6%9D%A5%E6%88%91%E4%BB%AC%E4%BC%9A%E6%80%8E%E6%A0%B7%20-%20%E5%88%98%E6%83%9C%E5%90%9B.mp3', 
+	        pic: 'http://p1.music.126.net/C0nqK9yq5_LRHbQ6EqfzNg==/3384296793240085.jpg?param=130y130'
+	    },{
+	    	title: '小幸运',                                         
+	        author: '田馥甄',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%B0%8F%E5%B9%B8%E8%BF%90%20-%20%E7%94%B0%E9%A6%A5%E7%94%84.mp3', 
+	        pic: 'http://p4.music.126.net/oTF9i5fY79GdAwbLQ7xMCQ==/109951163272573333.jpg?param=50y50'
+	    },{
+	    	title: '岁月神偷',                                         
+	        author: '金玟岐',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E5%B2%81%E6%9C%88%E7%A5%9E%E5%81%B7%20-%20%E9%87%91%E7%8E%9F%E5%B2%90.mp3', 
+	        pic: 'http://p1.music.126.net/RTuj3aTIZrR-v0-W_dD2VQ==/19080924788792622.jpg?param=50y50'
+	    },{
+	    	title: '愿得一人心',                                         
+	        author: '谭艳',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%84%BF%E5%BE%97%E4%B8%80%E4%BA%BA%E5%BF%83%20-%20%E8%B0%AD%E8%89%B3.mp3', 
+	        pic: 'http://p4.music.126.net/1N8HiCwgY7DqO-wILpJTeQ==/3438172872014843.jpg?param=50y50'
+	    },{
+	    	title: '我们不是说好了吗 ',                                         
+	        author: '白百何',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%88%91%E4%BB%AC%E4%B8%8D%E6%98%AF%E8%AF%B4%E5%A5%BD%E4%BA%86%E5%90%97%20-%20%E5%BD%AD%E4%BA%8E%E6%99%8F%2C%E7%99%BD%E7%99%BE%E4%BD%95.mp3', 
+	        pic: 'http://p1.music.126.net/Wc7s_rVkVHTKrMRu4xFNzQ==/2315571488119029.jpg?param=130y130'
+	    },{
+	    	title: '我们都被忘了',                                         
+	        author: '谢安琪',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%88%91%E4%BB%AC%E9%83%BD%E8%A2%AB%E5%BF%98%E4%BA%86%20-%20%E8%B0%A2%E5%AE%89%E7%90%AA.mp3', 
+	        pic: 'http://p3.music.126.net/fBDRSoH46yYAldgmUAu7hw==/18684001092518241.jpg?param=50y50'
+	    },{
+	    	title: '泡沫',                                         
+	        author: '邓紫棋',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%B3%A1%E6%B2%AB%20-%20G.E.M.%E9%82%93%E7%B4%AB%E6%A3%8B.mp3', 
+	        pic: 'http://p3.music.126.net/P8VwgDjdLDN4spkwIv8QXg==/18722483999690981.jpg?param=50y50'
+	    },{
+	    	title: '漂洋过海来看你',                                         
+	        author: '李宗盛',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E6%BC%82%E6%B4%8B%E8%BF%87%E6%B5%B7%E6%9D%A5%E7%9C%8B%E4%BD%A0%C2%A0%5B20170527-%E5%B9%B4%E5%BA%A6%E7%AC%AC4%E6%AC%A1%E6%AD%A3%E5%BC%8F%E6%B4%BB%E5%8A%A8%5D%EF%BC%88Cover%20%E6%9D%8E%E5%AE%97%E7%9B%9B%20%EF%BC%8F%20%E5%A8%83%E5%A8%83%EF%BC%89%20-%20%E5%AD%A6%E5%94%B1%E5%9B%A2.mp3', 
+	        pic: 'http://p1.music.126.net/IXm8On-EZt82SnBz00GQ3Q==/109951162940064301.jpg?param=130y130'
+	    },{
+	    	title: '纸短情长',                                         
+	        author: '烟把儿',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E7%BA%B8%E7%9F%AD%E6%83%85%E9%95%BF%EF%BC%88%E5%AE%8C%E6%95%B4%E7%89%88%EF%BC%89%20-%20%E7%83%9F%E6%8A%8A%E5%84%BF.mp3', 
+	        pic: 'http://p1.music.126.net/tbZaE-DjL_BkemynFlL1cQ==/109951163052534918.jpg?param=130y130'
+	    },{
+	    	title: '美丽世界的孤儿',                                         
+	        author: '汪峰',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E7%BE%8E%E4%B8%BD%E4%B8%96%E7%95%8C%E7%9A%84%E5%AD%A4%E5%84%BF%20-%20%E6%B1%AA%E5%B3%B0.ncm', 
+	        pic: 'http://p3.music.126.net/pP2sbfkvd6nsmdbmFTIEJQ==/109951163116154677.jpg?param=50y50'
+	    },{
+	    	title: '致青春',                                         
+	        author: '王菲',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%87%B4%E9%9D%92%E6%98%A5%20-%20%E7%8E%8B%E8%8F%B2.mp3', 
+	        pic: 'http://p3.music.126.net/WjDAZ9C8whAB6yfE_sfIFw==/109951163244980773.jpg?param=50y50'
+	    },{
+	    	title: '说散就散',                                         
+	        author: '袁娅维',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%AF%B4%E6%95%A3%E5%B0%B1%E6%95%A3%20-%20%E8%A2%81%E5%A8%85%E7%BB%B4.ncm', 
+	        pic: 'http://p4.music.126.net/zsRaHUdZO7LQ0hTX5ptqGg==/109951163102064502.jpg?param=50y50'
+	    },{
+	    	title: '走在冷风中',                                         
+	        author: '二珂',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%B5%B0%E5%9C%A8%E5%86%B7%E9%A3%8E%E4%B8%AD%20-%20%E4%BA%8C%E7%8F%82.mp3', 
+	        pic: 'http://p1.music.126.net/iAaRt_l_ussYqkLVuDEpqg==/2931298001578529.jpg?param=130y130'
+	    },{
+	    	title: '追光者',                                         
+	        author: '岑宁儿',                        
+	        url: 'https://zckdmp3-1257031229.cos.ap-guangzhou.myqcloud.com/%E8%BF%BD%E5%85%89%E8%80%85%20-%20%E5%B2%91%E5%AE%81%E5%84%BF.mp3', 
+	        pic: 'http://p4.music.126.net/1N8HiCwgY7DqO-wILpJTeQ==/3438172872014843.jpg?param=50y50'
+	    },
+	    ]
+});
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:true,
+		position:{top:'150px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+You can't see this
+  
+  undefined
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"scale":2,"hHeadPos":0.5,"vHeadPos":0.618},"display":{"superSample":3,"width":100,"height":200,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</html>
