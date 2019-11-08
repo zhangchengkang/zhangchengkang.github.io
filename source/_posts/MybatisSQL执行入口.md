@@ -1,13 +1,13 @@
 ---
 toc: true
-title: Mybatis SQL执行入口
-date: 2019-10-19 16:12:35
-tags: [Design Pattern]
+title: Mybatis源码分析(二) SQL执行入口
+date: 2019-10-20 15:54:12
+tags: [Mybatis]
 categories: JAVA
 
 ---
 
-*better late than never*
+*one today is worth two tomorrows*
 <!--more-->  
 
 
@@ -58,56 +58,7 @@ public static void main(String[] args) {
 
 
 
-## 使用Mapper源码分析
-
-### set
-
-- 我们既然能够从SqlSession中得到BlogMapper接口的，那么我们肯定需要先在哪里把它放进去了，然后 SqlSession 才能生成我们想要的代理类啊。我们可以从getMapper()联系，可能会有一个setMapper()或者addMapper()方法。
-
-```java
-public class Configuration {
-    protected final MapperRegistry mapperRegistry = new MapperRegistry(this);
-        
-	public <T> void addMapper(Class<T> type) {
-    	mapperRegistry.addMapper(type);
-  	}
- }
-```
-
-
-
-````java
-
-public class MapperRegistry {
-private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
-  
-public <T> void addMapper(Class<T> type) {
-    if (type.isInterface()) { // 只添加接口
-      if (hasMapper(type)) { // 不允许重复添加
-        throw new BindingException("Type " + type + " is already known to the MapperRegistry.");
-      }
-      boolean loadCompleted = false;
-      try {
-        // 添加到 knownMappers 中
-        knownMappers.put(type, new MapperProxyFactory<T>(type));
-        MapperAnnotationBuilder parser = new MapperAnnotationBuilder(config, type);
-        parser.parse();
-        // 标记加载完成 
-        loadCompleted = true;
-      } finally {
-         // 若加载未完成，从 knownMappers 中移除
-        if (!loadCompleted) {
-          knownMappers.remove(type);
-        }
-      }
-    }
-  }
-}
-````
-
-
-
-### get
+## getMapper源码分析
 
 ```java
 public class DefaultSqlSession implements SqlSession {
