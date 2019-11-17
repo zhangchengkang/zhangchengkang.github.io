@@ -9,9 +9,9 @@ server:
   header: true
 
 # Site
-title: 千山暮雪
+title: 山有木兮
 subtitle: 只影向谁去
-description: 当时共我赏花人,点检如今无一半
+description: 人生自是有情痴，此恨不关风与月
 keywords: 
 author: kangshifu
 language: zh-Hans
@@ -102,8 +102,8 @@ live2d:
     vHeadPos: 0.618
   display:
     superSample: 3
-    width: 100
-    height: 200
+    width: 75
+    height: 150
     position: right
     hOffset: 0
     vOffset: -20
