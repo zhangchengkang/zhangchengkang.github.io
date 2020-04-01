@@ -284,7 +284,7 @@ doGetBean执行流程总结:
 8. 调用 getObjectForBeanInstance 方法，并按 name 规则返回相应的 bean 实例
 9. 按需转换 bean 类型，并返回转换后的 bean 实例。
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
 
 ### beanName 转换 ->transformedBeanName
 

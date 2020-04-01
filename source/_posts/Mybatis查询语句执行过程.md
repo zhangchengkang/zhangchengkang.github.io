@@ -50,7 +50,7 @@ categories: JAVA
   }
 ```
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/Executor%E7%B1%BB%E5%9B%BE.png)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/Executor%E7%B1%BB%E5%9B%BE.png)
 
 这里executor 的类型为 CachingExecutor(DefaultSqlSessionFactory.openSession()) ，该类是一 个装饰器类，用于给目标 Executor 增加二级缓存功能。那目标 Executor 是谁呢？默认情况 下是SimpleExecutor。
 
@@ -190,7 +190,7 @@ public class PreparedStatementHandler extends BaseStatementHandler {
 
 ##  StatementHandler 
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/statementHandler%E7%B1%BB%E5%9B%BE.png)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/statementHandler%E7%B1%BB%E5%9B%BE.png)
 
 StatementHandler接口的实现大致有四个，其中三个实现类都是和JDBC中的Statement响对应的：
 

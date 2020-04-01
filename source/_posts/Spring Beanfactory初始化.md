@@ -16,9 +16,9 @@ categories: JAVA
 
 ## 两张图
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%B7%AF.png)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/spring%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%B7%AF.png)
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/spring%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png)
 
 ## Spring入口
 
@@ -502,4 +502,4 @@ ApplicationContext context = new ClassPathXmlApplicationContext("applicationCont
 	}
 ```
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/BeanDefinition%E5%AE%9A%E4%BD%8D%E5%8A%A0%E8%BD%BD%E6%B3%A8%E5%86%8C%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/BeanDefinition%E5%AE%9A%E4%BD%8D%E5%8A%A0%E8%BD%BD%E6%B3%A8%E5%86%8C%E6%B5%81%E7%A8%8B%E5%9B%BE.png)

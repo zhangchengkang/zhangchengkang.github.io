@@ -114,7 +114,7 @@ boundSql长啥样?
 ```
 
 对于一个包含了${}占位符，或<if>、<where>等标签的SQL，在解析的过程中，会被分解 成多个片段。每个片段都有对应的类型，每种类型的片段都有不同的解析逻辑。在源码中， 片段这个概念等价于sql 节点，即SqlNode。SqlNode 是一个接口，它有众多的实现类。其继 承体系如下： 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/SqlNode%E7%B1%BB%E5%9B%BE.png)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/SqlNode%E7%B1%BB%E5%9B%BE.png)
 
 StaticTextSqlNode 用于存储静态文本，TextSqlNode用于存储带有${}占位 符的文本，IfSqlNode 则用于存储<if>节点的内容。MixedSqlNode 内部维护了一个 SqlNode 集合，用于存储各种各样的SqlNode
 

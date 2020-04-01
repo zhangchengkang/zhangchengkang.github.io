@@ -17,7 +17,7 @@ categories: JAVA
 
 xml文件中的sql节点会在初始化时被解析成MappedStatement对象，其中的sql语句会被解析成SqlSource对象，动态Sql节点等由SqlNode接口的相应实现类进行表示
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/BaseBuilder%E7%B1%BB%E5%9B%BE.png)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/BaseBuilder%E7%B1%BB%E5%9B%BE.png)
 
 - **XMLConfigBuilder**：解析mybatis中configLocation属性中的全局xml文件，内部会使用 XMLMapperBuilder 解析各个xml文件。
 - **XMLMapperBuilder**：遍历mybatis中mapperLocations属性中的xml文件中每个节点的Builder，比如user.xml，内部会使用 XMLStatementBuilder 处理xml中的每个节点。

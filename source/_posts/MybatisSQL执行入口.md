@@ -40,21 +40,23 @@ public static void main(String[] args) {
 }
 ```
 
+
+
 #### 获取sqlsessionFactory
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96SqlSessionFactory%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/%E8%8E%B7%E5%8F%96SqlSessionFactory%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
 
 #### 获取sqlSession
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96SqlSession%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/%E8%8E%B7%E5%8F%96SqlSession%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
 
 #### 获取接口代理对象MapperProxy
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%8E%B7%E5%8F%96MapperProxy%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/%E8%8E%B7%E5%8F%96MapperProxy%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg)
 
 #### 执行增删改查
 
-![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/Mapper%E6%89%A7%E8%A1%8C%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9.jpg)
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/Mapper%E6%89%A7%E8%A1%8C%E5%A2%9E%E5%88%A0%E6%9F%A5%E6%94%B9.jpg)
 
 
 
@@ -220,7 +222,7 @@ public class MapperMethod {
 
 
 
-
+![](https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/%E4%BD%BF%E7%94%A8mapper%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
 
 
 
