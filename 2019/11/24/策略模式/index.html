@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="山有木兮">
 <meta property="og:description" content="You are not brave, no one for you to be strong">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:updated_time" content="2019-11-22T11:18:44.017Z">
+<meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:updated_time" content="2020-04-01T04:23:52.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="装饰器模式">
 <meta name="twitter:description" content="You are not brave, no one for you to be strong">
-<meta name="twitter:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.png">
+<meta name="twitter:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.png">
 
 
 
@@ -383,7 +383,7 @@
 <p><strong>注意事项：</strong>如果一个系统的策略多于四个，就需要考虑使用混合模式，解决策略类膨胀的问题。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>下面以一个网购付款方式为例进行说明：</p>
 <p>在网购付款的时候，可以选择的付款方式有很多种，如支付宝，微信，信用卡和 ApplePay等。</p>
-<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.png" alt="策略模式"></p>
+<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.png" alt="策略模式"></p>
 <p>首先定义<strong>抽象策略类PayWay</strong>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PayWay</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">pay</span><span class="params">(<span class="keyword">double</span> money)</span></span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>定义<strong>具体策略类</strong>：</p>
@@ -442,6 +442,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/01/责任链模式/" rel="prev" title="责任链模式">
+                责任链模式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -546,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -568,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -626,7 +630,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="山有木兮">
 <meta property="og:description" content="Youth means limitless possibilities">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2019-11-16T04:16:03.019Z">
+<meta property="og:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2020-04-01T04:31:52.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring源码分析(二) GetBean()">
 <meta name="twitter:description" content="Youth means limitless possibilities">
-<meta name="twitter:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
+<meta name="twitter:image" content="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
 
 
 
@@ -391,7 +391,7 @@
 <li>调用 getObjectForBeanInstance 方法，并按 name 规则返回相应的 bean 实例</li>
 <li>按需转换 bean 类型，并返回转换后的 bean 实例。</li>
 </ol>
-<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt=""></p>
+<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt=""></p>
 <h3 id="beanName-转换-gt-transformedBeanName"><a href="#beanName-转换-gt-transformedBeanName" class="headerlink" title="beanName 转换 -&gt;transformedBeanName"></a>beanName 转换 -&gt;transformedBeanName</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//AbstractBeanFactory.java</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> String <span class="title">transformedBeanName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> canonicalName(BeanFactoryUtils.transformedBeanName(name));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//BeanFactoryUtils.java</span></span><br><span class="line"><span class="comment">// 使用工具类 BeanFactoryUtils 来转名字</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">transformedBeanName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">	Assert.notNull(name, <span class="string">"'name' must not be null"</span>);</span><br><span class="line">	<span class="keyword">if</span> (!name.startsWith(BeanFactory.FACTORY_BEAN_PREFIX)) &#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">// 如果 beanName 以 &amp; 开头，则去掉 &amp;,并添加到transformedBeanNameCache中</span></span><br><span class="line">       <span class="comment">//computeIfAbsent-&gt;如果map里没有这个key，那么就按照后面的这个function添加对应的key和value</span></span><br><span class="line">	<span class="keyword">return</span> transformedBeanNameCache.computeIfAbsent(name, beanName -&gt; &#123;</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			beanName = beanName.substring(BeanFactory.FACTORY_BEAN_PREFIX.length());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (beanName.startsWith(BeanFactory.FACTORY_BEAN_PREFIX));</span><br><span class="line">           <span class="comment">// 返回去掉 &amp; 后的 beanName</span></span><br><span class="line">		<span class="keyword">return</span> beanName;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SimpleAliasRegistry.java</span></span><br><span class="line"><span class="comment">//该方法用于转换别名,返回原始的bean的名字</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">canonicalName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">	String canonicalName = name;</span><br><span class="line">	String resolvedName;</span><br><span class="line">       <span class="comment">// while 循环，因为 bean 的别名可以有多个</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		resolvedName = <span class="keyword">this</span>.aliasMap.get(canonicalName);</span><br><span class="line">		<span class="keyword">if</span> (resolvedName != <span class="keyword">null</span>) &#123;</span><br><span class="line">			canonicalName = resolvedName;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (resolvedName != <span class="keyword">null</span>);</span><br><span class="line">	<span class="keyword">return</span> canonicalName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -568,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -590,7 +590,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -648,7 +648,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
