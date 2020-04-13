@@ -95,21 +95,21 @@ format: html
 limit: 10000
 
 
-live2d:
-  model:
-    scale: 2
-    hHeadPos: 0.5
-    vHeadPos: 0.618
-  display:
-    superSample: 3
-    width: 75
-    height: 150
-    position: right
-    hOffset: 0
-    vOffset: -20
-  mobile:
-    show: true
-    scale: 0.5
-  react:
-    opacityDefault: 0.7
-    opacityOnHover: 0.2
+# live2d:
+#   model:
+#     scale: 2
+#     hHeadPos: 0.5
+#     vHeadPos: 0.618
+#   display:
+#     superSample: 3
+#     width: 75
+#     height: 150
+#     position: right
+#     hOffset: 0
+#     vOffset: -20
+#   mobile:
+#     show: true
+#     scale: 0.5
+#   react:
+#     opacityDefault: 0.7
+#     opacityOnHover: 0.2
