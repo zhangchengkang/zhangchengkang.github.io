@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="zhangchengkang.top/"/>
-  <updated>2019-11-22T11:13:20.798Z</updated>
+  <updated>2020-05-16T15:00:25.874Z</updated>
   <id>zhangchengkang.top/</id>
   
   <author>
@@ -17,21 +17,191 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Spring源码分析(五) 创建AOP代理</title>
-    <link href="zhangchengkang.top/2019/11/17/spring-chuang-jian-aop-dai-li/"/>
-    <id>zhangchengkang.top/2019/11/17/spring-chuang-jian-aop-dai-li/</id>
-    <published>2019-11-17T07:16:51.000Z</published>
-    <updated>2019-11-22T11:13:20.798Z</updated>
+    <title>2020-3年面试总结</title>
+    <link href="zhangchengkang.top/2020/04/01/2020-mian-shi-zong-jie/"/>
+    <id>zhangchengkang.top/2020/04/01/2020-mian-shi-zong-jie/</id>
+    <published>2020-04-01T12:02:54.000Z</published>
+    <updated>2020-05-16T15:00:25.874Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;I know that my future is not just a dream&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
+&lt;h2 id=&quot;RabbitMQ&quot;&gt;&lt;a href=&quot;#RabbitMQ&quot; class=&quot;headerlink&quot; title=&quot;RabbitMQ&quot;&gt;&lt;/a&gt;RabbitMQ&lt;/h2&gt;&lt;h3 id=&quot;RabbitMQ架构&quot;&gt;&lt;a
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="面试" scheme="zhangchengkang.top/categories/%E9%9D%A2%E8%AF%95/"/>
     
+    
+      <category term="面试" scheme="zhangchengkang.top/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>责任链模式</title>
+    <link href="zhangchengkang.top/2019/12/04/ze-ren-lian-mo-shi/"/>
+    <id>zhangchengkang.top/2019/12/04/ze-ren-lian-mo-shi/</id>
+    <published>2019-12-04T04:25:24.000Z</published>
+    <updated>2020-05-16T15:02:45.097Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;顾名思义，责任链模式（Chain of Responsibility
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>策略模式</title>
+    <link href="zhangchengkang.top/2019/11/24/ce-lue-mo-shi/"/>
+    <id>zhangchengkang.top/2019/11/24/ce-lue-mo-shi/</id>
+    <published>2019-11-24T13:11:03.000Z</published>
+    <updated>2020-05-16T14:21:12.552Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h1 id=&quot;策略模式&quot;&gt;&lt;a href=&quot;#策略模式&quot; class=&quot;headerlink&quot; title=&quot;策略模式&quot;&gt;&lt;/a&gt;策略模式&lt;/h1&gt;&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>观察者模式</title>
+    <link href="zhangchengkang.top/2019/11/24/guan-cha-zhe-mo-shi/"/>
+    <id>zhangchengkang.top/2019/11/24/guan-cha-zhe-mo-shi/</id>
+    <published>2019-11-24T08:21:54.000Z</published>
+    <updated>2020-05-16T14:20:43.469Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;If you get tired, learn to rest, not to quit&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>适配器模式</title>
+    <link href="zhangchengkang.top/2019/11/23/gua-pei-qi-mo-shi/"/>
+    <id>zhangchengkang.top/2019/11/23/gua-pei-qi-mo-shi/</id>
+    <published>2019-11-23T09:32:34.000Z</published>
+    <updated>2020-05-16T14:21:35.311Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;适配器模式（Adapter
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>装饰器模式</title>
+    <link href="zhangchengkang.top/2019/11/23/zhuang-shi-qi-mo-shi/"/>
+    <id>zhangchengkang.top/2019/11/23/zhuang-shi-qi-mo-shi/</id>
+    <published>2019-11-23T07:45:23.000Z</published>
+    <updated>2020-05-16T14:21:24.902Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;装饰器模式（Decorator
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="zhangchengkang.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring源码分析(五) 创建AOP代理</title>
+    <link href="zhangchengkang.top/2019/11/17/spring-chuang-jian-aop-dai-li/"/>
+    <id>zhangchengkang.top/2019/11/17/spring-chuang-jian-aop-dai-li/</id>
+    <published>2019-11-17T07:16:51.000Z</published>
+    <updated>2020-05-16T14:34:54.501Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;入口&quot;&gt;&lt;a href=&quot;#入口&quot; class=&quot;headerlink&quot; title=&quot;入口&quot;&gt;&lt;/a&gt;入口&lt;/h2&gt;&lt;pre class=&quot; language-java&quot;&gt;&lt;code
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Spring" scheme="zhangchengkang.top/categories/Spring/"/>
+    
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
     
@@ -42,7 +212,7 @@
     <link href="zhangchengkang.top/2019/11/16/spring-aop-jia-zai/"/>
     <id>zhangchengkang.top/2019/11/16/spring-aop-jia-zai/</id>
     <published>2019-11-16T13:06:23.000Z</published>
-    <updated>2019-11-22T11:13:33.030Z</updated>
+    <updated>2020-05-16T14:35:56.569Z</updated>
     
     <summary type="html">
     
@@ -51,8 +221,10 @@
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Spring" scheme="zhangchengkang.top/categories/Spring/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
     
@@ -63,7 +235,7 @@
     <link href="zhangchengkang.top/2019/11/10/spring-createbean/"/>
     <id>zhangchengkang.top/2019/11/10/spring-createbean/</id>
     <published>2019-11-10T12:35:12.000Z</published>
-    <updated>2020-04-01T04:31:36.634Z</updated>
+    <updated>2020-05-16T14:36:36.736Z</updated>
     
     <summary type="html">
     
@@ -72,8 +244,10 @@
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Spring" scheme="zhangchengkang.top/categories/Spring/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
     
@@ -84,17 +258,26 @@
     <link href="zhangchengkang.top/2019/11/09/spring-getbean/"/>
     <id>zhangchengkang.top/2019/11/09/spring-getbean/</id>
     <published>2019-11-09T11:02:01.000Z</published>
-    <updated>2020-04-01T04:31:52.501Z</updated>
+    <updated>2020-05-16T14:35:33.901Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;Youth means limitless possibilities&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;FactoryBean-接口&quot;&gt;&lt;a href=&quot;#FactoryBean-接口&quot; class=&quot;headerlink&quot; title=&quot;FactoryBean 接口&quot;&gt;&lt;/a&gt;FactoryBean
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Spring" scheme="zhangchengkang.top/categories/Spring/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
     
@@ -105,17 +288,26 @@
     <link href="zhangchengkang.top/2019/11/03/spring-beanfactory-chu-shi-hua/"/>
     <id>zhangchengkang.top/2019/11/03/spring-beanfactory-chu-shi-hua/</id>
     <published>2019-11-03T10:22:31.000Z</published>
-    <updated>2020-04-01T04:31:09.323Z</updated>
+    <updated>2020-05-16T14:57:08.493Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;When it has is lost, brave to give up&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;两张图&quot;&gt;&lt;a href=&quot;#两张图&quot; class=&quot;headerlink&quot; title=&quot;两张图&quot;&gt;&lt;/a&gt;两张图&lt;/h2&gt;&lt;p&gt;&lt;img
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Spring" scheme="zhangchengkang.top/categories/Spring/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
     
@@ -126,17 +318,27 @@
     <link href="zhangchengkang.top/2019/11/02/mybatissql-jie-xi-guo-cheng/"/>
     <id>zhangchengkang.top/2019/11/02/mybatissql-jie-xi-guo-cheng/</id>
     <published>2019-11-02T11:38:56.000Z</published>
-    <updated>2020-04-01T04:44:31.767Z</updated>
+    <updated>2020-05-16T14:33:50.974Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;Don’t give up and don’t give in&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;从哪里开始&quot;&gt;&lt;a href=&quot;#从哪里开始&quot; class=&quot;headerlink&quot; title=&quot;从哪里开始&quot;&gt;&lt;/a&gt;从哪里开始&lt;/h2&gt;&lt;p&gt;SQL是从哪被要求解析的呢?&lt;/p&gt;
+&lt;pre class=&quot;
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Mybatis" scheme="zhangchengkang.top/categories/Mybatis/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
     
@@ -147,17 +349,26 @@
     <link href="zhangchengkang.top/2019/10/26/mybatis-cha-xun-yu-ju-zhi-xing-guo-cheng/"/>
     <id>zhangchengkang.top/2019/10/26/mybatis-cha-xun-yu-ju-zhi-xing-guo-cheng/</id>
     <published>2019-10-26T09:12:23.000Z</published>
-    <updated>2020-04-01T04:44:28.605Z</updated>
+    <updated>2020-05-16T14:33:38.613Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;go for it! just do it!&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;selectOne方法分析&quot;&gt;&lt;a href=&quot;#selectOne方法分析&quot; class=&quot;headerlink&quot; title=&quot;selectOne方法分析&quot;&gt;&lt;/a&gt;selectOne方法分析&lt;/h2&gt;&lt;pre
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Mybatis" scheme="zhangchengkang.top/categories/Mybatis/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
     
@@ -168,17 +379,26 @@
     <link href="zhangchengkang.top/2019/10/20/mybatissql-zhi-xing-ru-kou/"/>
     <id>zhangchengkang.top/2019/10/20/mybatissql-zhi-xing-ru-kou/</id>
     <published>2019-10-20T07:54:12.000Z</published>
-    <updated>2020-04-01T04:44:30.080Z</updated>
+    <updated>2020-05-16T14:56:26.094Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;one today is worth two tomorrows&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;MyBatis工作流程简述&quot;&gt;&lt;a href=&quot;#MyBatis工作流程简述&quot; class=&quot;headerlink&quot; title=&quot;MyBatis工作流程简述&quot;&gt;&lt;/a&gt;MyBatis工作流程简述&lt;/h2&gt;&lt;h3
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Mybatis" scheme="zhangchengkang.top/categories/Mybatis/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
     
@@ -189,17 +409,26 @@
     <link href="zhangchengkang.top/2019/10/19/mybatis-pei-zhi-wen-jian-jie-xi/"/>
     <id>zhangchengkang.top/2019/10/19/mybatis-pei-zhi-wen-jian-jie-xi/</id>
     <published>2019-10-19T08:12:35.000Z</published>
-    <updated>2020-04-01T04:44:33.569Z</updated>
+    <updated>2020-05-16T14:32:02.741Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;There is only one me in this world&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Mybatis" scheme="zhangchengkang.top/categories/Mybatis/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
     
@@ -210,17 +439,26 @@
     <link href="zhangchengkang.top/2019/10/13/cas/"/>
     <id>zhangchengkang.top/2019/10/13/cas/</id>
     <published>2019-10-13T09:02:54.000Z</published>
-    <updated>2019-11-06T12:07:51.217Z</updated>
+    <updated>2020-05-16T14:52:04.456Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;Only god is in a position to look down on anyone&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
+&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Java 并发" scheme="zhangchengkang.top/categories/Java-%E5%B9%B6%E5%8F%91/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Java 并发" scheme="zhangchengkang.top/tags/Java-%E5%B9%B6%E5%8F%91/"/>
     
@@ -231,59 +469,87 @@
     <link href="zhangchengkang.top/2019/10/07/threadpoolexecutor/"/>
     <id>zhangchengkang.top/2019/10/07/threadpoolexecutor/</id>
     <published>2019-10-07T06:52:36.000Z</published>
-    <updated>2019-11-06T12:10:40.054Z</updated>
+    <updated>2020-05-16T14:49:55.048Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;There is a time to speak and a time to be silent&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
+&lt;h3 id=&quot;类图&quot;&gt;&lt;a href=&quot;#类图&quot; class=&quot;headerlink&quot; title=&quot;类图&quot;&gt;&lt;/a&gt;类图&lt;/h3&gt;&lt;p&gt;&lt;img
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Java 并发" scheme="zhangchengkang.top/categories/Java-%E5%B9%B6%E5%8F%91/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Java 并发" scheme="zhangchengkang.top/tags/Java-%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   
   <entry>
-    <title>LinkedList</title>
+    <title>LinkedList源码分析</title>
     <link href="zhangchengkang.top/2019/10/06/linkedlist/"/>
     <id>zhangchengkang.top/2019/10/06/linkedlist/</id>
     <published>2019-10-06T09:22:11.000Z</published>
-    <updated>2019-11-06T11:42:22.327Z</updated>
+    <updated>2020-05-16T14:47:56.270Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;Blessed is he who expects nothing, for he shall never be disappointed&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
+&lt;p&gt;LinkedList 的继承体系较为复杂，继承自 AbstractSequentialList，同时又实现了 List 和 Deque 接口&lt;/p&gt;
+&lt;p&gt;AbstractSequentialList
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Collection" scheme="zhangchengkang.top/categories/Collection/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Collection" scheme="zhangchengkang.top/tags/Collection/"/>
     
   </entry>
   
   <entry>
-    <title>ArrayList</title>
+    <title>ArrayList源码分析</title>
     <link href="zhangchengkang.top/2019/10/03/arraylist/"/>
     <id>zhangchengkang.top/2019/10/03/arraylist/</id>
     <published>2019-10-03T11:31:16.000Z</published>
-    <updated>2019-11-06T11:41:54.005Z</updated>
+    <updated>2020-05-16T14:47:02.182Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;Whatever your past has been, you have a spotless future&lt;/em&gt;&lt;/p&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;源码分析&quot;&gt;&lt;a href=&quot;#源码分析&quot; class=&quot;headerlink&quot; title=&quot;源码分析&quot;&gt;&lt;/a&gt;源码分析&lt;/h2&gt;&lt;h3 id=&quot;成员变量&quot;&gt;&lt;a href=&quot;#成员变量&quot;
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="Collection" scheme="zhangchengkang.top/categories/Collection/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Collection" scheme="zhangchengkang.top/tags/Collection/"/>
     
@@ -294,145 +560,28 @@
     <link href="zhangchengkang.top/2019/10/01/sharding/"/>
     <id>zhangchengkang.top/2019/10/01/sharding/</id>
     <published>2019-10-01T08:03:16.000Z</published>
-    <updated>2019-11-06T11:41:26.837Z</updated>
+    <updated>2020-05-16T14:48:52.151Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;Would like to ask you，is there a song when you sing，think of me。&lt;/em&gt;&lt;/p&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;分片策略&quot;&gt;&lt;a href=&quot;#分片策略&quot; class=&quot;headerlink&quot; title=&quot;分片策略&quot;&gt;&lt;/a&gt;分片策略&lt;/h2&gt;&lt;h3 id=&quot;StandardShardingStrategy&quot;&gt;&lt;a
+        
+      
     
     </summary>
     
     
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+      <category term="ShardingSphere" scheme="zhangchengkang.top/categories/ShardingSphere/"/>
     
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="ShardingSphere" scheme="zhangchengkang.top/tags/ShardingSphere/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>责任链模式</title>
-    <link href="zhangchengkang.top/2019/04/01/ze-ren-lian-mo-shi/"/>
-    <id>zhangchengkang.top/2019/04/01/ze-ren-lian-mo-shi/</id>
-    <published>2019-04-01T04:25:24.000Z</published>
-    <updated>2020-04-16T09:05:21.565Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;em&gt;You are not brave, no one for you to be strong&lt;/em&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
-    
-    
-      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面试知识点</title>
-    <link href="zhangchengkang.top/2019/03/14/mian-shi-zhi-shi-dian/"/>
-    <id>zhangchengkang.top/2019/03/14/mian-shi-zhi-shi-dian/</id>
-    <published>2019-03-14T13:04:13.000Z</published>
-    <updated>2019-03-14T13:06:50.393Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;em&gt;Add this line to Using the more label,but it’s too short to look bad,addition point length&lt;/em&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
-    
-    
-      <category term="Java SE" scheme="zhangchengkang.top/tags/Java-SE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>策略模式</title>
-    <link href="zhangchengkang.top/2018/11/24/ce-lue-mo-shi/"/>
-    <id>zhangchengkang.top/2018/11/24/ce-lue-mo-shi/</id>
-    <published>2018-11-24T13:11:03.000Z</published>
-    <updated>2020-04-16T09:06:29.459Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;em&gt;You are not brave, no one for you to be strong&lt;/em&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
-    
-    
-      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>观察者模式</title>
-    <link href="zhangchengkang.top/2018/11/24/guan-cha-zhe-mo-shi/"/>
-    <id>zhangchengkang.top/2018/11/24/guan-cha-zhe-mo-shi/</id>
-    <published>2018-11-24T08:21:54.000Z</published>
-    <updated>2020-04-16T09:06:18.036Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;em&gt;If you get tired, learn to rest, not to quit&lt;/em&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
-    
-    
-      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>适配器模式</title>
-    <link href="zhangchengkang.top/2018/11/23/gua-pei-qi-mo-shi/"/>
-    <id>zhangchengkang.top/2018/11/23/gua-pei-qi-mo-shi/</id>
-    <published>2018-11-23T09:32:34.000Z</published>
-    <updated>2020-04-16T09:06:11.563Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;em&gt;Quitters never win and winners never quit&lt;/em&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
-    
-    
-      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>装饰器模式</title>
-    <link href="zhangchengkang.top/2018/11/23/zhuang-shi-qi-mo-shi/"/>
-    <id>zhangchengkang.top/2018/11/23/zhuang-shi-qi-mo-shi/</id>
-    <published>2018-11-23T07:45:23.000Z</published>
-    <updated>2020-04-16T09:06:01.978Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;em&gt;Say goodbye to the depravation of yesterday&lt;/em&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
-    
-    
-      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
     
   </entry>
   
