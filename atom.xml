@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>山有木兮</title>
+  
+  <subtitle>山有木兮</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="zhangchengkang.top/"/>
+  <updated>2019-11-22T11:13:20.798Z</updated>
+  <id>zhangchengkang.top/</id>
+  
+  <author>
+    <name>kangshifu</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring源码分析(五) 创建AOP代理</title>
+    <link href="zhangchengkang.top/2019/11/17/spring-chuang-jian-aop-dai-li/"/>
+    <id>zhangchengkang.top/2019/11/17/spring-chuang-jian-aop-dai-li/</id>
+    <published>2019-11-17T07:16:51.000Z</published>
+    <updated>2019-11-22T11:13:20.798Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;I know that my future is not just a dream&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring源码分析(四) AOP加载过程</title>
+    <link href="zhangchengkang.top/2019/11/16/spring-aop-jia-zai/"/>
+    <id>zhangchengkang.top/2019/11/16/spring-aop-jia-zai/</id>
+    <published>2019-11-16T13:06:23.000Z</published>
+    <updated>2019-11-22T11:13:33.030Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Real dream is the other shore of reality&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring源码分析(三) CreateBean()</title>
+    <link href="zhangchengkang.top/2019/11/10/spring-createbean/"/>
+    <id>zhangchengkang.top/2019/11/10/spring-createbean/</id>
+    <published>2019-11-10T12:35:12.000Z</published>
+    <updated>2020-04-01T04:31:36.634Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;better late than never&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring源码分析(二) GetBean()</title>
+    <link href="zhangchengkang.top/2019/11/09/spring-getbean/"/>
+    <id>zhangchengkang.top/2019/11/09/spring-getbean/</id>
+    <published>2019-11-09T11:02:01.000Z</published>
+    <updated>2020-04-01T04:31:52.501Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Youth means limitless possibilities&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring源码分析(一) Beanfactory初始化</title>
+    <link href="zhangchengkang.top/2019/11/03/spring-beanfactory-chu-shi-hua/"/>
+    <id>zhangchengkang.top/2019/11/03/spring-beanfactory-chu-shi-hua/</id>
+    <published>2019-11-03T10:22:31.000Z</published>
+    <updated>2020-04-01T04:31:09.323Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;When it has is lost, brave to give up&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Spring" scheme="zhangchengkang.top/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis源码分析(四) SQL解析过程</title>
+    <link href="zhangchengkang.top/2019/11/02/mybatissql-jie-xi-guo-cheng/"/>
+    <id>zhangchengkang.top/2019/11/02/mybatissql-jie-xi-guo-cheng/</id>
+    <published>2019-11-02T11:38:56.000Z</published>
+    <updated>2020-04-01T04:44:31.767Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Don’t give up and don’t give in&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis源码分析(三) SQL执行过程</title>
+    <link href="zhangchengkang.top/2019/10/26/mybatis-cha-xun-yu-ju-zhi-xing-guo-cheng/"/>
+    <id>zhangchengkang.top/2019/10/26/mybatis-cha-xun-yu-ju-zhi-xing-guo-cheng/</id>
+    <published>2019-10-26T09:12:23.000Z</published>
+    <updated>2020-04-01T04:44:28.605Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;go for it! just do it!&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis源码分析(二) SQL执行入口</title>
+    <link href="zhangchengkang.top/2019/10/20/mybatissql-zhi-xing-ru-kou/"/>
+    <id>zhangchengkang.top/2019/10/20/mybatissql-zhi-xing-ru-kou/</id>
+    <published>2019-10-20T07:54:12.000Z</published>
+    <updated>2020-04-01T04:44:30.080Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;one today is worth two tomorrows&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis源码分析(一) 配置文件解析过程</title>
+    <link href="zhangchengkang.top/2019/10/19/mybatis-pei-zhi-wen-jian-jie-xi/"/>
+    <id>zhangchengkang.top/2019/10/19/mybatis-pei-zhi-wen-jian-jie-xi/</id>
+    <published>2019-10-19T08:12:35.000Z</published>
+    <updated>2020-04-01T04:44:33.569Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;There is only one me in this world&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CAS</title>
+    <link href="zhangchengkang.top/2019/10/13/cas/"/>
+    <id>zhangchengkang.top/2019/10/13/cas/</id>
+    <published>2019-10-13T09:02:54.000Z</published>
+    <updated>2019-11-06T12:07:51.217Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Only god is in a position to look down on anyone&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Java 并发" scheme="zhangchengkang.top/tags/Java-%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ThreadPoolExecutor</title>
+    <link href="zhangchengkang.top/2019/10/07/threadpoolexecutor/"/>
+    <id>zhangchengkang.top/2019/10/07/threadpoolexecutor/</id>
+    <published>2019-10-07T06:52:36.000Z</published>
+    <updated>2019-11-06T12:10:40.054Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;There is a time to speak and a time to be silent&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Java 并发" scheme="zhangchengkang.top/tags/Java-%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LinkedList</title>
+    <link href="zhangchengkang.top/2019/10/06/linkedlist/"/>
+    <id>zhangchengkang.top/2019/10/06/linkedlist/</id>
+    <published>2019-10-06T09:22:11.000Z</published>
+    <updated>2019-11-06T11:42:22.327Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Blessed is he who expects nothing, for he shall never be disappointed&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Collection" scheme="zhangchengkang.top/tags/Collection/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ArrayList</title>
+    <link href="zhangchengkang.top/2019/10/03/arraylist/"/>
+    <id>zhangchengkang.top/2019/10/03/arraylist/</id>
+    <published>2019-10-03T11:31:16.000Z</published>
+    <updated>2019-11-06T11:41:54.005Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Whatever your past has been, you have a spotless future&lt;/em&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Collection" scheme="zhangchengkang.top/tags/Collection/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sahrding-JDBC分片策略及算法</title>
+    <link href="zhangchengkang.top/2019/10/01/sharding/"/>
+    <id>zhangchengkang.top/2019/10/01/sharding/</id>
+    <published>2019-10-01T08:03:16.000Z</published>
+    <updated>2019-11-06T11:41:26.837Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Would like to ask you，is there a song when you sing，think of me。&lt;/em&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="ShardingSphere" scheme="zhangchengkang.top/tags/ShardingSphere/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>责任链模式</title>
+    <link href="zhangchengkang.top/2019/04/01/ze-ren-lian-mo-shi/"/>
+    <id>zhangchengkang.top/2019/04/01/ze-ren-lian-mo-shi/</id>
+    <published>2019-04-01T04:25:24.000Z</published>
+    <updated>2020-04-16T09:05:21.565Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;You are not brave, no one for you to be strong&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面试知识点</title>
+    <link href="zhangchengkang.top/2019/03/14/mian-shi-zhi-shi-dian/"/>
+    <id>zhangchengkang.top/2019/03/14/mian-shi-zhi-shi-dian/</id>
+    <published>2019-03-14T13:04:13.000Z</published>
+    <updated>2019-03-14T13:06:50.393Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Add this line to Using the more label,but it’s too short to look bad,addition point length&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Java SE" scheme="zhangchengkang.top/tags/Java-SE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>策略模式</title>
+    <link href="zhangchengkang.top/2018/11/24/ce-lue-mo-shi/"/>
+    <id>zhangchengkang.top/2018/11/24/ce-lue-mo-shi/</id>
+    <published>2018-11-24T13:11:03.000Z</published>
+    <updated>2020-04-16T09:06:29.459Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;You are not brave, no one for you to be strong&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>观察者模式</title>
+    <link href="zhangchengkang.top/2018/11/24/guan-cha-zhe-mo-shi/"/>
+    <id>zhangchengkang.top/2018/11/24/guan-cha-zhe-mo-shi/</id>
+    <published>2018-11-24T08:21:54.000Z</published>
+    <updated>2020-04-16T09:06:18.036Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;If you get tired, learn to rest, not to quit&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>适配器模式</title>
+    <link href="zhangchengkang.top/2018/11/23/gua-pei-qi-mo-shi/"/>
+    <id>zhangchengkang.top/2018/11/23/gua-pei-qi-mo-shi/</id>
+    <published>2018-11-23T09:32:34.000Z</published>
+    <updated>2020-04-16T09:06:11.563Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Quitters never win and winners never quit&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>装饰器模式</title>
+    <link href="zhangchengkang.top/2018/11/23/zhuang-shi-qi-mo-shi/"/>
+    <id>zhangchengkang.top/2018/11/23/zhuang-shi-qi-mo-shi/</id>
+    <published>2018-11-23T07:45:23.000Z</published>
+    <updated>2020-04-16T09:06:01.978Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;Say goodbye to the depravation of yesterday&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="zhangchengkang.top/categories/JAVA/"/>
+    
+    
+      <category term="Design Pattern" scheme="zhangchengkang.top/tags/Design-Pattern/"/>
+    
+  </entry>
+  
+</feed>
