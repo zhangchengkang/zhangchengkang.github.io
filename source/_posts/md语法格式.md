@@ -1,11 +1,22 @@
 ---
-toc: true
 title: MarkDown语法格式
 date: 2018-05-16 18:53:40
-tags: [MarkDown]
-categories: JavaScript
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: MarkDown
+tags:
+  - MarkDown
+
+
 ---
-*Add this line to Using the more label,but it's too short to look bad,addition point length*
+
 <!--more-->
 
 ## 1. 标题

@@ -1,12 +1,23 @@
 ---
-toc: true
-title: ArrayList
+title: ArrayList源码分析
 date: 2019-10-03 19:31:16
-tags: [Collection]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Collection
+tags:
+  - Java 
+  - Collection
+
 ---
 
-*Whatever your past has been, you have a spotless future*
+
 
 
 

@@ -1,12 +1,25 @@
 ---
-toc: true
-title:  volatile
+title: volatile
 date: 2018-07-15 20:17:13
-tags: [Java 并发]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: true
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Java 并发
+tags:
+  - Java 
+  - Java 并发
+
+
 ---
-*Add this line to Using the more label,but it's too short to look bad,addition point length*
+
 <!--more--> 
+
 ## 摘要
 　  在 Java 并发编程中，要想使并发程序能够正确地执行，必须要保证三条原则，即：原子性、可见性和有序性。只要有一条原则没有被保证，就有可能会导致程序运行不正确。volatile关键字 被用来保证可见性，即保证共享变量的内存可见性以解决缓存一致性问题。一旦一个共享变量被 volatile关键字 修饰，那么就具备了两层语义：内存可见性和禁止进行指令重排序。在多线程环境下，volatile关键字 主要用于及时感知共享变量的修改，并使得其他线程可以立即得到变量的最新值，例如，用于 修饰状态标记量 和 Double-Check (双重检查)中。
 

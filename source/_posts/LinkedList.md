@@ -1,13 +1,24 @@
 ---
-toc: true
-title:  LinkedList
+title: LinkedList源码分析
 date: 2019-10-06 17:22:11
-tags: [Collection]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Collection
+tags:
+  - Java 
+  - Collection
+
 
 ---
 
-*Blessed is he who expects nothing, for he shall never be disappointed*
+
 <!--more--> 
 
 

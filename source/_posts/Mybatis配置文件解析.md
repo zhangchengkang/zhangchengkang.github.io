@@ -1,14 +1,24 @@
 ---
-toc: true
 title: Mybatis源码分析(一) 配置文件解析过程
 date: 2019-10-19 16:12:35
-tags: [Mybatis]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Mybatis
+tags:
+  - Java 
+  - Mybatis
 
 
 ---
 
-*There is only one me in this world*
+
 <!--more-->  
 
 

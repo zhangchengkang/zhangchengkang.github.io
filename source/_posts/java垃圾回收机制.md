@@ -1,12 +1,25 @@
 ---
-toc: true
-title:  java垃圾回收机制
+title: JVM垃圾回收机制
 date: 2018-05-28 20:57:50
-tags: [JVM]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: JVM
+tags:
+  - Java 
+  - JVM
+
+
 ---
-*Add this line to Using the more label,but it's too short to look bad,addition point length*
+
 <!--more-->  
+
 ## 概述
 * Java技术体系中所提倡的**自动内存管理**最终可以归结为自动化地解决了两个问题：**给对象分配内存**以及**回收分配给对象的内存**，而且这两个问题针对的内存区域就是Java内存模型中的堆区和方法区,但主要是堆(栈中的栈帧随着方法的进入和退出有条不紊地执行着出栈和入栈操作,每一个栈帧中分配多少内存基本上是在类结构确定下来是就已知的,而随着方法结束或线程结束,内存就自然跟着回收了,因此栈区的内存分配和回收都具备确定性。)。
 * 垃圾回收(Carbage Collection)机制可以有效的防止内存泄露(内存泄露是指该内存空间使用完毕之后未回收，在不涉及复杂数据结构的一般情况下，Java 的内存泄露表现为一个内存对象的生命周期超出了程序需要它的时间长度),保证内存的有效使用,那么GC到底需要做什么呢

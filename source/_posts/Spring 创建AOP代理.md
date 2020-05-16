@@ -1,10 +1,19 @@
 ---
-toc: true
 title: Spring源码分析(五) 创建AOP代理
 date: 2019-11-17 15:16:51
-tags: [Spring]
-categories: JAVA
-
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Spring
+tags:
+  - Java 
+  - Spring
 
 
 
@@ -12,7 +21,7 @@ categories: JAVA
 
 ---
 
-*I know that my future is not just a dream*
+
 <!--more-->  
 
 

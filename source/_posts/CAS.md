@@ -1,13 +1,25 @@
 ---
-toc: true
-title:  CAS
+title: CAS
 date: 2019-10-13 17:02:54
-tags: [Java 并发]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Java 并发
+tags:
+  - Java 
+  - Java 并发
+
+
 
 ---
 
-*Only god is in a position to look down on anyone*
+
 <!--more--> 
 
 

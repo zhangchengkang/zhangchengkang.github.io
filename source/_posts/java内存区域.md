@@ -1,11 +1,23 @@
 ---
-toc: true
-title: java内存区域
+title: JVM内存区域
 date: 2018-05-23 21:36:06
-tags: [JVM]
-categories: JAVA
+author: kangshifu
+img: 
+top: true
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: JVM
+tags:
+  - Java 
+  - JVM
+
+
 ---
-*Add this line to Using the more label,but it's too short to look bad,addition point length*
+
 <!--more-->  
 
 ![运行时数据区](/img/jvm/jvm001.png)

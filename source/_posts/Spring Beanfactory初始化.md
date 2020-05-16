@@ -1,15 +1,25 @@
 ---
-toc: true
+
+
 title: Spring源码分析(一) Beanfactory初始化
 date: 2019-11-03 18:22:31
-tags: [Spring]
-categories: JAVA
-
-
+author: kangshifu
+img: 
+top: false
+cover: true
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Spring
+tags:
+  - Java 
+  - Spring
 
 ---
 
-*When it has is lost, brave to give up*
+
 <!--more-->  
 
 

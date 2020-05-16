@@ -1,11 +1,23 @@
 ---
-toc: true
 title: ThreadLocal
 date: 2018-07-20 20:07:33
-tags: [Java 并发]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Java 并发
+tags:
+  - Java 
+  - Java 并发
+
+
 ---
-*Add this line to Using the more label,but it's too short to look bad,addition point length*
+
 <!--more--> 
 
 ## ThreadLocal 概述

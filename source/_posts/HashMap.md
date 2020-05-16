@@ -1,13 +1,24 @@
 ---
-toc: true
-title:  HashMap
+title: HashMap源码分析
 date: 2018-07-03 20:57:50
-tags: [Collection]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Collection
+tags:
+  - Java 
+  - Collection
+
 ---
-*Add this line to Using the more label,but it's too short to look bad,addition point length*
+
 <!--more--> 
-**原理**： hashmap差不多是由链表组成的数组，当添加一个元素（key-value)时，就首先计算元素key的hash值，以此确定插入数组中的位置。当hash值相同时就放在已存在元素的后面形成链表，当链表长度太大时，链表就转换为红黑树。当链表数组的容量超过初始容量的0.75时，再散列将链表数组扩大2倍，把原链表数组的搬移到新的数组中
+**概述**： hashmap差不多是由链表组成的数组，当添加一个元素（key-value)时，就首先计算元素key的hash值，以此确定插入数组中的位置。当hash值相同时就放在已存在元素的后面形成链表，当链表长度太大时，链表就转换为红黑树。当链表数组的容量超过初始容量的0.75时，再散列将链表数组扩大2倍，把原链表数组的搬移到新的数组中
 ![hashMap存储结构](/img/se/001.jpg) 
 
 ## JDK1.8中的涉及到的数据结构

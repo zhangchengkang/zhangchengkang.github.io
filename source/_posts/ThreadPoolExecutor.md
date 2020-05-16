@@ -1,13 +1,25 @@
 ---
-toc: true
-title:  ThreadPoolExecutor
+title: ThreadPoolExecutor
 date: 2019-10-07 14:52:36
-tags: [Java 并发]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Java 并发
+tags:
+  - Java 
+  - Java 并发
+
+
 
 ---
 
-*There is a time to speak and a time to be silent*
+
 <!--more--> 
 
 

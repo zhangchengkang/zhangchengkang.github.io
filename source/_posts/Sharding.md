@@ -1,12 +1,24 @@
 ---
-toc: ture
 title: sahrding-JDBC分片策略及算法
 date: 2019-10-01 16:03:16
-tags: [ShardingSphere]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: ShardingSphere
+tags:
+  - Java 
+  - ShardingSphere
+
+
 ---
 
-*Would like to ask you，is there a song when you sing，think of me。*
+
 
 <!--more-->  
 

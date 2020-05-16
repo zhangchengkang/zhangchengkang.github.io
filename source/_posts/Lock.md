@@ -1,12 +1,24 @@
 ---
-toc: true
 title: Lock
 date: 2018-07-25 19:37:33
-tags: [Java 并发]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: false
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Java 并发
+tags:
+  - Java 
+  - Java 并发
+
 ---
-*Add this line to Using the more label,but it's too short to look bad,addition point length*
+
 <!--more--> 
+
 ## Lock
 ````java
     public interface Lock {

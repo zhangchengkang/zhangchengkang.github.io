@@ -10,16 +10,16 @@ server:
 
 # Site
 title: 山有木兮
-subtitle: 只影向谁去
-description: 人生自是有情痴，此恨不关风与月
+subtitle: 山有木兮
+description: 
 keywords: 
 author: kangshifu
-language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: zhangchengkang.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -45,10 +45,15 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace:
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'tomorrow'
+  line_number: false    # default false
+  custom_css:
   
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -56,7 +61,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 18
   order_by: -date
   
 # Category & Tag
@@ -79,7 +84,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: hexo-theme-matery
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -91,9 +96,26 @@ deploy:
 search:
 path: search.xml
 field: post
-format: html
-limit: 10000
 
+permalink_pinyin:
+  enable: true
+  separator: '-' # default: '-'
+
+wordCount:
+  enable: true 
+  postWordCount: true
+  min2read: true
+  totalCount: true
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date  
 
 # live2d:
 #   model:
@@ -108,7 +130,7 @@ limit: 10000
 #     hOffset: 0
 #     vOffset: -20
 #   mobile:
-#     show: true
+#     show: false
 #     scale: 0.5
 #   react:
 #     opacityDefault: 0.7

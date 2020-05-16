@@ -1,13 +1,23 @@
 ---
-toc: true
 title: Mybatis源码分析(二) SQL执行入口
 date: 2019-10-20 15:54:12
-tags: [Mybatis]
-categories: JAVA
+author: kangshifu
+img: 
+top: false
+cover: true
+coverImg: 
+password: 
+toc: true
+mathjax: false
+summary: 
+categories: Mybatis
+tags:
+  - Java 
+  - Mybatis
 
 ---
 
-*one today is worth two tomorrows*
+
 <!--more-->  
 
 
