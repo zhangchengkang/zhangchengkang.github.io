@@ -1,21 +1,20 @@
 ---
 title: JVM垃圾回收机制
-date: 2018-05-28 20:57:50
 author: kangshifu
-img: 
 top: false
 cover: false
-coverImg: 
-password: 
 toc: true
 mathjax: false
-summary: 
 categories: JVM
 tags:
-  - Java 
+  - Java
   - JVM
-
-
+abbrlink: 1257264072
+date: 2018-05-28 20:57:50
+img:
+coverImg:
+password:
+summary:
 ---
 
 <!--more-->  

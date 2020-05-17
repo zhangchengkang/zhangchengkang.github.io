@@ -1,21 +1,20 @@
 ---
 title: Synchronized
-date: 2018-07-12 20:17:13
 author: kangshifu
-img: 
 top: false
 cover: false
-coverImg: 
-password: 
 toc: true
 mathjax: false
-summary: 
 categories: Java 并发
 tags:
-  - Java 
+  - Java
   - Java 并发
-
-
+abbrlink: 4124822084
+date: 2018-07-12 20:17:13
+img:
+coverImg:
+password:
+summary:
 ---
 
 <!--more--> 

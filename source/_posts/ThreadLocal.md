@@ -1,21 +1,20 @@
 ---
 title: ThreadLocal
-date: 2018-07-20 20:07:33
 author: kangshifu
-img: 
 top: false
 cover: false
-coverImg: 
-password: 
 toc: true
 mathjax: false
-summary: 
 categories: Java 并发
 tags:
-  - Java 
+  - Java
   - Java 并发
-
-
+abbrlink: 354370734
+date: 2018-07-20 20:07:33
+img:
+coverImg:
+password:
+summary:
 ---
 
 <!--more--> 

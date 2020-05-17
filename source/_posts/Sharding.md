@@ -1,21 +1,20 @@
 ---
 title: sahrding-JDBC分片策略及算法
-date: 2019-10-01 16:03:16
 author: kangshifu
-img: 
 top: false
 cover: false
-coverImg: 
-password: 
 toc: true
 mathjax: false
-summary: 
 categories: ShardingSphere
 tags:
-  - Java 
+  - Java
   - ShardingSphere
-
-
+abbrlink: 2632020453
+date: 2019-10-01 16:03:16
+img:
+coverImg:
+password:
+summary:
 ---
 
 

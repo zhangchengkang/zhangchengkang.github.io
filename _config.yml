@@ -9,8 +9,8 @@ server:
   header: true
 
 # Site
-title: 山有木兮
-subtitle: 山有木兮
+title: 远行客
+subtitle: 远行客
 description: 
 keywords: 
 author: kangshifu
@@ -21,8 +21,13 @@ timezone: Asia/Shanghai
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: zhangchengkang.top
 root: /
-permalink: :year/:month/:day/:title/
+permalink:  posts/:abbrlink.html
 permalink_defaults:
+
+abbrlink:
+  alg: crc32  #算法 crc16(default) and crc32
+  rep: dec    #进制 dec(default) and hex 十进制和十六进制，默认为10进制。
+
 
 # Directory
 source_dir: source
@@ -97,9 +102,9 @@ search:
 path: search.xml
 field: post
 
-permalink_pinyin:
-  enable: true
-  separator: '-' # default: '-'
+# permalink_pinyin:
+#   enable: true
+#   separator: '-' # default: '-'
 
 wordCount:
   enable: true 

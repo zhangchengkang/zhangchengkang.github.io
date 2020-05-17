@@ -1,21 +1,20 @@
 ---
 title: LinkedList源码分析
-date: 2019-10-06 17:22:11
 author: kangshifu
-img: 
 top: false
 cover: false
-coverImg: 
-password: 
 toc: true
 mathjax: false
-summary: 
 categories: Collection
 tags:
-  - Java 
+  - Java
   - Collection
-
-
+abbrlink: 1197454209
+date: 2019-10-06 17:22:11
+img:
+coverImg:
+password:
+summary:
 ---
 
 

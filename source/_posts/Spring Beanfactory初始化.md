@@ -1,22 +1,20 @@
 ---
-
-
 title: Spring源码分析(一) Beanfactory初始化
-date: 2019-11-03 18:22:31
 author: kangshifu
-img: 
 top: false
 cover: true
-coverImg: 
-password: 
 toc: true
 mathjax: false
-summary: 
 categories: Spring
 tags:
-  - Java 
+  - Java
   - Spring
-
+abbrlink: 541622045
+date: 2019-11-03 18:22:31
+img:
+coverImg:
+password:
+summary:
 ---
 
 

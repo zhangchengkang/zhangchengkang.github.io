@@ -1,20 +1,19 @@
 ---
 title: MarkDown语法格式
-date: 2018-05-16 18:53:40
 author: kangshifu
-img: 
 top: false
 cover: false
-coverImg: 
-password: 
 toc: true
 mathjax: false
-summary: 
 categories: MarkDown
 tags:
   - MarkDown
-
-
+abbrlink: 206592455
+date: 2018-05-16 18:53:40
+img:
+coverImg:
+password:
+summary:
 ---
 
 <!--more-->

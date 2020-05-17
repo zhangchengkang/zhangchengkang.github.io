@@ -1,21 +1,20 @@
 ---
 title: JVM内存区域
-date: 2018-05-23 21:36:06
 author: kangshifu
-img: 
 top: true
 cover: false
-coverImg: 
-password: 
 toc: true
 mathjax: false
-summary: 
 categories: JVM
 tags:
-  - Java 
+  - Java
   - JVM
-
-
+abbrlink: 4108271782
+date: 2018-05-23 21:36:06
+img:
+coverImg:
+password:
+summary:
 ---
 
 <!--more-->  
