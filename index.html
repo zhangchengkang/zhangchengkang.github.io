@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="山有木兮">
+    <meta name="keywords" content="远行客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,8 +16,8 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>山有木兮</title>
-    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    <title>远行客</title>
+    <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -29,23 +29,32 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<link rel="alternate" href="/atom.xml" title="山有木兮" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="远行客" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
 
-    <script src="/js/snow.js"></script>
+    <!-- <script src="/js/snow.js"></script> -->
 
+    <script type="text/javascript">
+        //只在桌面版网页启用特效
+        var windowWidth = $(window).width();
+        if (windowWidth > 768) {
+            document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+        }
+    </script>
+        
+     
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.jpg" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">山有木兮</span>
+                    <span class="logo-span">远行客</span>
                 </a>
             </div>
             
@@ -109,9 +118,9 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.jpg" class="logo-img circle responsive-img">
         
-        <div class="logo-name">山有木兮</div>
+        <div class="logo-name">远行客</div>
         <div class="logo-desc">
             
             Never really desperate, only the lost of the soul.
@@ -240,7 +249,7 @@
         <div class="brand">
             <div class="title center-align">
                 
-                山有木兮
+                远行客
                 
             </div>
 
@@ -505,32 +514,6 @@ ApplicationContext context = new ClassPathXmlApplicationContext("applicationCont
     
     
     <div class="col s12" >
-        <div class="post-card" style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/16.jpg')">
-            <div class="post-body">
-                <div class="post-categories">
-                    
-                        
-                            <a href="/categories/面试/" class="category">面试</a>
-                        
-                    
-                </div>
-                <a href="/posts/581244892.html">
-                    <h3 class="post-title">2019-2年面试总结</h3>
-                </a>
-                <p class="post-description">  
-Spring事务传播行为
-required: 如果存在事务则加入，不存在则新建事务(默认)
-supports: 如果存在事务则加入，不存在以非事务的方式执行
-man</p>
-                <a href="/posts/581244892.html" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
-                    <i class="icon far fa-eye fa-fw"></i>阅读更多
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="col s12 m6" data-aos="zoom-in-up">
         <div class="post-card" style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/8.jpg')">
             <div class="post-body">
                 <div class="post-categories">
@@ -546,8 +529,31 @@ man</p>
                 <p class="post-description">  
 
 1. 线程独占区1.1 程序计数器（Program Counter Register）
-程序计数器是一块较小的内存空间,它可以看做是</p>
-                <a href="/posts/4108271782.html" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)" target="_blank">
+程序计数器是一块较小的内存空间,它可以看做是当前线程所执行的字节码的行号指</p>
+                <a href="/posts/4108271782.html" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
+                    <i class="icon far fa-eye fa-fw"></i>阅读更多
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="col s12 m6" data-aos="zoom-in-up">
+        <div class="post-card" style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/13.jpg')">
+            <div class="post-body">
+                <div class="post-categories">
+                    
+                        
+                            <a href="/categories/随笔/" class="category">随笔</a>
+                        
+                    
+                </div>
+                <a href="/posts/512832655.html">
+                    <h3 class="post-title">葬花吟</h3>
+                </a>
+                <p class="post-description"> 
+花谢花飞花满天，红消香断有谁怜？游丝软系飘春榭，落絮轻沾扑绣帘。闺中女儿惜春暮，愁绪满怀无释处。手把花锄出绣帘，忍踏落花来复去。柳丝榆荚</p>
+                <a href="/posts/512832655.html" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)" target="_blank">
                     <i class="icon far fa-eye fa-fw"></i>阅读更多
                 </a>
             </div>
