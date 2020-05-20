@@ -106,6 +106,17 @@
     
   </li>
   
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
       <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
@@ -172,6 +183,17 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
 		</a>
           
         </li>
@@ -303,6 +325,15 @@
                 </a>
                 
                 
+                <a href="/categories/Maven/" title="Maven: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9E79F;">Maven
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
             </div>
         </div>
     </div>
@@ -328,7 +359,7 @@
 <script type="text/javascript">
     
 
-    $('#tag-wordcloud').jQCloud([{"text":"面试","weight":2,"link":"/tags/面试/"},{"text":"Java","weight":26,"link":"/tags/Java/"},{"text":"Java 并发","weight":7,"link":"/tags/Java-并发/"},{"text":"JVM","weight":4,"link":"/tags/JVM/"},{"text":"MarkDown","weight":1,"link":"/tags/MarkDown/"},{"text":"Mybatis","weight":4,"link":"/tags/Mybatis/"},{"text":"设计模式","weight":9,"link":"/tags/设计模式/"},{"text":"Java 基础","weight":2,"link":"/tags/Java-基础/"},{"text":"随笔","weight":1,"link":"/tags/随笔/"},{"text":"Collection","weight":3,"link":"/tags/Collection/"},{"text":"ShardingSphere","weight":1,"link":"/tags/ShardingSphere/"},{"text":"Spring","weight":5,"link":"/tags/Spring/"}], {
+    $('#tag-wordcloud').jQCloud([{"text":"面试","weight":2,"link":"/tags/面试/"},{"text":"Java","weight":26,"link":"/tags/Java/"},{"text":"Java 并发","weight":7,"link":"/tags/Java-并发/"},{"text":"JVM","weight":4,"link":"/tags/JVM/"},{"text":"MarkDown","weight":1,"link":"/tags/MarkDown/"},{"text":"Mybatis","weight":4,"link":"/tags/Mybatis/"},{"text":"设计模式","weight":9,"link":"/tags/设计模式/"},{"text":"Java 基础","weight":2,"link":"/tags/Java-基础/"},{"text":"随笔","weight":1,"link":"/tags/随笔/"},{"text":"Collection","weight":3,"link":"/tags/Collection/"},{"text":"ShardingSphere","weight":1,"link":"/tags/ShardingSphere/"},{"text":"Spring","weight":5,"link":"/tags/Spring/"},{"text":"Maven","weight":1,"link":"/tags/Maven/"}], {
         autoResize: true
     });
 </script>
@@ -454,6 +485,15 @@
                     </span>
                 </a>
                 
+                
+                <a href="/tags/Maven/" title="Maven: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Maven" style="background-color: #F9E79F;">Maven
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
             </div>
         </div>
     </div>
@@ -494,7 +534,7 @@
                     color: '#3C4858'
                 }
             },
-            indicator: [{"name":"面试","max":10},{"name":"Java 并发","max":10},{"name":"JVM","max":10},{"name":"MarkDown","max":10},{"name":"Mybatis","max":10},{"name":"设计模式","max":10},{"name":"Java 基础","max":10},{"name":"随笔","max":10},{"name":"Collection","max":10},{"name":"ShardingSphere","max":10},{"name":"Spring","max":10}],
+            indicator: [{"name":"面试","max":10},{"name":"Java 并发","max":10},{"name":"JVM","max":10},{"name":"MarkDown","max":10},{"name":"Mybatis","max":10},{"name":"设计模式","max":10},{"name":"Java 基础","max":10},{"name":"随笔","max":10},{"name":"Collection","max":10},{"name":"ShardingSphere","max":10},{"name":"Spring","max":10},{"name":"Maven","max":10}],
             nameGap: 5,
             center: ['50%','55%'],
             radius: '66%'
@@ -505,7 +545,7 @@
             itemStyle: {normal: {areaStyle: {type: 'default'}}},
             data : [
                 {
-                    value : [2,7,4,1,4,9,2,1,3,1,5],
+                    value : [2,7,4,1,4,9,2,1,3,1,5,1],
                     name : '文章分类数量'
                 }
             ]
@@ -577,7 +617,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,8,10,1,0,0,0,1,0],
+                data: [0,0,0,0,0,8,10,1,0,0,0,1,1],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -619,7 +659,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"面试","value":2},{"name":"Java 并发","value":7},{"name":"JVM","value":4},{"name":"MarkDown","value":1},{"name":"Mybatis","value":4},{"name":"设计模式","value":9},{"name":"Java 基础","value":2},{"name":"随笔","value":1},{"name":"Collection","value":3},{"name":"ShardingSphere","value":1},{"name":"Spring","value":5}],
+                data: [{"name":"面试","value":2},{"name":"Java 并发","value":7},{"name":"JVM","value":4},{"name":"MarkDown","value":1},{"name":"Mybatis","value":4},{"name":"设计模式","value":9},{"name":"Java 基础","value":2},{"name":"随笔","value":1},{"name":"Collection","value":3},{"name":"ShardingSphere","value":1},{"name":"Spring","value":5},{"name":"Maven","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -643,7 +683,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["Java","设计模式","Java 并发","Spring","Mybatis","JVM","Collection","Java 基础","面试","MarkDown"]
+                data: ["Java","设计模式","Java 并发","Spring","JVM","Mybatis","Collection","Java 基础","面试","随笔"]
             }
         ],
         yAxis: [
@@ -753,7 +793,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.8k</span>&nbsp;字
+                class="white-color">80.2k</span>&nbsp;字
             
             
             

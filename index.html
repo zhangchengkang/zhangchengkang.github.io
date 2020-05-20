@@ -106,6 +106,17 @@
     
   </li>
   
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
       <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
@@ -172,6 +183,17 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
 		</a>
           
         </li>
@@ -266,7 +288,7 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/banner/0.jpg)');
+    $('.bg-cover').css('background-image', 'url(https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/banner/3.jpg)');
 </script>
 
 
@@ -606,6 +628,68 @@ Message:：消息，消息是不具名的，它由消息头和消息体组成。
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/posts/2586075670.html">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/30.jpg" class="responsive-img" alt="Maven 打包">
+                            
+                            <span class="card-title">Maven 打包</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                  
+三种打包插件
+
+
+plugin
+function
+
+
+
+
+maven-jar-plugin
+maven 默认打包插件，用来创建 project jar
+
+
+maven-shade-plugin
+用来打可执行包，executable(f
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Maven/" class="post-category">
+                                    Maven
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Maven/">
+                            <span class="chip bg-color">Maven</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/posts/3617069065.html">
                         <div class="card-image">
                             
@@ -769,8 +853,9 @@ Message:：消息，消息是不具名的，它由消息头和消息体组成。
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                If you get tired, learn to rest, not to quit  
-介绍当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如，当一个对象被修改时，则会自动通知它的依赖对象。观察者模式
+                                  
+介绍当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如，当一个对象被修改时，则会自动通知它的依赖对象。观察者模式属于行为型模式。
+意图：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所
                             
                         </div>
                         <div class="publish-info">
@@ -1494,59 +1579,6 @@ Executor是一个顶层接口，在它里面只声明了一个方法execute(Runn
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/posts/1197454209.html">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/26.jpg" class="responsive-img" alt="LinkedList源码分析">
-                            
-                            <span class="card-title">LinkedList源码分析</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                 
-LinkedList 的继承体系较为复杂，继承自 AbstractSequentialList，同时又实现了 List 和 Deque 接口
-AbstractSequentialList 提供了一套基于顺序访问的接口。通过继承此类，子类
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-06
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Collection/" class="post-category">
-                                    Collection
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Java/">
-                            <span class="chip bg-color">Java</span>
-                        </a>
-                        
-                        <a href="/tags/Collection/">
-                            <span class="chip bg-color">Collection</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
@@ -1645,7 +1677,7 @@ AbstractSequentialList 提供了一套基于顺序访问的接口。通过继承
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.8k</span>&nbsp;字
+                class="white-color">80.2k</span>&nbsp;字
             
             
             

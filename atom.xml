@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="zhangchengkang.top/"/>
-  <updated>2020-05-17T03:47:33.535Z</updated>
+  <updated>2020-05-20T12:36:17.055Z</updated>
   <id>zhangchengkang.top/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Maven 打包</title>
+    <link href="zhangchengkang.top/posts/2586075670.html"/>
+    <id>zhangchengkang.top/posts/2586075670.html</id>
+    <published>2020-05-20T12:31:23.000Z</published>
+    <updated>2020-05-20T12:36:17.055Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h3 id=&quot;三种打包插件&quot;&gt;&lt;a href=&quot;#三种打包插件&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Maven" scheme="zhangchengkang.top/categories/Maven/"/>
+    
+    
+      <category term="Maven" scheme="zhangchengkang.top/tags/Maven/"/>
+    
+  </entry>
   
   <entry>
     <title>2020-3年面试总结</title>
@@ -105,11 +133,18 @@
     <link href="zhangchengkang.top/posts/2586075670.html"/>
     <id>zhangchengkang.top/posts/2586075670.html</id>
     <published>2019-11-24T08:21:54.000Z</published>
-    <updated>2020-05-17T03:47:33.514Z</updated>
+    <updated>2020-05-20T12:33:25.451Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;em&gt;If you get tired, learn to rest, not to quit&lt;/em&gt;&lt;br&gt;
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;当对象间存在一对多关系时，则使用观察者模式（Observer
+        
+      
     
     </summary>
     
@@ -552,36 +587,6 @@
       <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Collection" scheme="zhangchengkang.top/tags/Collection/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>sahrding-JDBC分片策略及算法</title>
-    <link href="zhangchengkang.top/posts/2632020453.html"/>
-    <id>zhangchengkang.top/posts/2632020453.html</id>
-    <published>2019-10-01T08:03:16.000Z</published>
-    <updated>2020-05-17T03:47:33.517Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-&lt;h2 id=&quot;分片策略&quot;&gt;&lt;a href=&quot;#分片策略&quot; class=&quot;headerlink&quot; title=&quot;分片策略&quot;&gt;&lt;/a&gt;分片策略&lt;/h2&gt;&lt;h3 id=&quot;StandardShardingStrategy&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="ShardingSphere" scheme="zhangchengkang.top/categories/ShardingSphere/"/>
-    
-    
-      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
-    
-      <category term="ShardingSphere" scheme="zhangchengkang.top/tags/ShardingSphere/"/>
     
   </entry>
   

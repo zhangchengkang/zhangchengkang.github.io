@@ -106,6 +106,17 @@
     
   </li>
   
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
       <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
@@ -176,6 +187,17 @@
           
         </li>
         
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
         
     </ul>
 </div>
@@ -213,7 +235,7 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/banner/0.jpg)');
+    $('.bg-cover').css('background-image', 'url(https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/banner/3.jpg)');
 </script>
 
 
@@ -230,6 +252,59 @@
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/posts/1197454209.html">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/26.jpg" class="responsive-img" alt="LinkedList源码分析">
+                            
+                            <span class="card-title">LinkedList源码分析</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                 
+LinkedList 的继承体系较为复杂，继承自 AbstractSequentialList，同时又实现了 List 和 Deque 接口
+AbstractSequentialList 提供了一套基于顺序访问的接口。通过继承此类，子类
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Collection/" class="post-category">
+                                    Collection
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/Collection/">
+                            <span class="chip bg-color">Collection</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
@@ -1137,61 +1212,6 @@ Java技术体系中所提倡的自动内存管理最终可以归结为自动化�
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/posts/4108271782.html">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/8.jpg" class="responsive-img" alt="JVM内存区域">
-                            
-                            <span class="card-title">JVM内存区域</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                  
-
-1. 线程独占区1.1 程序计数器（Program Counter Register）
-程序计数器是一块较小的内存空间,它可以看做是当前线程所执行的字节码的行号指示器
-字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-05-23
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/JVM/" class="post-category">
-                                    JVM
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Java/">
-                            <span class="chip bg-color">Java</span>
-                        </a>
-                        
-                        <a href="/tags/JVM/">
-                            <span class="chip bg-color">JVM</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
@@ -1291,7 +1311,7 @@ Java技术体系中所提倡的自动内存管理最终可以归结为自动化�
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.8k</span>&nbsp;字
+                class="white-color">80.2k</span>&nbsp;字
             
             
             
