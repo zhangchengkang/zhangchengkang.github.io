@@ -2,7 +2,7 @@
 title: volatile
 author: kangshifu
 top: false
-cover: true
+cover: false
 toc: true
 mathjax: false
 categories: Java 并发
