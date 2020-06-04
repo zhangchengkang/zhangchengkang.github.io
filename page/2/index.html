@@ -235,7 +235,7 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/banner/3.jpg)');
+    $('.bg-cover').css('background-image', 'url(https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/banner/4.jpg)');
 </script>
 
 
@@ -252,6 +252,115 @@
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/posts/2526909569.html">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/33.jpg" class="responsive-img" alt="CAS">
+                            
+                            <span class="card-title">CAS</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                 
+概述　　　　CAS是乐观锁技术，当多个线程尝试使用CAS同时更新同一个变量时，只有其中一个线程能更新变量的值，而其它线程都失败，失败的线程并不会被挂起，而是被告知这次竞争中失败，并可以再次尝试。　　　
+　　　　CAS 操作中包含三个操作
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-13
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java-并发/" class="post-category">
+                                    Java 并发
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/Java-并发/">
+                            <span class="chip bg-color">Java 并发</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/posts/2504375410.html">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/27.jpg" class="responsive-img" alt="ThreadPoolExecutor">
+                            
+                            <span class="card-title">ThreadPoolExecutor</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                 
+类图
+
+Executor是一个顶层接口，在它里面只声明了一个方法execute(Runnable)，返回值为void，参数为Runnable类型，从字面意思可以理解，就是用来执行传进去的任务的；
+
+然后ExecutorService接口
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java-并发/" class="post-category">
+                                    Java 并发
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/Java-并发/">
+                            <span class="chip bg-color">Java 并发</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
@@ -1105,113 +1214,6 @@ public class Person {
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/posts/1257264072.html">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/21.jpg" class="responsive-img" alt="JVM垃圾回收机制">
-                            
-                            <span class="card-title">JVM垃圾回收机制</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                  
-概述
-Java技术体系中所提倡的自动内存管理最终可以归结为自动化地解决了两个问题：给对象分配内存以及回收分配给对象的内存，而且这两个问题针对的内存区域就是Java内存模型中的堆区和方法区,但主要是堆(栈中的栈帧随着方法的进入和退出有条
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-05-28
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/JVM/" class="post-category">
-                                    JVM
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Java/">
-                            <span class="chip bg-color">Java</span>
-                        </a>
-                        
-                        <a href="/tags/JVM/">
-                            <span class="chip bg-color">JVM</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/posts/3724957039.html">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/31.jpg" class="responsive-img" alt="JVM类加载机制">
-                            
-                            <span class="card-title">JVM类加载机制</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                  
-序
-在了解类加载机制前先看下java程序执行流程1. 类加载的过程
-类从被加载到虚拟机内存中开始，到卸载出内存，它的整个生命周期包括：加载（Loading）、验证（Verification）、准备（Preparation）、解析（Re
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-05-24
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/JVM/" class="post-category">
-                                    JVM
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Java/">
-                            <span class="chip bg-color">Java</span>
-                        </a>
-                        
-                        <a href="/tags/JVM/">
-                            <span class="chip bg-color">JVM</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
@@ -1311,7 +1313,7 @@ Java技术体系中所提倡的自动内存管理最终可以归结为自动化�
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">80.2k</span>&nbsp;字
+                class="white-color">81.6k</span>&nbsp;字
             
             
             
