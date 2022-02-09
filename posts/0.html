@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SpringBoot自定义Starter, 远行客">
+    <meta name="keywords" content="远行客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>SpringBoot自定义Starter | 远行客</title>
+    <title>远行客</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/31.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SpringBoot自定义Starter</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -334,29 +334,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
-                            </a>
-                        
-                            <a href="/tags/SpringBoot/">
-                                <span class="chip bg-color">SpringBoot</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                SpringBoot
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -366,28 +349,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-04
+                    2022-02-09
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-04
+                    2022-02-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    786
+                    0
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    1 分
                 </div>
                 
 
@@ -402,131 +385,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <a id="more"></a>  
-<h2 id="为什么要自定义Starter"><a href="#为什么要自定义Starter" class="headerlink" title="为什么要自定义Starter"></a>为什么要自定义Starter</h2><p><strong>No Why</strong></p>
-<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><h3 id="TestClient"><a href="#TestClient" class="headerlink" title="TestClient"></a>TestClient</h3><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//随便定义一个Service  用来验证</span>
-<span class="token annotation punctuation">@Data</span><span class="token comment" spellcheck="true">//lombok</span>
-<span class="token annotation punctuation">@Builder</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestClient</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> String ip<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> Integer port<span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> String <span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> ip <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> port<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="UserProperties"><a href="#UserProperties" class="headerlink" title="UserProperties"></a>UserProperties</h3><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//定义一个实体类  接收配置</span>
-<span class="token annotation punctuation">@Data</span>
-<span class="token annotation punctuation">@Configuration</span>
-<span class="token comment" spellcheck="true">//当配置文件中test.client.enabled=true时,才会注入</span>
-<span class="token annotation punctuation">@ConditionalOnProperty</span><span class="token punctuation">(</span>prefix <span class="token operator">=</span> <span class="token string">"test.client"</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">"enable"</span><span class="token punctuation">,</span> havingValue <span class="token operator">=</span> <span class="token string">"true"</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@ConfigurationProperties</span><span class="token punctuation">(</span>prefix <span class="token operator">=</span> <span class="token string">"test.client"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//批量注入配置文件的属性,前提是前缀匹配</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserProperties</span> <span class="token punctuation">{</span>
-
-    <span class="token keyword">private</span> String ip<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> Integer port<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-</code></pre>
-<h3 id="TestAutoConfiguration"><a href="#TestAutoConfiguration" class="headerlink" title="TestAutoConfiguration"></a>TestAutoConfiguration</h3><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//编写AutoConfigure类</span>
-<span class="token annotation punctuation">@Configuration</span>
-<span class="token annotation punctuation">@EnableConfigurationProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span>UserProperties<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//开启@ConfigurationProperties。</span>
-<span class="token annotation punctuation">@ConditionalOnBean</span><span class="token punctuation">(</span><span class="token punctuation">{</span>UserProperties<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//当给定的bean存在时,实例化下面@Bean指定的Bean</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestAutoConfiguration</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Bean</span>
-    <span class="token annotation punctuation">@ConditionalOnMissingBean</span><span class="token comment" spellcheck="true">//当Spring Context中不存在该Bean时才会注册</span>
-    <span class="token keyword">public</span> TestClient <span class="token function">makeTestClient</span><span class="token punctuation">(</span>UserProperties userProperties<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> TestClient<span class="token punctuation">.</span><span class="token function">builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ip</span><span class="token punctuation">(</span>userProperties<span class="token punctuation">.</span><span class="token function">getIp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">port</span><span class="token punctuation">(</span>userProperties<span class="token punctuation">.</span><span class="token function">getPort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="spring-factories"><a href="#spring-factories" class="headerlink" title="spring.factories"></a>spring.factories</h3><pre class=" language-json"><code class="language-json">//在resources/META-INF/下创建spring.factories文件
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.ksf.spring.boot.starter.test.TestAutoConfiguration
-</code></pre>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//如果有多个AutoConfiguration</span>
-org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>autoconfigure<span class="token punctuation">.</span>EnableAutoConfiguration<span class="token operator">=</span>\
-com<span class="token punctuation">.</span>ksf<span class="token punctuation">.</span>spring<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>starter<span class="token punctuation">.</span>test<span class="token punctuation">.</span>TestAutoConfiguration<span class="token punctuation">,</span>\
-com<span class="token punctuation">.</span>ksf<span class="token punctuation">.</span>spring<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>starter<span class="token punctuation">.</span>test<span class="token punctuation">.</span>TestAutoConfiguration<span class="token punctuation">,</span>\
-com<span class="token punctuation">.</span>ksf<span class="token punctuation">.</span>spring<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>starter<span class="token punctuation">.</span>test<span class="token punctuation">.</span>TestAutoConfiguration
-</code></pre>
-<p>至此自定义Strater创建完毕</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><pre class=" language-xml"><code class="language-xml">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.ksf.spring.boot.starter.test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>test-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>0.0.1-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-</code></pre>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><pre class=" language-properties"><code class="language-properties"><span class="token comment" spellcheck="true"># application.properties</span>
-<span class="token attr-name">server.port</span><span class="token punctuation">=</span><span class="token attr-value">8082</span>
-
-<span class="token attr-name">test.client.enable</span> <span class="token punctuation">=</span> <span class="token attr-value">true</span>
-<span class="token attr-name">test.client.ip</span> <span class="token punctuation">=</span> <span class="token attr-value">"http://192.168.0.131"</span>
-<span class="token attr-name">test.client.port</span> <span class="token punctuation">=</span> <span class="token attr-value">8080</span>
-
-</code></pre>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
-<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"com.*"</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@RestController</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestServiceApplication</span> <span class="token punctuation">{</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>TestServiceApplication<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token annotation punctuation">@Autowired</span>
-    <span class="token keyword">private</span> TestClient testClient<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/init"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> String <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> testClient<span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span>
-</code></pre>
-<p>启动TestServiceApplication  访问<a href="http://localhost:8082/init" target="_blank" rel="noopener">http://localhost:8082/init</a></p>
-<pre><code>输出:&quot;http://192.168.0.131&quot;:8080
-</code></pre><h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ul>
-<li>Spring Boot在启动时扫描项目所依赖的JAR包，寻找包含spring.factories文件的JAR包，</li>
-<li>然后读取spring.factories文件获取配置的自动配置类AutoConfiguration，</li>
-<li>然后将自动配置类下满足条件(@ConditionalOnXxx)的@Bean放入到Spring容器中(Spring Context)</li>
-<li>这样使用者就可以直接用来注入，因为该类已经在容器中了</li>
-</ul>
-<h2 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h2><ul>
-<li><p>@ConditionalOnClass：当类路径classpath下有指定的类的情况下进行自动配置</p>
-</li>
-<li><p>@ConditionalOnMissingBean:当容器(Spring Context)中没有指定Bean的情况下进行自动配置</p>
-</li>
-<li><p>@ConditionalOnProperty(prefix = “example.service”, value = “enabled”, matchIfMissing = true)，当配置文件中example.service.enabled=true时进行自动配置，如果没有设置此值就默认使用matchIfMissing对应的值</p>
-</li>
-<li><p>@ConditionalOnMissingBean，当Spring Context中不存在该Bean时。</p>
-</li>
-<li><p>@ConditionalOnBean:当容器(Spring Context)中有指定的Bean的条件下</p>
-</li>
-<li><p>@ConditionalOnMissingClass:当类路径下没有指定的类的条件下</p>
-</li>
-<li><p>@ConditionalOnExpression:基于SpEL表达式作为判断条件</p>
-</li>
-<li><p>@ConditionalOnJava:基于JVM版本作为判断条件</p>
-</li>
-<li><p>@ConditionalOnJndi:在JNDI存在的条件下查找指定的位置</p>
-</li>
-<li><p>@ConditionalOnNotWebApplication:当前项目不是Web项目的条件下</p>
-</li>
-<li><p>@ConditionalOnWebApplication:当前项目是Web项目的条件下</p>
-</li>
-<li><p>@ConditionalOnResource:类路径下是否有指定的资源</p>
-</li>
-<li><p>@ConditionalOnSingleCandidate:当指定的Bean在容器中只有一个，或者在有多个Bean的情况下，用来指定首选的Bean</p>
-</li>
-<li><p>@ConfigurationProperties:把properties配置文件转化为对应的XxxProperties来使用的，并不会把该类放入到IOC容器中，如果想放入到容器中可以在XxxProperties上使用@Component</p>
-</li>
-<li>@EnableConfigurationProperties(XxxProperties.class):使@ConfigurationProperties注解生效。相当于给类上加上了@Component注解，让IOC注入一下</li>
-</ul>
-<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><pre class=" language-java"><code class="language-java">https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>zhangchengkang<span class="token operator">/</span>demo<span class="token operator">-</span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>starter<span class="token punctuation">.</span>git
-</code></pre>
-
+                
             </div>
             <hr/>
 
@@ -551,7 +410,7 @@ com<span class="token punctuation">.</span>ksf<span class="token punctuation">.<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="zhangchengkang.top/posts/317826433.html">zhangchengkang.top/posts/317826433.html</a>
+                    <a href="zhangchengkang.top/posts/0.html">zhangchengkang.top/posts/0.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -588,15 +447,7 @@ com<span class="token punctuation">.</span>ksf<span class="token punctuation">.<
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
-                                </a>
-                            
-                                <a href="/tags/SpringBoot/">
-                                    <span class="chip bg-color">SpringBoot</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -784,9 +635,10 @@ com<span class="token punctuation">.</span>ksf<span class="token punctuation">.<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/posts/0.html">
                     <div class="card-image">
@@ -804,9 +656,9 @@ com<span class="token punctuation">.</span>ksf<span class="token punctuation">.<
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -815,6 +667,7 @@ com<span class="token punctuation">.</span>ksf<span class="token punctuation">.<
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -825,30 +678,30 @@ com<span class="token punctuation">.</span>ksf<span class="token punctuation">.<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/4013045820.html">
+                <a href="/posts/317826433.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/21.jpg" class="responsive-img" alt="SpringBoot过滤器&amp;拦截器">
+                        <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/31.jpg" class="responsive-img" alt="SpringBoot自定义Starter">
                         
-                        <span class="card-title">SpringBoot过滤器&amp;拦截器</span>
+                        <span class="card-title">SpringBoot自定义Starter</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                               
-拦截器与过滤器的区别
-过滤器和拦截器触发时机和地点不一样，过滤器是在请求进入容器后，但请求进入servlet之前进行预处理的。请求结束返回也是，是在servlet处理完后，返回给前端之前。
-
-
-
-拦截器可以获取IOC容器中的各个bea
+为什么要自定义StarterNo Why
+实现步骤TestClient//随便定义一个Service  用来验证
+@Data//lombok
+@Builder
+public class TestClient {
+    private
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-04
                             </span>
                         <span class="publish-author">
                             
