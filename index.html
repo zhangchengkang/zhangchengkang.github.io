@@ -325,6 +325,31 @@
         
             
             <div class="carousel-item amber white-text carousel-post bg-cover"
+                 style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/10.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <div class="title center-align">Mybatis源码分析(二) SQL执行入口</div>
+                            <div class="description center-align">
+                                
+                                      
+MyBatis工作流程简述使用sqlSession(旧)public static void main(String[] args) {
+        InputStream inputStream = Resources.getR
+                                
+                            </div>
+                            <div class="cover-btns">
+                                <a href="/posts/898269237.html" class="waves-effect waves-light btn"
+                                   target="_blank">
+                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="carousel-item amber white-text carousel-post bg-cover"
                  style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/15.jpg');">
                 <div class="container">
                     <div class="row">
@@ -424,31 +449,6 @@
                             </div>
                             <div class="cover-btns">
                                 <a href="/posts/4013045822.html" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/10.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">Mybatis源码分析(二) SQL执行入口</div>
-                            <div class="description center-align">
-                                
-                                      
-MyBatis工作流程简述使用sqlSession(旧)public static void main(String[] args) {
-        InputStream inputStream = Resources.getR
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/posts/898269237.html" class="waves-effect waves-light btn"
                                    target="_blank">
                                     <i class="icon fa fa-eye fa-fw"></i>阅读更多
                                 </a>
@@ -703,56 +703,6 @@ Message:：消息，消息是不具名的，它由消息头和消息体组成。
                                   
 解析流程
 refresh-obtainFreshBeanFactory-refreshBeanFactory-loadBeanDefinitions-doLoadBeanDefinitions-registerBeanDefiniti
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Dubbo/" class="post-category">
-                                    Dubbo
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Dubbo/">
-                            <span class="chip bg-color">Dubbo</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/posts/317826436.html">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/29.jpg" class="responsive-img" alt="初识Dubbo">
-                            
-                            <span class="card-title">初识Dubbo</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                  
-解析流程
-refresh-obtainFreshBeanFactory-refreshBeanFactory-loadBeanDefinitions
--doLoadBeanDefinitions-registerBeanDefinit
                             
                         </div>
                         <div class="publish-info">
@@ -1630,6 +1580,61 @@ ApplicationContext context = new ClassPathXmlApplicationContext("applicationCont
                 </div>
             </div>
             
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/posts/3752311474.html">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/34.jpg" class="responsive-img" alt="Mybatis源码分析(四) SQL解析过程">
+                            
+                            <span class="card-title">Mybatis源码分析(四) SQL解析过程</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                  
+从哪里开始SQL是从哪被要求解析的呢?
+  //BaseExecutor.java
+  @Override
+  public &lt;E> List&lt;E> query(MappedStatement ms, Object par
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Mybatis/" class="post-category">
+                                    Mybatis
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/Mybatis/">
+                            <span class="chip bg-color">Mybatis</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
         </div>
     </article>
 
@@ -1728,7 +1733,7 @@ ApplicationContext context = new ClassPathXmlApplicationContext("applicationCont
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">82.8k</span>&nbsp;字
+                class="white-color">82.7k</span>&nbsp;字
             
             
             

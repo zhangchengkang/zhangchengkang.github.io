@@ -376,7 +376,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    91
+                    90
                 </div>
                 
 
@@ -400,25 +400,16 @@
             <div id="articleContent">
                 <a id="more"></a>  
 <p>解析流程</p>
-<pre class=" language-java"><code class="language-java">refresh<span class="token operator">-</span>obtainFreshBeanFactory<span class="token operator">-</span>refreshBeanFactory<span class="token operator">-</span>loadBeanDefinitions
-<span class="token operator">-</span>doLoadBeanDefinitions<span class="token operator">-</span>registerBeanDefinitions<span class="token operator">-</span>doRegisterBeanDefinitions
-<span class="token operator">-</span>parseBeanDefinitions<span class="token operator">-</span>parseDefaultElement<span class="token operator">-</span>parseCustomElement      
+<pre class=" language-java"><code class="language-java">refresh<span class="token operator">-</span>obtainFreshBeanFactory<span class="token operator">-</span>refreshBeanFactory<span class="token operator">-</span>loadBeanDefinitions<span class="token operator">-</span>doLoadBeanDefinitions<span class="token operator">-</span>registerBeanDefinitions<span class="token operator">-</span>doRegisterBeanDefinitions<span class="token operator">-</span>parseBeanDefinitions<span class="token operator">-</span>parseDefaultElement<span class="token operator">-</span>parseCustomElement      
 NamespaceHandler handler <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>readerContext<span class="token punctuation">.</span><span class="token function">getNamespaceHandlerResolver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>namespaceUri<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//需要在spring.handles配置dubboNamespaceHandler      </span>
-namespaceHandler<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>          
-    <span class="token function">registerBeanDefinitionParser</span><span class="token punctuation">(</span><span class="token string">"service"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DubboBeanDefinitionParser</span><span class="token punctuation">(</span>ServiceBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token function">registerBeanDefinitionParser</span><span class="token punctuation">(</span><span class="token string">"reference"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DubboBeanDefinitionParser</span><span class="token punctuation">(</span>ReferenceBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span><span class="token punctuation">;</span>   
+namespaceHandler<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>          <span class="token function">registerBeanDefinitionParser</span><span class="token punctuation">(</span><span class="token string">"service"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DubboBeanDefinitionParser</span><span class="token punctuation">(</span>ServiceBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token function">registerBeanDefinitionParser</span><span class="token punctuation">(</span><span class="token string">"reference"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DubboBeanDefinitionParser</span><span class="token punctuation">(</span>ReferenceBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span><span class="token punctuation">;</span>   
 DubboBeanDefinitionParser parse <span class="token operator">=</span>   NamespaceHandlerSupport<span class="token punctuation">.</span>findParserForElement   
 parse<span class="token punctuation">.</span>parse<span class="token comment" spellcheck="true">//解析xml标签</span>
 </code></pre>
-<p>服务注册</p>
-<pre><code>serviveBean  serviceConfig  
-InitializingBean-afterPropertiesSet-publishEvent
--onApplicationEvent-export-doExportUrls
--doExportUrlsFor1Protocol-protocol.expor
-t-RegistryProtocol.export-register-registry.register-zkregistry.register
-</code></pre><p>服务发现</p>
-<pre><code>referenceBean  referenceConfig  
-InitializingBean-afterPropertiesSet
--getObject-get-init-createProxy-putToMap
+<p>服务导出</p>
+<pre><code>serviveBean  serviceConfig  InitializingBean-afterPropertiesSet-publishEvent-onApplicationEvent-export-doExportUrls    -doExportUrlsFor1Protocol-protocol.export-RegistryProtocol.export-register-registry.register-zkregistry.register
+</code></pre><p>服务引用</p>
+<pre><code>referenceBean  referenceConfig  InitializingBean-afterPropertiesSet-getObject-get-init-createProxy-putToMap
 </code></pre>
             </div>
             <hr/>
@@ -673,9 +664,10 @@ InitializingBean-afterPropertiesSet
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/posts/317826436.html">
                     <div class="card-image">
@@ -695,9 +687,9 @@ refresh-obtainFreshBeanFactory-refreshBeanFactory-loadBeanDefinitions-doLoadBean
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -710,6 +702,7 @@ refresh-obtainFreshBeanFactory-refreshBeanFactory-loadBeanDefinitions-doLoadBean
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -978,7 +971,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">82.8k</span>&nbsp;字
+                class="white-color">82.7k</span>&nbsp;字
             
             
             

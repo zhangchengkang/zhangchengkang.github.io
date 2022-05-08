@@ -29,31 +29,6 @@
     
     
     <entry>
-      <title>初识Dubbo</title>
-      <link href="/posts/317826436.html"/>
-      <url>/posts/317826436.html</url>
-      
-        <content type="html"><![CDATA[<a id="more"></a>  <p>解析流程</p><pre class=" language-java"><code class="language-java">refresh<span class="token operator">-</span>obtainFreshBeanFactory<span class="token operator">-</span>refreshBeanFactory<span class="token operator">-</span>loadBeanDefinitions<span class="token operator">-</span>doLoadBeanDefinitions<span class="token operator">-</span>registerBeanDefinitions<span class="token operator">-</span>doRegisterBeanDefinitions<span class="token operator">-</span>parseBeanDefinitions<span class="token operator">-</span>parseDefaultElement<span class="token operator">-</span>parseCustomElement      NamespaceHandler handler <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>readerContext<span class="token punctuation">.</span><span class="token function">getNamespaceHandlerResolver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>namespaceUri<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//需要在spring.handles配置dubboNamespaceHandler      </span>namespaceHandler<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>              <span class="token function">registerBeanDefinitionParser</span><span class="token punctuation">(</span><span class="token string">"service"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DubboBeanDefinitionParser</span><span class="token punctuation">(</span>ServiceBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token function">registerBeanDefinitionParser</span><span class="token punctuation">(</span><span class="token string">"reference"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DubboBeanDefinitionParser</span><span class="token punctuation">(</span>ReferenceBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span><span class="token punctuation">;</span>   DubboBeanDefinitionParser parse <span class="token operator">=</span>   NamespaceHandlerSupport<span class="token punctuation">.</span>findParserForElement   parse<span class="token punctuation">.</span>parse<span class="token comment" spellcheck="true">//解析xml标签</span></code></pre><p>服务注册</p><pre><code>serviveBean  serviceConfig  InitializingBean-afterPropertiesSet-publishEvent-onApplicationEvent-export-doExportUrls-doExportUrlsFor1Protocol-protocol.export-RegistryProtocol.export-register-registry.register-zkregistry.register</code></pre><p>服务发现</p><pre><code>referenceBean  referenceConfig  InitializingBean-afterPropertiesSet-getObject-get-init-createProxy-putToMap</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> Dubbo </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Dubbo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>TIDB</title>
       <link href="/posts/4013045821.html"/>
       <url>/posts/4013045821.html</url>
