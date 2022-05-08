@@ -1,19 +1,19 @@
 [{
-    "avatar": "https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/friends/cjdm.jpg",
+    "avatar": "http://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/friends/cjdm.jpg",
     "name": "咖啡店的码农",
-    "introduction": "Refresh it",
+    "introduction": "杰哥",
     "url": "https://marscheng.cn/",
     "title": "刷新一下"
   }, {
-    "avatar": "https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/friends/gaogong.jpg",
+    "avatar": "http://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/friends/gaogong.jpg",
     "name": "客栈少年高工",
-    "introduction": "clear cache",
+    "introduction": "高工",
     "url": "https://innlad.com/",
     "title": "清除缓存"
   }, {
-    "avatar": "https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/friends/avatar.png",
-    "name": "换成吴彦祖",
-    "introduction": "Reset computer.",
-    "url": "http://zhangchengkang.top",
+    "avatar": "https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3",
+    "name": "小小的诗",
+    "introduction": "波哥",
+    "url": "https://ouyangresume.github.io/",
     "title": "重启电脑"
   }]
