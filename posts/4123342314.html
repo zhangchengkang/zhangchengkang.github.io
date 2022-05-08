@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="适配器模式, 远行客">
-    <meta name="description" content="">
+    <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -410,7 +410,7 @@
 <p><strong>缺点：</strong> 1、过多地使用适配器，会让系统非常零乱，不易整体进行把握。比如，明明看到调用的是 A 接口，其实内部被适配成了 B 接口的实现，一个系统如果太多出现这种情况，无异于一场灾难。因此如果不是很有必要，可以不使用适配器，而是直接对系统进行重构。 2.由于 JAVA 至多继承一个类，所以至多只能适配一个适配者类，而且目标类必须是抽象类。</p>
 <p><strong>使用场景：</strong>有动机地修改一个正常运行的系统的接口，这时应该考虑使用适配器模式。</p>
 <p><strong>注意事项：</strong>适配器不是在详细设计时添加的，而是解决正在服役的项目的问题。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="类适配"><a href="#类适配" class="headerlink" title="类适配"></a>类适配</h3><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%B1%BB%E9%80%82%E9%85%8D.png" alt=""></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="类适配"><a href="#类适配" class="headerlink" title="类适配"></a>类适配</h3><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%B1%BB%E9%80%82%E9%85%8D.png" alt></p>
 <p>客户端真正调用的目标接口:</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Target</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//目标接口方法</span>
@@ -442,7 +442,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token comment" spellcheck="true">//sout:客户端最终想要的接口方法</span>
 </code></pre>
-<h3 id="对象适配"><a href="#对象适配" class="headerlink" title="对象适配"></a>对象适配</h3><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D.png" alt=""></p>
+<h3 id="对象适配"><a href="#对象适配" class="headerlink" title="对象适配"></a>对象适配</h3><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D.png" alt></p>
 <p>客户端真正调用的目标接口:</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Target</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//目标接口方法</span>
@@ -1033,7 +1033,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">81.6k</span>&nbsp;字
+                class="white-color">82.8k</span>&nbsp;字
             
             
             

@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="远行客">
-    <meta name="description" content="">
+    <meta name="keywords" content="初识Dubbo, 远行客">
+    <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>远行客</title>
+    <title>初识Dubbo | 远行客</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/29.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">初识Dubbo</h1>
                 </div>
             </div>
         </div>
@@ -334,12 +334,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Dubbo/">
+                                <span class="chip bg-color">Dubbo</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Dubbo/" class="post-category">
+                                Dubbo
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -349,21 +362,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-09
+                    2022-04-04
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-02-09
+                    2022-05-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    91
                 </div>
                 
 
@@ -385,7 +398,28 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <a id="more"></a>  
+<p>解析流程</p>
+<pre class=" language-java"><code class="language-java">refresh<span class="token operator">-</span>obtainFreshBeanFactory<span class="token operator">-</span>refreshBeanFactory<span class="token operator">-</span>loadBeanDefinitions
+<span class="token operator">-</span>doLoadBeanDefinitions<span class="token operator">-</span>registerBeanDefinitions<span class="token operator">-</span>doRegisterBeanDefinitions
+<span class="token operator">-</span>parseBeanDefinitions<span class="token operator">-</span>parseDefaultElement<span class="token operator">-</span>parseCustomElement      
+NamespaceHandler handler <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>readerContext<span class="token punctuation">.</span><span class="token function">getNamespaceHandlerResolver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>namespaceUri<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//需要在spring.handles配置dubboNamespaceHandler      </span>
+namespaceHandler<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>          
+    <span class="token function">registerBeanDefinitionParser</span><span class="token punctuation">(</span><span class="token string">"service"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DubboBeanDefinitionParser</span><span class="token punctuation">(</span>ServiceBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token function">registerBeanDefinitionParser</span><span class="token punctuation">(</span><span class="token string">"reference"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DubboBeanDefinitionParser</span><span class="token punctuation">(</span>ReferenceBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span><span class="token punctuation">;</span>   
+DubboBeanDefinitionParser parse <span class="token operator">=</span>   NamespaceHandlerSupport<span class="token punctuation">.</span>findParserForElement   
+parse<span class="token punctuation">.</span>parse<span class="token comment" spellcheck="true">//解析xml标签</span>
+</code></pre>
+<p>服务注册</p>
+<pre><code>serviveBean  serviceConfig  
+InitializingBean-afterPropertiesSet-publishEvent
+-onApplicationEvent-export-doExportUrls
+-doExportUrlsFor1Protocol-protocol.expor
+t-RegistryProtocol.export-register-registry.register-zkregistry.register
+</code></pre><p>服务发现</p>
+<pre><code>referenceBean  referenceConfig  
+InitializingBean-afterPropertiesSet
+-getObject-get-init-createProxy-putToMap
+</code></pre>
             </div>
             <hr/>
 
@@ -410,7 +444,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="zhangchengkang.top/posts/0.html">zhangchengkang.top/posts/0.html</a>
+                    <a href="zhangchengkang.top/posts/317826436.html">zhangchengkang.top/posts/317826436.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -447,7 +481,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Dubbo/">
+                                    <span class="chip bg-color">Dubbo</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -635,39 +673,51 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/posts/0.html">
+                <a href="/posts/317826436.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/29.jpg" class="responsive-img" alt="初识Dubbo">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">初识Dubbo</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                              
+解析流程
+refresh-obtainFreshBeanFactory-refreshBeanFactory-loadBeanDefinitions-doLoadBeanDefinitions-registerBeanDefiniti
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            kangshifu
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Dubbo/" class="post-category">
+                                    Dubbo
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Dubbo/">
+                        <span class="chip bg-color">Dubbo</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -678,37 +728,35 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/317826433.html">
+                <a href="/posts/4013045821.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/31.jpg" class="responsive-img" alt="SpringBoot自定义Starter">
+                        <img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/matery/featureimages/15.jpg" class="responsive-img" alt="TIDB">
                         
-                        <span class="card-title">SpringBoot自定义Starter</span>
+                        <span class="card-title">TIDB</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                               
-为什么要自定义StarterNo Why
-实现步骤TestClient//随便定义一个Service  用来验证
-@Data//lombok
-@Builder
-public class TestClient {
-    private
+简介TiDB是可以同时支持OLTP/OLAP场景的国产开源分布式关系型数据库，可无限水平扩展，多副本强一致，高度兼容MySQL 5.7协议和语法 
+特性： 
+
+分布式架构，解决业务持续增长MySQL单机存储、CPU IO性能瓶颈问题 
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-03
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                    SpringBoot
+                            <a href="/categories/SQL/" class="post-category">
+                                    SQL
                                 </a>
                             
                             
@@ -722,8 +770,8 @@ public class TestClient {
                         <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/SpringBoot/">
-                        <span class="chip bg-color">SpringBoot</span>
+                    <a href="/tags/SQL/">
+                        <span class="chip bg-color">SQL</span>
                     </a>
                     
                 </div>
@@ -930,7 +978,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">81.6k</span>&nbsp;字
+                class="white-color">82.8k</span>&nbsp;字
             
             
             

@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Mybatis源码分析(四) SQL解析过程, 远行客">
-    <meta name="description" content="">
+    <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -488,7 +488,7 @@
     <span class="token keyword">return</span> boundSql<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 </code></pre>
-<p>对于一个包含了${}占位符，或<if>、<where>等标签的SQL，在解析的过程中，会被分解 成多个片段。每个片段都有对应的类型，每种类型的片段都有不同的解析逻辑。在源码中， 片段这个概念等价于sql 节点，即SqlNode。SqlNode 是一个接口，它有众多的实现类。其继 承体系如下：<br><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/SqlNode%E7%B1%BB%E5%9B%BE.png" alt=""></where></if></p>
+<p>对于一个包含了${}占位符，或<if>、<where>等标签的SQL，在解析的过程中，会被分解 成多个片段。每个片段都有对应的类型，每种类型的片段都有不同的解析逻辑。在源码中， 片段这个概念等价于sql 节点，即SqlNode。SqlNode 是一个接口，它有众多的实现类。其继 承体系如下：<br><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/SqlNode%E7%B1%BB%E5%9B%BE.png" alt></where></if></p>
 <p>StaticTextSqlNode 用于存储静态文本，TextSqlNode用于存储带有${}占位 符的文本，IfSqlNode 则用于存储<if>节点的内容。MixedSqlNode 内部维护了一个 SqlNode 集合，用于存储各种各样的SqlNode</if></p>
 <h3 id="MixedSqlNode"><a href="#MixedSqlNode" class="headerlink" title="MixedSqlNode"></a>MixedSqlNode</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MixedSqlNode</span> <span class="token keyword">implements</span> <span class="token class-name">SqlNode</span> <span class="token punctuation">{</span>
   <span class="token keyword">private</span> <span class="token keyword">final</span> List<span class="token operator">&lt;</span>SqlNode<span class="token operator">></span> contents<span class="token punctuation">;</span>
@@ -1513,7 +1513,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">81.6k</span>&nbsp;字
+                class="white-color">82.8k</span>&nbsp;字
             
             
             

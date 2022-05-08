@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="zhangchengkang.top/"/>
-  <updated>2022-02-09T13:51:11.527Z</updated>
+  <updated>2022-05-07T03:31:23.561Z</updated>
   <id>zhangchengkang.top/</id>
   
   <author>
@@ -17,17 +17,119 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="zhangchengkang.top/posts/0.html"/>
-    <id>zhangchengkang.top/posts/0.html</id>
-    <published>2022-02-09T13:51:11.527Z</published>
-    <updated>2022-02-09T13:51:11.527Z</updated>
+    <title>初识Dubbo</title>
+    <link href="zhangchengkang.top/posts/317826436.html"/>
+    <id>zhangchengkang.top/posts/317826436.html</id>
+    <published>2022-04-04T02:23:17.000Z</published>
+    <updated>2022-05-07T03:31:23.561Z</updated>
     
     <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;p&gt;解析流程&lt;/p&gt;
+&lt;pre class=&quot; language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;refresh&lt;span class=&quot;token
+        
+      
     
     </summary>
     
     
+      <category term="Dubbo" scheme="zhangchengkang.top/categories/Dubbo/"/>
+    
+    
+      <category term="Dubbo" scheme="zhangchengkang.top/tags/Dubbo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初识Dubbo</title>
+    <link href="zhangchengkang.top/posts/317826436.html"/>
+    <id>zhangchengkang.top/posts/317826436.html</id>
+    <published>2022-04-04T02:23:17.000Z</published>
+    <updated>2022-05-07T03:05:06.888Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;p&gt;解析流程&lt;/p&gt;
+&lt;pre class=&quot; language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;refresh&lt;span class=&quot;token
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Dubbo" scheme="zhangchengkang.top/categories/Dubbo/"/>
+    
+    
+      <category term="Dubbo" scheme="zhangchengkang.top/tags/Dubbo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TIDB</title>
+    <link href="zhangchengkang.top/posts/4013045821.html"/>
+    <id>zhangchengkang.top/posts/4013045821.html</id>
+    <published>2021-06-03T06:02:21.000Z</published>
+    <updated>2022-05-07T02:20:47.088Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="SQL" scheme="zhangchengkang.top/categories/SQL/"/>
+    
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
+    
+      <category term="SQL" scheme="zhangchengkang.top/tags/SQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>问题定位tips</title>
+    <link href="zhangchengkang.top/posts/4013045822.html"/>
+    <id>zhangchengkang.top/posts/4013045822.html</id>
+    <published>2021-04-03T07:21:02.000Z</published>
+    <updated>2022-05-07T02:32:23.440Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
+&lt;h2 id=&quot;前端排查&quot;&gt;&lt;a href=&quot;#前端排查&quot; class=&quot;headerlink&quot; title=&quot;前端排查&quot;&gt;&lt;/a&gt;前端排查&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;通过接口响应的状态码判断
+        
+      
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="zhangchengkang.top/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
   </entry>
   
@@ -35,8 +137,8 @@
     <title>SpringBoot自定义Starter</title>
     <link href="zhangchengkang.top/posts/317826433.html"/>
     <id>zhangchengkang.top/posts/317826433.html</id>
-    <published>2020-06-04T14:03:45.000Z</published>
-    <updated>2020-06-04T13:18:20.556Z</updated>
+    <published>2020-12-04T14:03:45.000Z</published>
+    <updated>2022-05-07T02:16:12.052Z</updated>
     
     <summary type="html">
     
@@ -65,8 +167,8 @@
     <title>SpringBoot过滤器&amp;拦截器</title>
     <link href="zhangchengkang.top/posts/4013045820.html"/>
     <id>zhangchengkang.top/posts/4013045820.html</id>
-    <published>2020-06-01T13:36:05.000Z</published>
-    <updated>2020-06-04T13:24:34.993Z</updated>
+    <published>2020-12-01T13:36:05.000Z</published>
+    <updated>2022-05-07T02:15:30.704Z</updated>
     
     <summary type="html">
     
@@ -95,8 +197,8 @@
     <title>Maven 打包</title>
     <link href="zhangchengkang.top/posts/3589231934.html"/>
     <id>zhangchengkang.top/posts/3589231934.html</id>
-    <published>2020-05-20T12:31:23.000Z</published>
-    <updated>2020-06-04T13:19:15.249Z</updated>
+    <published>2020-11-20T12:31:23.000Z</published>
+    <updated>2022-05-07T02:15:42.579Z</updated>
     
     <summary type="html">
     
@@ -124,7 +226,7 @@
     <link href="zhangchengkang.top/posts/3617069065.html"/>
     <id>zhangchengkang.top/posts/3617069065.html</id>
     <published>2020-04-01T12:02:54.000Z</published>
-    <updated>2020-05-17T03:47:33.535Z</updated>
+    <updated>2022-05-07T02:57:43.239Z</updated>
     
     <summary type="html">
     
@@ -481,96 +583,6 @@
       <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
     
       <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mybatis源码分析(二) SQL执行入口</title>
-    <link href="zhangchengkang.top/posts/898269237.html"/>
-    <id>zhangchengkang.top/posts/898269237.html</id>
-    <published>2019-10-20T07:54:12.000Z</published>
-    <updated>2020-05-17T03:47:33.505Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-&lt;h2 id=&quot;MyBatis工作流程简述&quot;&gt;&lt;a href=&quot;#MyBatis工作流程简述&quot; class=&quot;headerlink&quot; title=&quot;MyBatis工作流程简述&quot;&gt;&lt;/a&gt;MyBatis工作流程简述&lt;/h2&gt;&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Mybatis" scheme="zhangchengkang.top/categories/Mybatis/"/>
-    
-    
-      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
-    
-      <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mybatis源码分析(一) 配置文件解析过程</title>
-    <link href="zhangchengkang.top/posts/3129899847.html"/>
-    <id>zhangchengkang.top/posts/3129899847.html</id>
-    <published>2019-10-19T08:12:35.000Z</published>
-    <updated>2020-05-17T03:46:55.541Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  
-&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Mybatis" scheme="zhangchengkang.top/categories/Mybatis/"/>
-    
-    
-      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
-    
-      <category term="Mybatis" scheme="zhangchengkang.top/tags/Mybatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CAS</title>
-    <link href="zhangchengkang.top/posts/2526909569.html"/>
-    <id>zhangchengkang.top/posts/2526909569.html</id>
-    <published>2019-10-13T09:02:54.000Z</published>
-    <updated>2020-05-17T03:46:55.538Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
-&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Java 并发" scheme="zhangchengkang.top/categories/Java-%E5%B9%B6%E5%8F%91/"/>
-    
-    
-      <category term="Java" scheme="zhangchengkang.top/tags/Java/"/>
-    
-      <category term="Java 并发" scheme="zhangchengkang.top/tags/Java-%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   

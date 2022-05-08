@@ -1,5 +1,5 @@
 
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.html2canvas=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return 3490="" s})({1:[function(_dereq_,module,exports){="" (function="" (global){="" *!="" http:="" mths.be="" punycode="" v1.2.4="" by="" @mathias="" *="" ;(function(root)="" {="" **="" detect="" free="" variables="" var="" freeexports="typeof" exports="=" 'object'="" &&="" exports;="" freemodule="typeof" module="=" module.exports="=" module;="" freeglobal="typeof" global="=" global;="" if="" (freeglobal.global="==" ||="" freeglobal.window="==" freeglobal)="" root="freeGlobal;" }="" the="" `punycode`="" object.="" @name="" @type="" object="" punycode,="" highest="" positive="" signed="" 32-bit="" float="" value="" maxint="2147483647," aka.="" 0x7fffffff="" or="" 2^31-1="" bootstring="" parameters="" base="36," tmin="1," tmax="26," skew="38," damp="700," initialbias="72," initialn="128," 0x80="" delimiter="-" ,="" '\x2d'="" regular="" expressions="" regexpunycode="/^xn--/," regexnonascii="/[^" -~]="" unprintable="" ascii="" chars="" +="" non-ascii="" regexseparators="/\x2E|\u3002|\uFF0E|\uFF61/g," rfc="" separators="" error="" messages="" errors="{" 'overflow':="" 'overflow:="" input="" needs="" wider="" integers="" to="" process',="" 'not-basic':="" 'illegal="">= 0x80 (not a basic code point)',
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.html2canvas=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return 3490 s})({1:[function(_dereq_,module,exports){ (function (global){ *! http: mths.be punycode v1.2.4 by @mathias * ;(function(root) { ** detect free variables var freeexports="typeof" exports="=" 'object' && exports; freemodule="typeof" module="=" module.exports="=" module; freeglobal="typeof" global="=" global; if (freeglobal.global="==" || freeglobal.window="==" freeglobal) root="freeGlobal;" } the `punycode` object. @name @type object punycode, highest positive signed 32-bit float value maxint="2147483647," aka. 0x7fffffff or 2^31-1 bootstring parameters base="36," tmin="1," tmax="26," skew="38," damp="700," initialbias="72," initialn="128," 0x80 delimiter="-" , '\x2d' regular expressions regexpunycode="/^xn--/," regexnonascii="/[^" -~] unprintable ascii chars + non-ascii regexseparators="/\x2E|\u3002|\uFF0E|\uFF61/g," rfc separators error messages errors="{" 'overflow': 'overflow: input needs wider integers to process', 'not-basic': 'illegal>= 0x80 (not a basic code point)',
 		'invalid-input': 'Invalid input'
 	},
 
@@ -59,7 +59,7 @@
 	 * UCS-2 exposes as separate characters) into a single code point,
 	 * matching UTF-16.
 	 * @see `punycode.ucs2.encode`
-	 * @see <http: mathiasbynens.be="" notes="" javascript-encoding="">
+	 * @see <http: mathiasbynens.be notes javascript-encoding>
 	 * @memberOf punycode.ucs2
 	 * @name decode
 	 * @param {String} string The Unicode input string (UCS-2).
@@ -73,7 +73,7 @@
 		    extra;
 		while (counter < length) {
 			value = string.charCodeAt(counter++);
-			if (value >= 0xD800 && value <= 0xdbff="" &&="" counter="" <="" length)="" {="" high="" surrogate,="" and="" there="" is="" a="" next="" character="" extra="string.charCodeAt(counter++);" if="" ((extra="" &="" 0xfc00)="=" 0xdc00)="" low="" surrogate="" output.push(((value="" 0x3ff)="" <<="" 10)="" +="" (extra="" 0x10000);="" }="" else="" unmatched="" surrogate;="" only="" append="" this="" code="" unit,="" in="" case="" the="" unit="" of="" pair="" output.push(value);="" counter--;="" return="" output;="" **="" *="" creates="" string="" based="" on="" an="" array="" numeric="" points.="" @see="" `punycode.ucs2.decode`="" @memberof="" punycode.ucs2="" @name="" encode="" @param="" {array}="" codepoints="" @returns="" {string}="" new="" unicode="" (ucs-2).="" function="" ucs2encode(array)="" map(array,="" function(value)="" var="" output="" ;="" (value=""> 0xFFFF) {
+			if (value >= 0xD800 && value <= 0xdbff && counter < length) { high surrogate, and there is a next character extra="string.charCodeAt(counter++);" if ((extra & 0xfc00)="=" 0xdc00) low surrogate output.push(((value 0x3ff) << 10) + (extra 0x10000); } else unmatched surrogate; only append this code unit, in case the unit of pair output.push(value); counter--; return output; ** * creates string based on an array numeric points. @see `punycode.ucs2.decode` @memberof punycode.ucs2 @name encode @param {array} codepoints @returns {string} new unicode (ucs-2). function ucs2encode(array) map(array, function(value) var output ; (value> 0xFFFF) {
 				value -= 0x10000;
 				output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
 				value = 0xDC00 | value & 0x3FF;
@@ -203,7 +203,7 @@
 				}
 
 				i += digit * w;
-				t = k <= bias="" ?="" tmin="" :="" (k="">= bias + tMax ? tMax : k - bias);
+				t = k <= bias ? tmin : (k>= bias + tMax ? tMax : k - bias);
 
 				if (digit < t) {
 					break;
@@ -326,7 +326,7 @@
 				if (currentValue == n) {
 					// Represent delta as a generalized variable-length integer
 					for (q = delta, k = base; /* no condition */; k += base) {
-						t = k <= bias="" ?="" tmin="" :="" (k="">= bias + tMax ? tMax : k - bias);
+						t = k <= bias ? tmin : (k>= bias + tMax ? tMax : k - bias);
 						if (q < t) {
 							break;
 						}
@@ -399,7 +399,7 @@
 		/**
 		 * An object of methods to convert from JavaScript's internal character
 		 * representation (UCS-2) to Unicode code points, and back.
-		 * @see <http: mathiasbynens.be="" notes="" javascript-encoding="">
+		 * @see <http: mathiasbynens.be notes javascript-encoding>
 		 * @memberOf punycode
 		 * @type Object
 		 */

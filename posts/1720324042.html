@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Spring源码分析(二) GetBean(), 远行客">
-    <meta name="description" content="">
+    <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -652,7 +652,7 @@
 <li>调用 getObjectForBeanInstance 方法，并按 name 规则返回相应的 bean 实例</li>
 <li>按需转换 bean 类型，并返回转换后的 bean 实例。</li>
 </ol>
-<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt=""></p>
+<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/spring/getBean%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt></p>
 <h3 id="beanName-转换-gt-transformedBeanName"><a href="#beanName-转换-gt-transformedBeanName" class="headerlink" title="beanName 转换 -&gt;transformedBeanName"></a>beanName 转换 -&gt;transformedBeanName</h3><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">//AbstractBeanFactory.java</span>
     <span class="token keyword">protected</span> String <span class="token function">transformedBeanName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token function">canonicalName</span><span class="token punctuation">(</span>BeanFactoryUtils<span class="token punctuation">.</span><span class="token function">transformedBeanName</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -921,7 +921,7 @@
 <li>对于非单例的 FactoryBean，每次直接创建新的实例即可，无需缓存</li>
 <li>如果 shouldPostProcess = true，不管是单例还是非单例 FactoryBean 生成的实例，都要进行后置处理</li>
 </ol>
-<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>
+<h3 id><a href="#" class="headerlink" title=" "></a> </h3>
             </div>
             <hr/>
 
@@ -1490,7 +1490,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">81.6k</span>&nbsp;字
+                class="white-color">82.8k</span>&nbsp;字
             
             
             

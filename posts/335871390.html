@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Mybatis源码分析(三) SQL执行过程, 远行客">
-    <meta name="description" content="">
+    <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -437,7 +437,7 @@
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/Executor%E7%B1%BB%E5%9B%BE.png" alt=""></p>
+<p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/Executor%E7%B1%BB%E5%9B%BE.png" alt></p>
 <p>这里executor 的类型为 CachingExecutor(DefaultSqlSessionFactory.openSession()) ，该类是一 个装饰器类，用于给目标 Executor 增加二级缓存功能。那目标 Executor 是谁呢？默认情况 下是SimpleExecutor。</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// CachingExecutor.java</span>
  <span class="token annotation punctuation">@Override</span>
@@ -562,7 +562,7 @@
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="StatementHandler"><a href="#StatementHandler" class="headerlink" title="StatementHandler"></a>StatementHandler</h2><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/statementHandler%E7%B1%BB%E5%9B%BE.png" alt=""></p>
+<h2 id="StatementHandler"><a href="#StatementHandler" class="headerlink" title="StatementHandler"></a>StatementHandler</h2><p><img src="https://blog-1257031229.cos.ap-shanghai.myqcloud.com/mybatis/statementHandler%E7%B1%BB%E5%9B%BE.png" alt></p>
 <p>StatementHandler接口的实现大致有四个，其中三个实现类都是和JDBC中的Statement响对应的：</p>
 <ol>
 <li>SimpleStatementHandler，这个就是对应我们JDBC中常用的Statement接口，用于简单SQL的处理；</li>
@@ -1171,7 +1171,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">81.6k</span>&nbsp;字
+                class="white-color">82.8k</span>&nbsp;字
             
             
             
